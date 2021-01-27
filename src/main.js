@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { AvatarPlugin } from 'bootstrap-vue'
 import { BadgePlugin } from 'bootstrap-vue'
-
+import 'animate.css'
 Vue.use(BadgePlugin)
 Vue.use(AvatarPlugin)
 // Install BootstrapVue

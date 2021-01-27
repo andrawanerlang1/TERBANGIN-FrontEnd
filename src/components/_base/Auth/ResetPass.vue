@@ -1,5 +1,5 @@
 <template>
-  <div class="forgot">
+  <div class="forgot animate__animated animate__fadeInRight">
     <div class="title">
       <img src="../../../assets/img/logoflight.png" alt="" />
       <h4>Angkasa</h4>

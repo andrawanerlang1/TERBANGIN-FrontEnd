@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col md="7" lg="7" xl="7" style="padding:0px">
-          <div class="img">
+          <div class="img animate__animated animate__fadeInLeft">
             <img src="../assets/img/AuthImg.png" alt="" class="responsive" />
           </div>
         </b-col>
