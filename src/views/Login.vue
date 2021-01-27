@@ -8,12 +8,36 @@
           </div>
         </b-col>
         <b-col md="5" lg="5" xl="5" style="padding:0px">
-          <Register />
+          <Register v-if="type === 'register'" />
+          <Login v-else-if="type === 'login'" />
+          <Forgot v-else-if="type === 'forgot'" />
+          <Reset v-else />
         </b-col>
       </b-row>
     </b-container>
   </div>
 </template>
+
+<script>
+import Register from '../components/_base/Auth/Register'
+import Login from '../components/_base/Auth/Login'
+import Forgot from '../components/_base/Auth/ForgotPass'
+import Reset from '../components/_base/Auth/ResetPass'
+export default {
+  name: 'Auth',
+  data() {
+    return {
+      type: 'register'
+    }
+  },
+  components: {
+    Register,
+    Login,
+    Forgot,
+    Reset
+  }
+}
+</script>
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Rubik:wght@300;400;500;600;700&display=swap');
@@ -23,14 +47,9 @@
 img {
   width: 100%;
 }
-</style>
-
-<script>
-import Register from '../components/_base/Auth/Register'
-export default {
-  name: 'Login',
-  components: {
-    Register
+@media only screen and (max-width: 600px) {
+  img {
+    display: none;
   }
 }
-</script>
+</style>

@@ -111,4 +111,11 @@ h1 {
   -moz-box-shadow: 0px 36px 39px -14px rgba(54, 79, 245, 1);
   box-shadow: 0px 36px 39px -14px rgba(54, 79, 245, 1);
 }
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 45px;
+  }
+}
 </style>
