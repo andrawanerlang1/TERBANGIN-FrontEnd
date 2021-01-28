@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import FlightDetail from '../views/FlightDetail.vue'
 import Search from '../views/Search.vue'
+import Landing from '../views/Landing.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: Search
+  },
+  {
+    path: '/landing',
+    name: 'Landing',
+    component: Landing
   }
 ]
 
