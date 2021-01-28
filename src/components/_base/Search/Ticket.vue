@@ -45,10 +45,68 @@
           <div>3 hours 11 minutes</div>
           <div>(1 transit)</div>
         </div>
-        <div class="facilities"></div>
-        <div class="price">Price</div>
-
-        <div class="select">select</div>
+        <div class="facilities">
+          <img src="../../../assets/img/burger.png" alt="" />
+          <img src="../../../assets/img/luggage.png" alt="" />
+          <img src="../../../assets/img/wifi.png" alt="" />
+        </div>
+        <div class="price" style="color:#2395FF">
+          $ 214,00 <span style="color:#979797">/pax </span>
+        </div>
+        <div class="select">
+          <button>
+            Select
+          </button>
+        </div>
+      </div>
+      <div class="viewdetail" style="color:#2395FF">
+        View Details
+        <img src="../../../assets/img/btnback.png" alt="" />
+      </div>
+    </div>
+    <div class="ticketCard">
+      <div class="flightPlate" style="color:#595959">
+        <img src="../../../assets/img/garuda.png" style="margin" />
+        Garuda Indonesia
+      </div>
+      <div class="detailPlate">
+        <div class="destination">
+          <div class="from">
+            <p style="font-weight:600; font-size:20px">IDN</p>
+            <p style="color:#6B6B6B">12.33</p>
+          </div>
+          <div class="imageDesti">
+            <p>
+              <img src="../../../assets/img/logoGrey.png" />
+            </p>
+            <p></p>
+          </div>
+          <div class="to">
+            <p style="font-weight:600; font-size:20px">JPN</p>
+            <p style="color:#6B6B6B">15.21</p>
+          </div>
+        </div>
+        <div class="time" style="text-align:center;color:#595959">
+          <div>3 hours 11 minutes</div>
+          <div>(1 transit)</div>
+        </div>
+        <div class="facilities">
+          <img src="../../../assets/img/burger.png" alt="" />
+          <img src="../../../assets/img/luggage.png" alt="" />
+          <img src="../../../assets/img/wifi.png" alt="" />
+        </div>
+        <div class="price" style="color:#2395FF">
+          $ 214,00 <span style="color:#979797">/pax </span>
+        </div>
+        <div class="select">
+          <button>
+            Select
+          </button>
+        </div>
+      </div>
+      <div class="viewdetail" style="color:#2395FF">
+        View Details
+        <img src="../../../assets/img/btnback.png" alt="" />
       </div>
     </div>
   </div>
@@ -75,6 +133,7 @@
 .detailPlate {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   margin-top: 30px;
   margin-bottom: 20px;
@@ -85,5 +144,14 @@
 }
 .destination div {
   margin-right: 20px;
+}
+.select button {
+  background-color: #2395ff;
+  border-radius: 15px;
+  border: 0px;
+  color: white;
+  font-weight: 600;
+  padding: 12px 50px 12px 50px;
+  box-shadow: 0 8px 6px -6px black;
 }
 </style>
