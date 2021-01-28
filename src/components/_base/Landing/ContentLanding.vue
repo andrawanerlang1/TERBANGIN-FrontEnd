@@ -17,10 +17,7 @@
             src="../../../assets/img/trending1.png"
             alt=""
           />
-          <div class="trending-text">
-            <h6 style="font-weight:600">Tokyo,</h6>
-            <h3>Japan</h3>
-          </div>
+          <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
           <img
@@ -28,10 +25,7 @@
             src="../../../assets/img/trendin2.png"
             alt=""
           />
-          <div class="trending-text">
-            <div>Tokyo,</div>
-            <div>Japan</div>
-          </div>
+          <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
           <img
@@ -39,10 +33,7 @@
             src="../../../assets/img/trendin2.png"
             alt=""
           />
-          <div class="trending-text">
-            <div>Tokyo,</div>
-            <div>Japan</div>
-          </div>
+          <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
           <img
@@ -50,10 +41,7 @@
             src="../../../assets/img/trendin2.png"
             alt=""
           />
-          <div class="trending-text">
-            <div>Tokyo,</div>
-            <div>Japan</div>
-          </div>
+          <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
           <img
@@ -160,6 +148,7 @@ export default {
 }
 .trending {
   margin-top: 40px;
+  margin-bottom: 60px;
   display: flex;
   justify-content: space-between;
 }
@@ -193,5 +182,6 @@ h3 {
 }
 .content {
   margin-top: 100px;
+  margin-bottom: 100px;
 }
 </style>
