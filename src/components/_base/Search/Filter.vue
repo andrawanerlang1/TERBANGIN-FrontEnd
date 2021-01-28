@@ -192,7 +192,26 @@
             </template>
           </b-navbar-toggle>
           <b-collapse id="Price" is-nav>
-            <b-navbar-nav style="margin-top:20px"> </b-navbar-nav>
+            <b-navbar-nav style="margin-top:20px">
+              <div class="pricetag" style="color:grey">
+                <div style="font-weight:300">Lowest</div>
+                <div style="font-weight:300">Highest</div>
+              </div>
+              <div
+                class="app-content"
+                style="margin-top:10px;margin-bottom:20px"
+              >
+                <vue-slider
+                  ref="slider"
+                  v-model="price"
+                  v-bind="slideOption"
+                ></vue-slider>
+              </div>
+              <div class="pricetag">
+                <div>${{ price[0] }}</div>
+                <div>${{ price[1] }}</div>
+              </div>
+            </b-navbar-nav>
           </b-collapse>
         </b-navbar>
       </div>
@@ -204,9 +223,14 @@
 export default {
   data() {
     return {
-      transit: null
+      price: [20, 100],
+      slideOption: {
+        min: 0,
+        max: 1000
+      }
     }
-  }
+  },
+  created() {}
 }
 </script>
 
@@ -234,5 +258,10 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-right: 15px;
+}
+.pricetag {
+  display: flex;
+  justify-content: space-between;
+  color: #2395ff;
 }
 </style>
