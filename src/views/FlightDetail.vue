@@ -32,7 +32,7 @@
         <b-row>
           <b-col col lg="8" md="8" sm="12" cols="12" style=" width: 100%;">
             <div class="text-center">
-              <button class="btn btn-payment my-5">Procees to Payment</button>
+              <button class="btn-payment my-5">Procees to Payment</button>
             </div>
           </b-col>
         </b-row>
@@ -85,10 +85,14 @@ export default {
   font-size: 600;
   padding: 15px 100px;
   border-radius: 10px;
-  transition-duration: 0.5s;
+  transition-duration: 0.7s;
+  border: unset;
+  font-weight: 600;
 }
 
 .btn-payment:hover {
-  background-color: #0084ff;
+  background-color: #037ff2;
+  -webkit-box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
 }
 </style>
