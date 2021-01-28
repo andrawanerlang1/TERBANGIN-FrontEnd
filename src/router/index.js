@@ -7,6 +7,7 @@ import Landing from '../views/Landing.vue'
 import MyBooking from '../views/Mybooking.vue'
 import DetailProfile from '../views/DetailProfile.vue'
 import BookingDetail from '../views/BookingDetail.vue'
+import Notifications from '../views/Notifications.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/detail-booking',
     name: 'BookingDetail',
     component: BookingDetail
+  },
+  {
+    path: '/notifications',
+    name: 'notifications',
+    component: Notifications
   }
 ]
 
