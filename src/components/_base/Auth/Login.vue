@@ -2,7 +2,7 @@
   <div class="login animate__animated animate__fadeInRight">
     <div class="title">
       <img src="../../../assets/img/logoflight.png" alt="" />
-      <h4>Angkasa</h4>
+      <h4>Terbang.in</h4>
     </div>
     <div class="forms">
       <div class="title-form">
