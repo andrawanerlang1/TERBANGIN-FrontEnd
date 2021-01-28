@@ -4,7 +4,7 @@
       <div class="top mb-4">
         <div class="d-flex justify-content-between">
           <div>
-            <p class="text-dark-grey">Pessanger: 1 Adult</p>
+            <p class="text-dark-grey">Pessanger: {{ passanger }}</p>
           </div>
           <div>
             <div class="custom-control custom-switch">
@@ -23,32 +23,40 @@
           </div>
         </div>
       </div>
-      <div class="input-form">
-        <p class="text-grey">Title</p>
-        <div>
-          <select name="title" class="mb-2">
-            <option value="mr">Mr.</option>
-            <option value="mrs">Mrs.</option></select
-          >
+      <div class="form-input-passanger" v-for="item in passanger" :key="item">
+        <div class="input-form">
+          <p class="text-grey">Title</p>
+          <div>
+            <select name="title" class="mb-2">
+              <option value="mr">Mr.</option>
+              <option value="mrs">Mrs.</option></select
+            >
+          </div>
         </div>
-      </div>
-      <div class="input-form">
-        <p class="text-grey">Fullname</p>
-        <input class="mb-1" type="text" placeholder="input your full name" />
-      </div>
-      <div class="input-form">
-        <p class="text-grey">Nationality</p>
-        <div>
-          <select name="nationality" class="mb-2">
-            <option value="indonesia">Indonesia</option>
-            <option value="usa">USA</option>
-            <option value="japan">Japan</option></select
-          >
+        <div class="input-form">
+          <p class="text-grey">Fullname</p>
+          <input class="mb-1" type="text" placeholder="input your full name" />
+        </div>
+        <div class="input-form mb-5">
+          <p class="text-grey">Nationality</p>
+          <div>
+            <select name="nationality" class="mb-2">
+              <option value="indonesia">Indonesia</option>
+              <option value="usa">USA</option>
+              <option value="japan">Japan</option></select
+            >
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['passanger']
+}
+</script>
 
 <style scoped>
 .form {
