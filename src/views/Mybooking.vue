@@ -17,10 +17,7 @@
             <div class="from-title">
               <p class="font-weight-bold">IDN</p>
             </div>
-            <img
-              src="../assets/img/greysmallplane.png"
-              alt="gray-small-plane"
-            />
+            <img src="../assets/img/logoGrey.png" alt="gray-small-plane" />
             <div class="from-title">
               <p class="font-weight-bold">JPN</p>
             </div>
@@ -39,7 +36,9 @@
               </p> -->
             </div>
             <p class="font-weight-bold text-primary" style="cursor: pointer;">
-              View Detail
+              <router-link to="/detail-booking">
+                View Detail
+              </router-link>
             </p>
           </div>
         </div>
@@ -51,7 +50,7 @@
 
 <script>
 import Navbar from '../components/Navbar'
-import CardProfile from '../components/CardProfile'
+import CardProfile from '../components/_base/Profile/CardProfile'
 import Footer from '../components/Footer'
 export default {
   name: 'MyBooking',
@@ -80,7 +79,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
-.header-content p:nth-child(2) {
+.header-content p {
   font-size: 15px;
 }
 .booking-history {
@@ -89,7 +88,7 @@ export default {
   background: #ffffff;
   border-radius: 15px;
 }
-.from-title p:nth-child(1) {
+.from-title p {
   font-size: 20px;
 }
 .route-way img {
@@ -134,7 +133,7 @@ export default {
   .navigation-button {
     grid-template-columns: 4fr 2fr;
   }
-  .navigation-button p:nth-child(3) {
+  .navigation-button p {
     display: none;
   }
 }
@@ -145,7 +144,7 @@ export default {
   .navigation-button {
     grid-template-columns: 4fr 2fr;
   }
-  .navigation-button p:nth-child(3) {
+  .navigation-button p {
     display: none;
   }
   .booking-history {

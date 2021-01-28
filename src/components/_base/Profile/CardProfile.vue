@@ -5,14 +5,14 @@
         <div class="text-center">
           <div class="user-profile">
             <img
-              src="../assets/img/profile.png"
+              src="../../../assets/img/profile.png"
               alt="profile"
               class="rounded-circle mt-4"
             />
           </div>
           <label class="custom-file-upload">
             <input type="file" />
-            Select Photo
+            <b>Select Photo</b>
           </label>
           <h5>Andrawan Ganteng</h5>
           <p class="small text-muted">Medan, Indonesia</p>
@@ -43,7 +43,7 @@
           </li>
           <li>
             <b-icon-gear-fill class="text-secondary mr-3"></b-icon-gear-fill>
-            Reset Password
+            Change Password
           </li>
           <li class="text-danger">
             <b-icon-box-arrow-right class="mr-3"></b-icon-box-arrow-right>Logout
@@ -78,7 +78,7 @@ input[type='file'] {
   background-color: #fff;
   border-radius: 15px;
   width: 300px;
-  height: 100%;
+  height: 95%;
   margin: auto;
 }
 .user-profile img {

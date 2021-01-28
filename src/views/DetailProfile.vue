@@ -16,10 +16,6 @@
                   <input type="text" class="form-control mb-4" />
                   <label class="text-muted">Phone Number</label>
                   <input type="text" class="form-control mb-4" />
-                  <p class="text-right text-info">
-                    Account Setting
-                    <b-icon-chevron-right></b-icon-chevron-right>
-                  </p>
                 </div>
                 <div class="col-sm-6">
                   <p>Biodata</p>
@@ -54,7 +50,7 @@
 
 <script>
 import Navbar from '../components/Navbar'
-import CardProfile from '../components/CardProfile'
+import CardProfile from '../components/_base/Profile/CardProfile'
 import Footer from '../components/Footer'
 export default {
   name: 'Profile',
@@ -74,7 +70,7 @@ export default {
   background-color: #fff;
   border-radius: 15px;
   width: 100vh;
-  height: 100%;
+  height: 96%;
   margin-bottom: 15px;
 }
 .sub {
@@ -101,7 +97,7 @@ input[type='password']:focus,
 select:focus {
   /* -webkit-box-shadow: none; */
   box-shadow: none;
-  border-bottom: 2px solid rgba(35, 159, 207, 0.68);
+  border-bottom: 2px soli#2395FF;
 }
 .btn-save {
   color: #fff;
@@ -109,6 +105,7 @@ select:focus {
   box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
   border-radius: 10px;
   padding: 10px 35px;
+  float: right;
 }
 @media (max-width: 768px) {
   .profile {
