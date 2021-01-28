@@ -27,7 +27,7 @@ export default {
   name: 'Auth',
   data() {
     return {
-      type: 'register'
+      type: 'reset'
     }
   },
   components: {
