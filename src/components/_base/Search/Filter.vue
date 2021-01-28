@@ -212,9 +212,9 @@ export default {
 
 <style scoped>
 .mainWrapper {
-  height: 700px;
   margin-left: 5%;
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 .filter {
   display: flex;

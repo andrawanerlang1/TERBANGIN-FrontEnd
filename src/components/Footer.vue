@@ -63,6 +63,7 @@ export default {
   justify-content: space-between;
   flex-wrap: wrap;
   color: #6b6b6b;
+  background: #fff;
 }
 .logo {
   position: relative;

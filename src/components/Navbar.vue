@@ -56,6 +56,7 @@ export default {
   padding-top: 35px;
   padding-bottom: 45px;
   text-align: center;
+  background: #fff;
 }
 .logo {
   font-weight: bold;
