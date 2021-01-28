@@ -4,6 +4,9 @@ import Login from '../views/Login.vue'
 import FlightDetail from '../views/FlightDetail.vue'
 import Search from '../views/Search.vue'
 import Landing from '../views/Landing.vue'
+import MyBooking from '../views/Mybooking.vue'
+import DetailProfile from '../views/DetailProfile.vue'
+import BookingDetail from '../views/BookingDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +30,21 @@ const routes = [
     path: '/landing',
     name: 'Landing',
     component: Landing
+  },
+  {
+    path: '/mybooking',
+    name: 'MyBooking',
+    component: MyBooking
+  },
+  {
+    path: '/detail-profile',
+    name: 'Profile',
+    component: DetailProfile
+  },
+  {
+    path: '/detail-booking',
+    name: 'BookingDetail',
+    component: BookingDetail
   }
 ]
 
