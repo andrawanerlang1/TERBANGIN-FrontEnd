@@ -1,41 +1,43 @@
 <template>
-  <div class="main">
+  <div>
     <Navbar />
-    <b-container class="pt-5">
-      <b-row>
-        <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
-          <h4 class="text-white mb-4">Contact Person Details</h4>
-          <ContactPersonDetail />
-        </b-col>
-        <b-col col lg="4" md="4" sm="12" cols="12" style="width: 100%;">
-          <h4 class="text-white mb-4">Flight Detail</h4>
-          <FlightDetailCard />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
-          <h4 class=" mb-4 mt-4  text-black">
-            Passanger Details
-          </h4>
-          <PassangerDetailTop />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col col lg="8" md="8" sm="12" cols="12" style=" width: 100%;">
-          <h4 class=" mb-4 mt-5  text-black">
-            Passanger Details
-          </h4>
-          <PassangerDetailBot />
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col col lg="8" md="8" sm="12" cols="12" style=" width: 100%;">
-          <div class="text-center">
-            <button class="btn btn-payment my-5">Procees to Payment</button>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
+    <div class="main">
+      <b-container class="pt-5">
+        <b-row>
+          <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
+            <h4 class="text-white mb-4">Contact Person Details</h4>
+            <ContactPersonDetail />
+          </b-col>
+          <b-col col lg="4" md="4" sm="12" cols="12" style="width: 100%;">
+            <h4 class="text-white mb-4">Flight Detail</h4>
+            <FlightDetailCard />
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
+            <h4 class=" mb-4 mt-4  text-black">
+              Passanger Details
+            </h4>
+            <PassangerDetailTop />
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col col lg="8" md="8" sm="12" cols="12" style=" width: 100%;">
+            <h4 class=" mb-4 mt-5  text-black">
+              Passanger Details
+            </h4>
+            <PassangerDetailBot />
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col col lg="8" md="8" sm="12" cols="12" style=" width: 100%;">
+            <div class="text-center">
+              <button class="btn btn-payment my-5">Procees to Payment</button>
+            </div>
+          </b-col>
+        </b-row>
+      </b-container>
+    </div>
     <Footer />
   </div>
 </template>
