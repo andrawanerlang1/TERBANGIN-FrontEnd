@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import FlightDetail from '../views/FlightDetail.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/detail',
     name: 'FlightDetail',
     component: FlightDetail
+  },
+  {
+    path: '/search',
+    name: 'Search',
+    component: Search
   }
 ]
 

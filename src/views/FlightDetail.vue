@@ -1,5 +1,6 @@
 <template>
   <div class="main">
+    <Navbar />
     <b-container class="pt-5">
       <b-row>
         <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
@@ -35,10 +36,13 @@
         </b-col>
       </b-row>
     </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import ContactPersonDetail from '../components/_base/FlightDetail/ContactPersonDetail'
 import FlightDetailCard from '../components/_base/FlightDetail/FlightDetail'
 import PassangerDetailTop from '../components/_base/FlightDetail/PassengerDetailTop'
@@ -47,6 +51,8 @@ import PassangerDetailBot from '../components/_base/FlightDetail/PassangerDetail
 export default {
   name: 'FlightDetail',
   components: {
+    Navbar,
+    Footer,
     ContactPersonDetail,
     FlightDetailCard,
     PassangerDetailTop,
