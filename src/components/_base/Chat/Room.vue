@@ -291,7 +291,7 @@ p {
   margin-bottom: unset;
 }
 
-img {
+.row img {
   border-radius: 20px;
   width: 50px;
   height: 50px;
