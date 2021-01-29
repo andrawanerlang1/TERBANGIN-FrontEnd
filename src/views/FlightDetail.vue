@@ -130,6 +130,10 @@ export default {
 </script>
 
 <style scoped>
+button {
+  outline: unset;
+}
+
 .main {
   background-image: url('../assets/bg-header.png');
   background-repeat: no-repeat;
