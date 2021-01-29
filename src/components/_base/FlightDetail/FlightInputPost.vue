@@ -1,6 +1,6 @@
 <template>
   <div class="row mt-3 justify-content-center">
-    <div class="col box mx-lg-2 mainWrapper">
+    <div class="col box mx-lg-2 mainWrapper" style="padding-bottom:50px">
       <div class="maskapai" style="font-weight:600">
         <div>
           Airlines
@@ -28,7 +28,7 @@
       </div>
       <div class="formSeparator">
         <div class="separatorName">
-          Flight Data
+          Flight Date
         </div>
         <b-form-input type="date"></b-form-input>
       </div>
@@ -50,9 +50,66 @@
       </div>
       <div class="formSeparator">
         <div class="separatorName">
+          Flight Class
+        </div>
+        <div style="display:flex;justify-content:space-around; font-weight:500">
+          <b-form-checkbox value="economy">Economy</b-form-checkbox>
+          <b-form-checkbox value="business">Business</b-form-checkbox>
+          <b-form-checkbox value="firstclass">First Class</b-form-checkbox>
+        </div>
+      </div>
+      <div class="formSeparator">
+        <div class="separatorName">
           Capacity
         </div>
         <b-form-input type="number" min="10" max="5000"></b-form-input>
+      </div>
+      <div class="formSeparator">
+        <div class="separatorName">
+          Flight Route
+        </div>
+        <div class="routeCard">
+          <div>
+            From :
+            <div style="display:flex">
+              <b-form-select
+                v-model="from"
+                :options="place"
+                required
+              ></b-form-select>
+            </div>
+          </div>
+          <div>
+            To :
+            <div style="display:flex">
+              <b-form-select
+                v-model="to"
+                :options="place"
+                required
+              ></b-form-select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="formSeparator">
+        <div class="separatorName">
+          Terminal
+        </div>
+        <b-form-select
+          v-model="terminal"
+          :options="terminals"
+          required
+        ></b-form-select>
+      </div>
+      <div class="formSeparator">
+        <div class="separatorName">
+          Transit
+        </div>
+        <b-form-select
+          v-model="transit"
+          :options="transits"
+          required
+        ></b-form-select>
       </div>
     </div>
   </div>
@@ -63,11 +120,34 @@ export default {
   data() {
     return {
       mascapai: null,
+      from: null,
+      to: null,
+      terminal: null,
+      transit: null,
       options: [
         { value: null, text: 'Please select airlines' },
         { value: 'garuda', text: 'Garuda Indonesia' },
         { value: 'lion', text: 'Lion Air' },
         { value: 'air', text: 'Air Asia' }
+      ],
+      place: [
+        { value: null, text: 'Please select the place' },
+        { value: '[Medan, Indonesia]', text: 'Medan, Indonesia' },
+        { value: '[Jakarta, Indonesia]', text: 'Jakarta, Indonesia' },
+        { value: '[Tokyo, Jepang]', text: 'Tokyo, Jepang' },
+        { value: '[Kuala, Malaysia]', text: 'Kuala Lumpur, Malaysia' }
+      ],
+      terminals: [
+        { value: null, text: 'Please select terminal' },
+        { value: 'A', text: 'Terminal A' },
+        { value: 'B', text: 'Terminal B' },
+        { value: 'C', text: 'Terminal C' }
+      ],
+      transits: [
+        { value: null, text: 'Please select terminal' },
+        { value: '0', text: 'Direct Flight' },
+        { value: '1', text: 'Transit Once' },
+        { value: '2', text: 'Transit Twice' }
       ]
     }
   }
@@ -84,6 +164,14 @@ export default {
 .separatorName {
   margin-top: 20px;
   margin-bottom: 10px;
+}
+.routeCard {
+  border-radius: 15px;
+  width: 70%;
+  box-shadow: 0px 8px 27px rgba(14, 63, 108, 0.19);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
 }
 .maxMesg p {
   overflow: hidden;

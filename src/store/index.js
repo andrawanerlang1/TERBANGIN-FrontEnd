@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Profile from './modules/profile'
 import Register from './modules/register'
 import Auth from './modules/auth'
 import Booking from './modules/auth'
@@ -10,7 +11,7 @@ export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
-  modules: { Register, Auth, Booking },
+  modules: { Register, Auth, Booking, Profile },
   getters: {},
   plugins: [
     createPersistedState({
