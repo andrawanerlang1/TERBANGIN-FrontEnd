@@ -18,7 +18,7 @@
             <h4 class=" mb-4 mt-4  text-black">
               Passanger Details
             </h4>
-            <PassangerDetailTop />
+            <PassangerDetailTop :passanger="passanger" />
           </b-col>
         </b-row>
         <b-row>
@@ -59,6 +59,11 @@ export default {
     FlightDetailCard,
     PassangerDetailTop,
     PassangerDetailBot
+  },
+  data() {
+    return {
+      passanger: 3
+    }
   }
 }
 </script>

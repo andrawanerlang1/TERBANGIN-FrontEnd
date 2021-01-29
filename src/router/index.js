@@ -7,7 +7,9 @@ import Landing from '../views/Landing.vue'
 import MyBooking from '../views/Mybooking.vue'
 import DetailProfile from '../views/DetailProfile.vue'
 import BookingDetail from '../views/BookingDetail.vue'
+import Chat from '../views/Chat.vue'
 import Notifications from '../views/Notifications.vue'
+import PostFlight from '../views/PostFlight.vue'
 
 Vue.use(VueRouter)
 
@@ -48,9 +50,19 @@ const routes = [
     component: BookingDetail
   },
   {
+    path: '/chat',
+    name: 'Chat',
+    component: Chat
+  },
+  {
     path: '/notifications',
     name: 'notifications',
     component: Notifications
+  },
+  {
+    path: '/post-flight',
+    name: 'PostFlight',
+    component: PostFlight
   }
 ]
 
