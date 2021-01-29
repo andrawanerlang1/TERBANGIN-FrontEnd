@@ -12,10 +12,10 @@
           <div class="chat-msg">
             <div class="d-flex flex-column">
               <div>
-                <p><strong>Firman - Admin</strong></p>
+                <p><strong>Dummy Admin</strong></p>
               </div>
               <div>
-                <p class="text-grey">Thanks for your help</p>
+                <p class="text-grey">Lorem ipsum</p>
               </div>
             </div>
           </div>
@@ -29,30 +29,7 @@
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
 
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
         <div class="d-flex justify-content-start py-2 room-item">
           <div class="chat-img">
             <img src="../../../assets/img-admin.png" />
@@ -60,202 +37,12 @@
           <div class="chat-msg">
             <div class="d-flex flex-column">
               <div>
-                <p><strong>Firman - Admin</strong></p>
+                <p><strong>Dummy Admin</strong></p>
               </div>
               <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
+                <p class="text-grey">
+                  Lorem ipsum
+                </p>
               </div>
             </div>
           </div>
