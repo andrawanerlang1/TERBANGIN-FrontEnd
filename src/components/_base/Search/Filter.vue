@@ -71,7 +71,7 @@
           </b-collapse>
         </b-navbar>
       </div>
-      <div class="departure">
+      <div class="departure" style="font-size:16px">
         <b-navbar toggleable>
           Departure Time
           <b-navbar-toggle target="Departure">
