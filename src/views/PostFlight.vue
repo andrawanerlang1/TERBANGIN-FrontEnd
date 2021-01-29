@@ -9,7 +9,10 @@
       />
     </div>
     <div class="row justify-content-center">
-      <div class="col-10 boxMessage col-lg-8  mt-5">
+      <div
+        class="col-10 boxMessage col-lg-8  mt-5"
+        style="padding-bottom:900px"
+      >
         <div class="container">
           <div class="row">
             <div class="col mx-lg-4">
@@ -63,7 +66,6 @@ div .row img {
 }
 .boxMessage {
   width: 800px;
-  height: 775px;
   background: #ffffff;
   box-shadow: 0px 8px 27px rgba(14, 63, 108, 0.19);
   border-radius: 20px;
