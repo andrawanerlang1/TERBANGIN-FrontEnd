@@ -9,10 +9,7 @@
       />
     </div>
     <div class="row justify-content-center">
-      <div
-        class="col-10 boxMessage col-lg-8  mt-5"
-        style="padding-bottom:900px"
-      >
+      <div class="col-10 boxMessage col-lg-8  mt-5" style="height:1200px">
         <div class="container">
           <div class="row">
             <div class="col mx-lg-4">
@@ -42,7 +39,7 @@
 <style>
 div .row img {
   width: 100%;
-  height: 55%;
+  height: 85%;
 }
 .clearNotif {
   font-family: Poppins;
