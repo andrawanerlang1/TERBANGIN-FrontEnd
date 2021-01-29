@@ -13,30 +13,59 @@
                 <div class="col-sm-6">
                   <p>Contact</p>
                   <label class="text-muted">Email</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.email"
+                  />
                   <label class="text-muted">Phone Number</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.phoneNumber"
+                  />
                 </div>
                 <div class="col-sm-6">
                   <p>Biodata</p>
                   <label class="text-muted">Username</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.fullName"
+                  />
                   <label class="text-muted">City</label>
                   <b-form-select>
                     <b-form-select-option disabled value="null"
                       >Select Category</b-form-select-option
                     >
                     <b-form-select-option>
-                      Medan
+                      Bandung
+                    </b-form-select-option>
+                    <b-form-select-option>
+                      Jakarta
                     </b-form-select-option>
                   </b-form-select>
                   <br />
                   <br />
                   <label class="text-muted">Address</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.nationality"
+                  />
                   <label class="text-muted">Post Code</label>
-                  <input type="text" class="form-control mb-4" />
-                  <button type="submit" class="btn btn-save">Save</button>
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.postCode"
+                  />
+                  <button
+                    type="submit"
+                    class="btn btn-save"
+                    @click="updateProfile"
+                  >
+                    Save
+                  </button>
                 </div>
               </div>
             </form>
@@ -49,6 +78,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Navbar from '../components/Navbar'
 import CardProfile from '../components/_base/Profile/CardProfile'
 import Footer from '../components/Footer'
@@ -58,6 +88,64 @@ export default {
     Navbar,
     CardProfile,
     Footer
+  },
+  data() {
+    return {
+      form: {
+        email: '',
+        fullName: '',
+        phoneNumber: '',
+        city: '',
+        nationality: '',
+        postCode: ''
+      }
+    }
+  },
+  created() {
+    this.getUserProfile(this.user.userId)
+      .then(response => {
+        console.log(response)
+        this.form = {
+          email: response.email,
+          fullName: response.fullName,
+          phoneNumber: response.phoneNumber,
+          city: response.city,
+          nationality: response.nationality,
+          postCode: response.postCode
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  },
+  methods: {
+    ...mapActions([
+      'getUserProfile',
+      'logout',
+      'patchUserProfile',
+      'patchLocation',
+      'patchProfilePict',
+      'deleteProfilePict'
+    ]),
+    ...mapMutations(['patchUser']),
+    updateProfile() {
+      console.log('connected to this function')
+      console.log(this.form)
+      this.form.fullName = this.profile.fullName
+      this.form.phoneNumber = this.profile.phoneNumber
+      this.form.city = this.profile.city
+      this.form.nationality = this.profile.nationality
+      this.form.postCode = this.profile.postCode
+      this.patchUser(this.form)
+      this.patchUserProfile(this.user.userId)
+      this.getUserProfile(this.user.userId)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      profile: 'setProfile'
+    })
   }
 }
 </script>
