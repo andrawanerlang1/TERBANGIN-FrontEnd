@@ -21,7 +21,7 @@
     </div>
     <div class="ticketCard">
       <div class="flightPlate" style="color:#595959">
-        <img src="../../../assets/img/garuda.png" style="margin" />
+        <img style="width:150px" src="../../../assets/img/garuda.png" />
         Garuda Indonesia
       </div>
       <div class="detailPlate">
@@ -58,15 +58,11 @@
             Select
           </button>
         </div>
-      </div>
-      <div class="viewdetail" style="color:#2395FF">
-        View Details
-        <img src="../../../assets/img/btnback.png" alt="" />
       </div>
     </div>
     <div class="ticketCard">
       <div class="flightPlate" style="color:#595959">
-        <img src="../../../assets/img/garuda.png" style="margin" />
+        <img style="width:150px" src="../../../assets/img/garuda.png" />
         Garuda Indonesia
       </div>
       <div class="detailPlate">
@@ -103,10 +99,6 @@
             Select
           </button>
         </div>
-      </div>
-      <div class="viewdetail" style="color:#2395FF">
-        View Details
-        <img src="../../../assets/img/btnback.png" alt="" />
       </div>
     </div>
   </div>
@@ -153,5 +145,8 @@
   font-weight: 600;
   padding: 12px 50px 12px 50px;
   box-shadow: 0 8px 6px -6px black;
+}
+.facilities img {
+  width: 30px;
 }
 </style>
