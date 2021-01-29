@@ -15,7 +15,7 @@ export default new Vuex.Store({
   getters: {},
   plugins: [
     createPersistedState({
-      path: ['Auth.user']
+      paths: ['Auth.user']
     })
   ]
 })
