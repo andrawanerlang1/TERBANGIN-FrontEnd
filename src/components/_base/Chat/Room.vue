@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ room + 'room' }} {{ oldRoom + 'oldroom' }} {{ roomId + 'roomId' }} tes
     <div class="room-container">
       <div class="header">
         <h4>Chat</h4>
@@ -77,12 +78,17 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+import io from 'socket.io-client'
 
 export default {
   data() {
     return {
-      role: 0
+      role: 0,
+      socket: io('http://localhost:3000'),
+      room: '',
+      oldRoom: '',
+      roomId: null
     }
   },
   created() {
@@ -95,20 +101,55 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['getAdminList', 'createRoomChat']),
-    clickRoom(item) {
+    ...mapActions([
+      'getAdminList',
+      'changeChatActive',
+      'createRoomChat',
+      'getRoomId'
+    ]),
+    ...mapMutations(['clearMessages']),
+    async clickRoom(item) {
       const setData = {
         sender: this.user.userId,
         receiver: item.userId
       }
-      console.log(setData)
-      this.createRoomChat(setData)
+      // ========= create room =============
+      await this.createRoomChat(setData)
         .then(result => {
           console.log(result)
         })
         .catch(error => {
           console.log(error)
         })
+      // ======== chat this user ============
+      await this.changeChatActive(item)
+      // ======== socket io  ================
+      await this.getRoomId(setData)
+        .then(result => {
+          this.roomId = result
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      const data = this.roomId
+      if (this.oldRoom) {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('changeRoom', {
+          username: this.user.fullName,
+          room: data,
+          oldRoom: this.oldRoom
+        })
+        this.oldRoom = data
+      } else {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('joinRoom', {
+          username: this.user.fullName,
+          room: data
+        })
+        this.oldRoom = data
+      }
     }
   }
 }
