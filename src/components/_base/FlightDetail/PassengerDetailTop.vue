@@ -23,9 +23,13 @@
           </div>
         </div>
       </div>
-      <div class="form-input-passanger" v-for="item in passanger" :key="item">
+      <div
+        class="form-input-passanger"
+        v-for="(item, index) in passanger"
+        :key="index"
+      >
         <div class="input-form">
-          <p class="text-grey">Title</p>
+          <p class="text-grey">Title{{ index + 1 }}</p>
           <div>
             <select name="title" class="mb-2">
               <option value="mr">Mr.</option>
@@ -35,7 +39,12 @@
         </div>
         <div class="input-form">
           <p class="text-grey">Fullname</p>
-          <input class="mb-1" type="text" placeholder="input your full name" />
+          <input
+            v-model="item.name"
+            class="mb-1"
+            type="text"
+            placeholder="input your full name"
+          />
         </div>
         <div class="input-form mb-5">
           <p class="text-grey">Nationality</p>
@@ -48,13 +57,27 @@
           </div>
         </div>
       </div>
+      <button @click="addPassanger">button</button>
+      {{ form }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['passanger']
+  props: ['passanger'],
+  data() {
+    return {
+      form: []
+    }
+  },
+  methods: {
+    addPassanger() {
+      this.form.push({
+        name: ''
+      })
+    }
+  }
 }
 </script>
 
