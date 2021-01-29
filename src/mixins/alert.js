@@ -1,4 +1,4 @@
-import Swal from 'vue-sweetalert2'
+import Swal from 'sweetalert2'
 
 export default {
   methods: {
@@ -10,7 +10,7 @@ export default {
       })
     },
     successAlert(msg) {
-      Swal.fire(msg, '', 'success')
+      Swal.fire('Success', msg, 'success')
     },
     errorAlert(error) {
       Swal.fire({

@@ -50,6 +50,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import alert from '../mixins/alert'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactPersonDetail from '../components/_base/FlightDetail/ContactPersonDetail'
@@ -59,6 +60,7 @@ import PassangerDetailBot from '../components/_base/FlightDetail/PassangerDetail
 
 export default {
   name: 'FlightDetail',
+  mixins: [alert],
   components: {
     Navbar,
     Footer,
@@ -114,6 +116,14 @@ export default {
       const setData = [dataBooking, ...this.formPassenger]
       console.log(setData)
       this.postBooking(setData)
+        .then(result => {
+          console.log(result.data.msg)
+          console.log('ini dari mixins')
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
     }
   }
 }
