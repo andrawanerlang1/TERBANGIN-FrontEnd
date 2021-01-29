@@ -31,7 +31,10 @@ export default {
 
 <style scoped>
 .main {
-  background: #f30000;
+  background-image: url('../assets/bg-header.png');
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  background-color: #fafafa;
 }
 
 .col {
