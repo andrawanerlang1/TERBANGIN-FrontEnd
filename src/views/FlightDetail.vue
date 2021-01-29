@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactPersonDetail from '../components/_base/FlightDetail/ContactPersonDetail'
@@ -81,6 +81,7 @@ export default {
         fullName: '',
         nationality: 'Indonesia'
       },
+      userId: '',
       // data flight by flight id
       flight: {
         flightId: 3,
@@ -89,15 +90,19 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['setUser']),
     total() {
       return this.formPassenger.length * this.flight.price
     }
+  },
+  created() {
+    this.userId = this.setUser.userId
   },
   methods: {
     ...mapActions(['postBooking']),
     addBooking() {
       const dataBooking = {
-        userId: 1,
+        userId: this.userId,
         flightId: this.flight.flightId,
         totalPassenger: this.formPassenger.length,
         totalPayment: this.total,
