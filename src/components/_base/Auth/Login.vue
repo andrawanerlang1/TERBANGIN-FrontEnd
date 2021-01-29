@@ -1,20 +1,21 @@
 <template>
   <div class="login animate__animated animate__fadeInRight">
     <div class="title">
-      <img src="../../../assets/img/logoflight.png" alt="" />
+      <img style="width:50px" src="../../../assets/img/logoflight.png" alt="" />
       <h4>Terbang.in</h4>
     </div>
     <div class="forms">
       <div class="title-form">
         <h1>Login</h1>
       </div>
-      <b-form>
+      <b-form @submit.prevent="signin">
         <b-form-input
-          type="text"
+          type="email"
           autocomplete="off"
           required
-          placeholder="Username"
+          placeholder="Email"
           class="input"
+          v-model="form.email"
         ></b-form-input>
         <b-form-input
           type="password"
@@ -22,6 +23,7 @@
           required
           placeholder="Password"
           class="input"
+          v-model="form.password"
         ></b-form-input>
         <b-button type="submit" class="signin shadow" block>Sign In</b-button>
       </b-form>
@@ -29,7 +31,10 @@
         <p style="color:#595959">
           Did you forgot your password?
         </p>
-        <div style="color:#2395FF;text-decoration:underline;cursor:pointer">
+        <div
+          @click="setPage('forgot')"
+          style="color:#2395FF;text-decoration:underline;cursor:pointer"
+        >
           Tap here for reset
         </div>
       </center>
@@ -40,15 +45,64 @@
       </p>
       <div class="button-alternative">
         <div class="btn-alter">
-          <img src="../../../assets/img/google.png" alt="" />
+          <img
+            style="width:25px;height:25px"
+            src="../../../assets/img/google.png"
+            alt=""
+          />
         </div>
         <div class="btn-alter">
-          <img src="../../../assets/img/fb.png" alt="" />
+          <img
+            style="width:25px;height:25px"
+            src="../../../assets/img/fb.png"
+            alt=""
+          />
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import alert from '../../../mixins/alert'
+export default {
+  name: 'Login',
+  mixins: [alert],
+  data() {
+    return {
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  created() {},
+  computed: {
+    ...mapGetters(['setUser'])
+  },
+  methods: {
+    ...mapActions(['login']),
+    ...mapMutations(['setPage']),
+    signin() {
+      this.login(this.form)
+        .then(result => {
+          this.makeToast(
+            `${result.data.msg}`,
+            `Congratulations, ${this.form.email}`,
+            'success'
+          )
+          setTimeout(() => {
+            this.$router.push('/search')
+          }, 2500)
+        })
+        .catch(error => {
+          this.makeToast('Failed', `${error.data.msg}`, 'danger')
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 .button-alternative {

@@ -1,20 +1,21 @@
 <template>
   <div class="forgot animate__animated animate__fadeInRight">
     <div class="title">
-      <img src="../../../assets/img/logoflight.png" alt="" />
+      <img style="width:50px" src="../../../assets/img/logoflight.png" alt="" />
       <h4>Terbang.in</h4>
     </div>
     <div class="forms">
       <div class="title-form">
         <h1>Forgot Password</h1>
       </div>
-      <b-form>
+      <b-form @submit.prevent="forgotPass">
         <b-form-input
           type="email"
           autocomplete="off"
           required
           placeholder="Email"
           class="input"
+          v-model="form.email"
         ></b-form-input>
         <b-button type="submit" class="signin shadow" block>Send</b-button>
       </b-form>
@@ -26,6 +27,32 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex'
+export default {
+  name: 'forgot',
+  data() {
+    return {
+      form: {
+        email: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['forgot']),
+    forgotPass() {
+      this.forgot(this.form)
+        .then(result => {
+          console.log(result)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  }
+}
+</script>
 
 <style scoped>
 .forgot {
