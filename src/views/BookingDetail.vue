@@ -15,7 +15,11 @@
             <div class="booking-left col-sm-6">
               <b-row>
                 <b-col>
-                  <img src="../assets/img/garuda.png" alt="logo garuda" />
+                  <img
+                    src="../assets/img/garuda.png"
+                    alt="logo garuda"
+                    class="maskapai-img"
+                  />
                 </b-col>
                 <b-col>
                   <b class="departure font-weight-bold mr-2">
@@ -24,6 +28,7 @@
                   <img
                     src="../assets/img/logoGrey.png"
                     alt="gray-small-plane"
+                    class="logo-grey"
                   />
                   <b class="departure font-weight-bold ml-2">
                     JPN
@@ -57,8 +62,12 @@
                 Monday,20 July 20 - 12:33
               </p>
             </div>
-            <div class="booking-right col-sm-4">
-              <img src="../assets/img/qrcode.png" alt="qr code" />
+            <div class="booking-right col-sm-4 text-center">
+              <img
+                class="qr-code"
+                src="../assets/img/qrcode.png"
+                alt="qr code"
+              />
             </div>
           </div>
         </div>
@@ -82,6 +91,16 @@ export default {
 </script>
 
 <style>
+.booking-left img.maskapai-img {
+  width: 160px;
+  height: 70px;
+}
+
+.booking-left img.logo-grey {
+  width: 20px;
+  height: 20px;
+}
+
 .booking-detail {
   background-color: #2395ff;
   overflow: hidden;
@@ -109,19 +128,21 @@ export default {
   border-left: none;
   border-radius: 10px;
 }
-.booking-right img {
+.booking-right img.qr-code {
   margin: 10% 0;
+  height: 255px;
+  width: 255px;
 }
 .departure {
-  font-size: 20px;
+  font-size: 27px;
 }
 @media (min-width: 581px) {
-  .booking-right img {
+  .booking-right img.qr-code {
     width: 100%;
   }
 }
 @media (max-width: 576px) {
-  .booking-right img {
+  .booking-right img.qr-code {
     margin: 10% auto;
   }
   .booking-left {
