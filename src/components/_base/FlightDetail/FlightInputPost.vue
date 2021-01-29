@@ -28,7 +28,7 @@
       </div>
       <div class="formSeparator">
         <div class="separatorName">
-          Flight Data
+          Flight Date
         </div>
         <b-form-input type="date"></b-form-input>
       </div>
@@ -46,6 +46,16 @@
           <b-form-checkbox value="wifi">Wifi</b-form-checkbox>
           <b-form-checkbox value="food">Meal</b-form-checkbox>
           <b-form-checkbox value="luggage">Luggage</b-form-checkbox>
+        </div>
+      </div>
+      <div class="formSeparator">
+        <div class="separatorName">
+          Flight Class
+        </div>
+        <div style="display:flex;justify-content:space-around; font-weight:500">
+          <b-form-checkbox value="economy">Economy</b-form-checkbox>
+          <b-form-checkbox value="business">Business</b-form-checkbox>
+          <b-form-checkbox value="firstclass">First Class</b-form-checkbox>
         </div>
       </div>
       <div class="formSeparator">
