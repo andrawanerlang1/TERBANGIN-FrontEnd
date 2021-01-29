@@ -1,20 +1,21 @@
 <template>
   <div class="register animate__animated animate__fadeInRight">
     <div class="title">
-      <img src="../../../assets/img/logoflight.png" alt="" />
+      <img style="width:50px" src="../../../assets/img/logoflight.png" alt="" />
       <h4>Terbang.in</h4>
     </div>
     <div class="forms">
       <div class="title-form">
         <h1>Register</h1>
       </div>
-      <b-form>
+      <b-form @submit.prevent="onRegister">
         <b-form-input
           type="text"
           autocomplete="off"
           required
           placeholder="Full Name"
           class="input"
+          v-model="form.fullName"
         ></b-form-input>
         <b-form-input
           type="email"
@@ -22,6 +23,7 @@
           required
           placeholder="Email"
           class="input"
+          v-model="form.email"
         ></b-form-input>
         <b-form-input
           type="password"
@@ -29,12 +31,14 @@
           required
           placeholder="Password"
           class="input"
+          v-model="form.password"
         ></b-form-input>
         <b-button type="submit" class="signup shadow" block>Sign Up</b-button>
         <b-form-checkbox
           name="checkbox-1"
           value="accepted"
           unchecked-value="not_accepted"
+          required
         >
           Accept terms and condition
         </b-form-checkbox>
@@ -44,10 +48,54 @@
       <p style="color:#A1A1A1;text-align:center;margin-bottom:35px">
         Already have an account?
       </p>
-      <b-button type="submit" class="signin" block>Sign In</b-button>
+      <b-button type="submit" class="signin" block @click.prevent="toSignIn"
+        >Sign In</b-button
+      >
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import alert from '../../../mixins/alert'
+export default {
+  name: 'Register',
+  mixins: [alert],
+  data() {
+    return {
+      form: {
+        fullName: '',
+        email: '',
+        password: ''
+      }
+    }
+  },
+  created() {},
+  computed: {
+    ...mapGetters(['typePage'])
+  },
+  methods: {
+    ...mapActions(['register']),
+    ...mapMutations(['setPage']),
+    onRegister() {
+      this.register(this.form)
+        .then(result => {
+          this.makeToast(
+            'Congratulations',
+            `${result.data.data.fullName} Login successfully`,
+            'success'
+          )
+        })
+        .catch(error => {
+          this.makeToast('Failed', `${error.data.msg}`, 'danger')
+        })
+    },
+    toSignIn() {
+      this.setPage('login')
+    }
+  }
+}
+</script>
 
 <style scoped>
 .register {

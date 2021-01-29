@@ -1,7 +1,7 @@
 <template>
   <div class="forgot animate__animated animate__fadeInRight">
     <div class="title">
-      <img src="../../../assets/img/logoflight.png" alt="" />
+      <img style="width:50px" src="../../../assets/img/logoflight.png" alt="" />
       <h4>Terbang.in</h4>
     </div>
     <div class="forms">

@@ -8,9 +8,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { AvatarPlugin } from 'bootstrap-vue'
 import { BadgePlugin } from 'bootstrap-vue'
 import 'animate.css'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 Vue.component('VueSlider', VueSlider)
+Vue.use(VueSweetalert2)
 Vue.use(BadgePlugin)
 Vue.use(AvatarPlugin)
 // Install BootstrapVue
