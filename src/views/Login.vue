@@ -23,13 +23,20 @@ import Register from '../components/_base/Auth/Register'
 import Login from '../components/_base/Auth/Login'
 import Forgot from '../components/_base/Auth/ForgotPass'
 import Reset from '../components/_base/Auth/ResetPass'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'Auth',
   data() {
     return {}
   },
-  created() {},
+  created() {
+    const key = this.$route.query.key
+    if (key) {
+      this.setPage('reset')
+    } else {
+      this.setPage('register')
+    }
+  },
   components: {
     Register,
     Login,
@@ -38,6 +45,9 @@ export default {
   },
   computed: {
     ...mapGetters(['typePage'])
+  },
+  methods: {
+    ...mapMutations(['setPage'])
   }
 }
 </script>
