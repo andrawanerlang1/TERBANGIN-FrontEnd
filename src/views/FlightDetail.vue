@@ -6,7 +6,7 @@
         <b-row>
           <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
             <h4 class="text-white mb-4">Contact Person Details</h4>
-            <ContactPersonDetail />
+            <ContactPersonDetail :formBooking="formBooking" />
           </b-col>
           <b-col col lg="4" md="4" sm="12" cols="12" style="width: 100%;">
             <h4 class="text-white mb-4">Flight Detail</h4>
@@ -18,7 +18,11 @@
             <h4 class=" mb-4 mt-4  text-black">
               Passanger Details
             </h4>
-            <PassangerDetailTop :passanger="passanger" />
+            <PassangerDetailTop
+              :formPassenger="formPassenger"
+              :passenger="passenger"
+              :flight="flight"
+            />
           </b-col>
         </b-row>
         <b-row>
@@ -32,7 +36,9 @@
         <b-row>
           <b-col col lg="8" md="8" sm="12" cols="12" style=" width: 100%;">
             <div class="text-center">
-              <button class="btn-payment my-5">Procees to Payment</button>
+              <button @click="addBooking" class="btn-payment my-5">
+                Procees to Payment
+              </button>
             </div>
           </b-col>
         </b-row>
@@ -43,6 +49,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import alert from '../mixins/alert'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import ContactPersonDetail from '../components/_base/FlightDetail/ContactPersonDetail'
@@ -52,6 +60,7 @@ import PassangerDetailBot from '../components/_base/FlightDetail/PassangerDetail
 
 export default {
   name: 'FlightDetail',
+  mixins: [alert],
   components: {
     Navbar,
     Footer,
@@ -62,13 +71,69 @@ export default {
   },
   data() {
     return {
-      passanger: 3
+      formBooking: {
+        contactFullName: '',
+        contactEmail: '',
+        phoneCode: '+62',
+        phoneNumber: ''
+      },
+      formPassenger: [],
+      passenger: {
+        title: 'Mr.',
+        fullName: '',
+        nationality: 'Indonesia'
+      },
+      userId: '',
+      // data flight by flight id
+      flight: {
+        flightId: 3,
+        price: 500000
+      }
+    }
+  },
+  computed: {
+    ...mapGetters(['setUser']),
+    total() {
+      return this.formPassenger.length * this.flight.price
+    }
+  },
+  created() {
+    this.userId = this.setUser.userId
+  },
+  methods: {
+    ...mapActions(['postBooking']),
+    addBooking() {
+      const dataBooking = {
+        userId: this.userId,
+        flightId: this.flight.flightId,
+        totalPassenger: this.formPassenger.length,
+        totalPayment: this.total,
+        contactFullName: this.formBooking.contactFullName,
+        contactEmail: this.formBooking.contactEmail,
+        contactNumber: this.formBooking.phoneCode + this.formBooking.phoneNumber
+      }
+
+      const setData = [dataBooking, ...this.formPassenger]
+      console.log(setData)
+      this.postBooking(setData)
+        .then(result => {
+          console.log(result.data.msg)
+          console.log('ini dari mixins')
+          this.successAlert(result.data.msg)
+        })
+        .catch(error => {
+          this.errorAlert(error.data.msg)
+        })
     }
   }
 }
 </script>
 
 <style scoped>
+button {
+  outline: unset;
+}
+
 .main {
   background-image: url('../assets/bg-header.png');
   background-repeat: no-repeat;

@@ -8,7 +8,7 @@
           <div class="profile mt-3 p-4">
             <p class="sub">PROFILE</p>
             <h3>Profile</h3>
-            <form>
+            <form @submit.prevent="updateProfile">
               <div class="row mt-4">
                 <div class="col-sm-6">
                   <p>Contact</p>
@@ -34,17 +34,11 @@
                     v-model="profile.fullName"
                   />
                   <label class="text-muted">City</label>
-                  <b-form-select>
-                    <b-form-select-option disabled value="null"
-                      >Select Category</b-form-select-option
-                    >
-                    <b-form-select-option>
-                      Bandung
-                    </b-form-select-option>
-                    <b-form-select-option>
-                      Jakarta
-                    </b-form-select-option>
-                  </b-form-select>
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.city"
+                  />
                   <br />
                   <br />
                   <label class="text-muted">Address</label>
@@ -59,16 +53,13 @@
                     class="form-control mb-4"
                     v-model="profile.postCode"
                   />
-                  <button
-                    type="submit"
-                    class="btn btn-save"
-                    @click="updateProfile"
-                  >
+                  <button type="submit" class="btn btn-save">
                     Save
                   </button>
                 </div>
               </div>
             </form>
+            {{ profile }}
           </div>
         </b-col>
       </b-row>
@@ -91,32 +82,32 @@ export default {
   },
   data() {
     return {
-      form: {
-        email: '',
-        fullName: '',
-        phoneNumber: '',
-        city: '',
-        nationality: '',
-        postCode: ''
-      }
+      // form: {
+      //   email: '',
+      //   fullName: '',
+      //   phoneNumber: '',
+      //   city: '',
+      //   nationality: '',
+      //   postCode: ''
+      // }
     }
   },
   created() {
     this.getUserProfile(this.user.userId)
-      .then(response => {
-        console.log(response)
-        this.form = {
-          email: response.email,
-          fullName: response.fullName,
-          phoneNumber: response.phoneNumber,
-          city: response.city,
-          nationality: response.nationality,
-          postCode: response.postCode
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    // .then(response => {
+    //   this.form = {
+    //     email: response.email,
+    //     fullName: response.fullName,
+    //     phoneNumber: response.phoneNumber,
+    //     city: response.city,
+    //     nationality: response.nationality,
+    //     postCode: response.postCode
+    //   }
+    //   console.log(this.form)
+    // })
+    // .catch(error => {
+    //   console.log(`ini error ${error}`)
+    // })
   },
   methods: {
     ...mapActions([
@@ -129,16 +120,22 @@ export default {
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
-      console.log('connected to this function')
-      console.log(this.form)
-      this.form.fullName = this.profile.fullName
-      this.form.phoneNumber = this.profile.phoneNumber
-      this.form.city = this.profile.city
-      this.form.nationality = this.profile.nationality
-      this.form.postCode = this.profile.postCode
-      this.patchUser(this.form)
-      this.patchUserProfile(this.user.userId)
-      this.getUserProfile(this.user.userId)
+      // console.log('connected to this function')
+      // console.log(this.profile)
+      // this.form.fullName = this.profile.fullName
+      // this.form.phoneNumber = this.profile.phoneNumber
+      // this.form.city = this.profile.city
+      // this.form.nationality = this.profile.nationality
+      // this.form.postCode = this.profile.postCode
+      // this.patchUser(this.form)
+      const setData = { id: this.user.userId, data: this.profile }
+      this.patchUserProfile(setData)
+        .then(result => {
+          this.$toasted.success(result)
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
     }
   },
   computed: {

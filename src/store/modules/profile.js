@@ -13,15 +13,6 @@ export default {
     }
   },
   mutations: {
-    patchUser(context, payload) {
-      console.log(payload)
-      context.form.email = payload.email
-      context.form.fullName = payload.fullName
-      context.form.phoneNumber = payload.phoneNumber
-      context.form.city = payload.city
-      context.form.nationality = payload.nationality
-      context.form.postCode = payload.postCode
-    },
     setUserProfile(state, payload) {
       state.profile = payload
     }
@@ -43,15 +34,19 @@ export default {
     },
     patchUserProfile(context, payload) {
       return new Promise((resolve, reject) => {
+        console.log(payload)
         axios
-          .patch(`http://localhost:3000/user/${payload}`, context.state.form)
+          .patch(
+            `http://localhost:3000/user/settings/${payload.id}`,
+            payload.data
+          )
           .then(response => {
             console.log(response.data.data)
-            // context.commit('setUserProfile', response.data.data)
-            resolve(response.data)
+            context.commit('setUserProfile', response.data.data)
+            resolve(response.data.msg)
           })
           .catch(error => {
-            reject(error.response)
+            reject(error.response.data.msg)
           })
       })
     },
@@ -66,6 +61,7 @@ export default {
             resolve(response.data.data)
           })
           .catch(error => {
+            console.log(error.response)
             reject(error.response.data.message)
           })
       })
@@ -90,6 +86,9 @@ export default {
     setProfile(state) {
       console.log(state)
       return state.profile
+    },
+    seUser(state) {
+      return state.user
     }
   }
 }

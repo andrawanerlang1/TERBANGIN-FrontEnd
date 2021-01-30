@@ -15,6 +15,7 @@
             <b>Select Photo</b>
           </label>
           <h5>Andrawan Ganteng</h5>
+          <!-- <h5>{{ form.user_name }}</h5> -->
           <p class="small text-muted">Medan, Indonesia</p>
         </div>
       </form>
@@ -54,6 +55,70 @@
   </div>
 </template>
 
+<script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+export default {
+  name: 'Profile',
+  data() {
+    return {
+      form: {
+        email: '',
+        fullName: '',
+        phoneNumber: '',
+        city: '',
+        nationality: '',
+        postCode: ''
+      }
+    }
+  },
+  created() {
+    this.getUserProfile(this.user.userId)
+      .then(response => {
+        this.form = {
+          email: response.email,
+          fullName: response.fullName,
+          phoneNumber: response.phoneNumber,
+          city: response.city,
+          nationality: response.nationality,
+          postCode: response.postCode
+        }
+        console.log(this.form)
+      })
+      .catch(error => {
+        console.log(`ini error ${error}`)
+      })
+  },
+  methods: {
+    ...mapActions([
+      'getUserProfile',
+      'logout',
+      'patchUserProfile',
+      'patchLocation',
+      'patchProfilePict',
+      'deleteProfilePict'
+    ]),
+    ...mapMutations(['patchUser']),
+    updateProfile() {
+      console.log('connected to this function')
+      console.log(this.profile)
+      this.form.fullName = this.profile.fullName
+      this.form.phoneNumber = this.profile.phoneNumber
+      this.form.city = this.profile.city
+      this.form.nationality = this.profile.nationality
+      this.form.postCode = this.profile.postCode
+      this.patchUser(this.form)
+      this.patchUserProfile(this.user.userId)
+      this.getUserProfile(this.user.userId)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      profile: 'setProfile'
+    })
+  }
+}
+</script>
 <style scoped>
 input[type='file'] {
   display: none;

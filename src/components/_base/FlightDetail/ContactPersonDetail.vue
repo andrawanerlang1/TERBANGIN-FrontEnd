@@ -3,17 +3,27 @@
     <div class="form">
       <div class="input-form">
         <p class="text-grey">Full Name</p>
-        <input class="mb-1" type="text" placeholder="input your full name" />
+        <input
+          v-model="formBooking.contactFullName"
+          class="mb-1"
+          type="text"
+          placeholder="input your full name"
+        />
       </div>
       <div class="input-form">
         <p class="text-grey">Email</p>
-        <input class="mb-1" type="text" placeholder="input your email" />
+        <input
+          v-model="formBooking.contactEmail"
+          class="mb-1"
+          type="email"
+          placeholder="input your email"
+        />
       </div>
       <div class="input-form">
         <p class="text-grey">Phone Number</p>
         <div class="d-flex justify-content-start">
           <div>
-            <select name="phone">
+            <select v-model="formBooking.phoneCode" name="phone">
               <option value="+62">+62 (ID)</option>
               <option value="+1">+1 (USA)</option>
               <option value="+81">+81 (JPN)</option></select
@@ -26,8 +36,9 @@
           </div>
           <div>
             <input
+              v-model="formBooking.phoneNumber"
               class="mb-1 ml-2"
-              type="text"
+              type="number"
               placeholder="input your phone number"
             />
           </div>
@@ -46,6 +57,12 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['formBooking']
+}
+</script>
 
 <style scoped>
 .form {
