@@ -4,7 +4,7 @@
       <div class="top mb-4">
         <div class="d-flex justify-content-between">
           <div>
-            <p class="text-dark-grey">Pessanger {{ total }}</p>
+            <p class="text-dark-grey">Passenger : {{ formPassenger.length }}</p>
           </div>
           <div>
             <div class="custom-control custom-switch">
@@ -60,7 +60,11 @@
               >
             </div>
             <div class="text-right">
-              <button class="btn-add" @click="addPassenger">
+              <button
+                v-if="formPassenger.length < maxPassanger"
+                class="btn-add"
+                @click="addPassenger"
+              >
                 Add passenger
               </button>
             </div>
@@ -95,10 +99,19 @@
 
 <script>
 export default {
-  props: ['formBooking', 'formPassenger', 'passenger', 'flight'],
+  props: ['formBooking', 'formPassenger', 'passenger', 'flight', 'params'],
   data() {
     return {
       error: ''
+    }
+  },
+  computed: {
+    maxPassanger() {
+      if (this.params.totalPassanger) {
+        return this.params.totalPassanger
+      } else {
+        return 10
+      }
     }
   },
   methods: {

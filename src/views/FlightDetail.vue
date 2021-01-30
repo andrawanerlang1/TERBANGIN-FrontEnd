@@ -22,6 +22,7 @@
               :formPassenger="formPassenger"
               :passenger="passenger"
               :flight="flight"
+              :params="params"
             />
           </b-col>
         </b-row>
@@ -44,6 +45,7 @@
         </b-row>
       </b-container>
     </div>
+    <button @click="show">show</button>
     <Footer />
   </div>
 </template>
@@ -92,7 +94,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['setUser']),
+    ...mapGetters({
+      setUser: 'setUser',
+      params: 'getParams'
+    }),
     total() {
       return this.formPassenger.length * this.flight.price
     }
@@ -102,6 +107,9 @@ export default {
   },
   methods: {
     ...mapActions(['postBooking']),
+    show() {
+      console.log(this.params)
+    },
     addBooking() {
       const dataBooking = {
         userId: this.userId,
