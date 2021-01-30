@@ -1,8 +1,18 @@
 import axios from 'axios'
 
 export default {
-  state: {},
-  mutataions: {},
+  state: {
+    flight: {},
+    flightDetail: {}
+  },
+  mutations: {
+    setFlight(context, payload) {
+      context.flight = payload
+    },
+    setFlightDetail(context, payload) {
+      context.flightDetail = payload
+    }
+  },
   actions: {
     postBooking(context, payload) {
       return new Promise((resolve, reject) => {
@@ -19,7 +29,28 @@ export default {
             reject(error.response)
           })
       })
+    },
+    getFlightById(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_PORT}/flight/${payload}`)
+          .then(result => {
+            console.log(result.data.data[0])
+            context.commit('setFlightDetail', result.data.data[0])
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
     }
   },
-  getters: {}
+  getters: {
+    getFlight(state) {
+      return state.flight
+    },
+    getFlightDetail(state) {
+      return state.flightDetail
+    }
+  }
 }

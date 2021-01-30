@@ -16,14 +16,16 @@
               <b-row>
                 <b-col>
                   <img
-                    src="../assets/img/garuda.png"
+                    :src="
+                      'http://localhost:3000/mascapai/' + flight.mascapaiImage
+                    "
                     alt="logo garuda"
                     class="maskapai-img"
                   />
                 </b-col>
-                <b-col>
-                  <b class="departure font-weight-bold mr-2">
-                    IDN
+                <b-col class="pt-4">
+                  <b class="departure font-weight-bold">
+                    {{ flight.fromCountry }}
                   </b>
                   <img
                     src="../assets/img/logoGrey.png"
@@ -31,7 +33,7 @@
                     class="logo-grey"
                   />
                   <b class="departure font-weight-bold ml-2">
-                    JPN
+                    {{ flight.toCountry }}
                   </b>
                 </b-col>
               </b-row>
@@ -44,13 +46,13 @@
                 </b-col>
                 <b-col>
                   <b class="small text-muted">Class</b>
-                  <p class="small">Economy</p>
+                  <p class="small">{{ flightClass }}</p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col>
                   <b class="small text-muted">Terminal</b>
-                  <p class="small">A</p>
+                  <p class="small">{{ flight.terminal }}</p>
                 </b-col>
                 <b-col>
                   <b class="small text-muted">Gate</b>
@@ -59,7 +61,7 @@
               </b-row>
               <p class="small text-muted">Departure</p>
               <p class="small">
-                Monday,20 July 20 - 12:33
+                {{ formatTime(flight.departureTime) }}
               </p>
             </div>
             <div class="booking-right col-sm-4 text-center">
@@ -78,6 +80,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import moment from 'moment'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -86,14 +90,41 @@ export default {
   components: {
     Navbar,
     Footer
+  },
+  computed: {
+    ...mapGetters({
+      flight: 'getFlightDetail'
+    }),
+    flightClass() {
+      if (this.flight.clas === 2) {
+        return 'First Class'
+      } else if (this.flight.clas === 1) {
+        return 'Business'
+      } else {
+        return 'Economy'
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['getFlightById']),
+    formatTime(value) {
+      const day = moment(value).format('dddd')
+      const date = moment(value).format('ll')
+      const time = moment(value).format('LT')
+      return `${day}, ${date} - ${time}`
+    }
+  },
+  created() {
+    const bookingId = this.$route.params.id
+    this.getFlightById(bookingId)
   }
 }
 </script>
 
 <style>
 .booking-left img.maskapai-img {
-  width: 160px;
-  height: 70px;
+  width: 140px;
+  height: 100px;
 }
 
 .booking-left img.logo-grey {

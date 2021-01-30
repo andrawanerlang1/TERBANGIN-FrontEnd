@@ -45,7 +45,7 @@ const routes = [
     component: DetailProfile
   },
   {
-    path: '/detail-booking',
+    path: '/detail-booking/:id',
     name: 'BookingDetail',
     component: BookingDetail
   },
