@@ -39,11 +39,38 @@
                 waiting for payment
               </p>
             </div>
-            <p class="font-weight-bold text-primary" style="cursor: pointer;">
-              <router-link :to="'/detail-booking/' + item.flightId">
-                View Detail
-              </router-link>
+            <p
+              @click="showDetail(index)"
+              class="font-weight-bold text-primary"
+              style="cursor: pointer;"
+            >
+              <!-- <router-link :to="'/detail-booking/' + item.flightId"> -->
+              View Detail
+              <!-- </router-link> -->
             </p>
+          </div>
+          <div v-if="index === detailIndex" class="booking-detail">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p>Booking Code : {{ item.code }}</p>
+              </div>
+              <div>
+                <p>Passenger Total : {{ item.totalPassenger }}</p>
+              </div>
+              <div>
+                <p>Rp {{ item.totalPayment }}</p>
+              </div>
+              <div>
+                <router-link
+                  v-if="item.paymentStatus"
+                  :to="'/detail-booking/' + item.flightId"
+                >
+                  <button class="btn btn-primary mb-5">
+                    Booking detail
+                  </button>
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -65,11 +92,20 @@ export default {
     CardProfile,
     Footer
   },
+  data() {
+    return {
+      detailIndex: ''
+    }
+  },
   computed: {
     ...mapGetters({ user: 'setUser', booking: 'getBooking' })
   },
   methods: {
     ...mapActions(['getBookingByUserId']),
+    showDetail(index) {
+      this.detailIndex = index
+      console.log(this.detailIndex)
+    },
     formatTime(value) {
       const day = moment(value).format('dddd')
       const date = moment(value).format('ll')
@@ -84,6 +120,13 @@ export default {
 </script>
 
 <style scoped>
+.booking-detail {
+  background: rgb(235, 235, 235);
+  height: 80px;
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+
 .main-booking {
   background-color: #f5f6fa;
   padding: 35px 30px;

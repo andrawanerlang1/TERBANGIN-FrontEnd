@@ -12,18 +12,27 @@
       <div class="findTicket">
         Find Ticket
       </div>
-      <div class="myBooking">
-        My Booking
+      <div v-if="user.email">
+        <div class="myBooking">
+          <router-link v-if="user.role === 0" to="/mybooking"
+            >My Booking</router-link
+          >
+          <router-link v-else to="">Post Flight</router-link>
+        </div>
       </div>
     </div>
     <div class="profile">
-      <div>
-        <img src="../assets/img/mail.png" alt="" />
+      <div v-if="user.email">
+        <router-link to="/chat">
+          <img src="../assets/img/mail.png" alt=""
+        /></router-link>
       </div>
-      <div>
-        <img src="../assets/img/bell.png" alt="" />
+      <div v-if="user.email">
+        <router-link to="/notifications">
+          <img src="../assets/img/bell.png" alt=""
+        /></router-link>
       </div>
-      <div>
+      <div v-if="user.email">
         <b-dropdown right text="Right align" variant="link" no-caret>
           <template #button-content>
             <img
@@ -32,17 +41,30 @@
               alt=""
             />
           </template>
-          <b-dropdown-item @click="logOut">Log Out</b-dropdown-item>
+          <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-dropdown>
       </div>
+      <router-link  v-if="!user.email" to=/login>
+      login</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data() {
     return {}
+  },
+  computed: {
+    ...mapGetters({ user: 'setUser' })
+  },
+  methods: {
+    ...mapActions(['logout']),
+    show() {
+      console.log(this.user)
+    }
   }
 }
 </script>
