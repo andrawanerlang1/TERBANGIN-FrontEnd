@@ -34,6 +34,20 @@
   </div>
 </template>
 
+<script>
+import alert from '../../../mixins/alert'
+
+export default {
+  name: 'Reset',
+  mixins: [alert],
+  data() {
+    return {}
+  },
+  created() {},
+  methods: {}
+}
+</script>
+
 <style scoped>
 .forgot {
   margin-left: 70px;

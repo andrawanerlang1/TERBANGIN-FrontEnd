@@ -4,10 +4,10 @@
     <div class="main">
       <b-container>
         <b-row class="pt-2">
-          <b-col col lg="4" md="4" sm="4" cols="4" style=" width:100%;"
+          <b-col col lg="4" md="4" cols="12" style=" width:100%  "
             ><Room
           /></b-col>
-          <b-col col lg="8" md="8" sm="8" cols="8" style="width:100%;"
+          <b-col col lg="8" md="8" cols="12" style="width:100%; "
             ><Content
           /></b-col>
         </b-row>

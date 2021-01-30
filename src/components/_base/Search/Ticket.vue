@@ -1,10 +1,11 @@
 <template>
   <div class="mainWrapper">
+    <!-- {{ getSearch }} -->
     <div class="filter">
       <div style="font-weight:bold; font-size: 20px">
         Select Ticket
         <span style="color:#979797;font-weight:300;font-size:15px">
-          (6 flight found)
+          ({{ getSearch.length }} flight found)
         </span>
       </div>
       <div style="font-weight:600">
@@ -19,16 +20,16 @@
         </b-dropdown>
       </div>
     </div>
-    <div class="ticketCard">
+    <div class="ticketCard" v-for="(item, index) in getSearch" :key="index">
       <div class="flightPlate" style="color:#595959">
         <img style="width:150px" src="../../../assets/img/garuda.png" />
-        Garuda Indonesia
+        {{ item.mascapai }}
       </div>
       <div class="detailPlate">
         <div class="destination">
           <div class="from">
-            <p style="font-weight:600; font-size:20px">IDN</p>
-            <p style="color:#6B6B6B">12.33</p>
+            <p style="font-weight:600; font-size:20px">{{ item.fromCity }}</p>
+            <p style="color:#6B6B6B">{{ item.departureTime }}</p>
           </div>
           <div class="imageDesti">
             <p>
@@ -37,8 +38,8 @@
             <p></p>
           </div>
           <div class="to">
-            <p style="font-weight:600; font-size:20px">JPN</p>
-            <p style="color:#6B6B6B">15.21</p>
+            <p style="font-weight:600; font-size:20px">{{ item.toCity }}</p>
+            <p style="color:#6B6B6B">{{ item.arrivedTime }}</p>
           </div>
         </div>
         <div class="time" style="text-align:center;color:#595959">
@@ -51,48 +52,7 @@
           <img src="../../../assets/img/wifi.png" alt="" />
         </div>
         <div class="price" style="color:#2395FF">
-          $ 214,00 <span style="color:#979797">/pax </span>
-        </div>
-        <div class="select">
-          <button>
-            Select
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="ticketCard">
-      <div class="flightPlate" style="color:#595959">
-        <img style="width:150px" src="../../../assets/img/garuda.png" />
-        Garuda Indonesia
-      </div>
-      <div class="detailPlate">
-        <div class="destination">
-          <div class="from">
-            <p style="font-weight:600; font-size:20px">IDN</p>
-            <p style="color:#6B6B6B">12.33</p>
-          </div>
-          <div class="imageDesti">
-            <p>
-              <img src="../../../assets/img/logoGrey.png" />
-            </p>
-            <p></p>
-          </div>
-          <div class="to">
-            <p style="font-weight:600; font-size:20px">JPN</p>
-            <p style="color:#6B6B6B">15.21</p>
-          </div>
-        </div>
-        <div class="time" style="text-align:center;color:#595959">
-          <div>3 hours 11 minutes</div>
-          <div>(1 transit)</div>
-        </div>
-        <div class="facilities">
-          <img src="../../../assets/img/burger.png" alt="" />
-          <img src="../../../assets/img/luggage.png" alt="" />
-          <img src="../../../assets/img/wifi.png" alt="" />
-        </div>
-        <div class="price" style="color:#2395FF">
-          $ 214,00 <span style="color:#979797">/pax </span>
+          {{ item.price }} <span style="color:#979797">/pax </span>
         </div>
         <div class="select">
           <button>
@@ -103,6 +63,21 @@
     </div>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'ticket',
+  data() {
+    return {}
+  },
+  created() {},
+  computed: {
+    ...mapGetters(['getSearch'])
+  },
+  methods: {}
+}
+</script>
 
 <style scoped>
 .mainWrapper {

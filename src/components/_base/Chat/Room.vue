@@ -1,16 +1,35 @@
 <template>
   <div>
-    {{ room + 'room' }} {{ oldRoom + 'oldroom' }} {{ roomId + 'roomId' }} tes
-    <div class="room-container">
+    <div
+      class="room-container"
+      style="
+  border-radius: 15px;"
+    >
       <div class="header">
         <h4>Chat</h4>
       </div>
-      <div class="room-list" v-if="role === 0">
+      <div v-if="user.role === 0">
+        <b-dropdown
+          text="Pick Admin to chat"
+          style="margin-bottom:20px; margin-top:10px;"
+          variant="primary"
+          dropright
+        >
+          <b-dropdown-item
+            class="d-flex justify-content-start py-2 room-item"
+            v-for="(item, index) in admin"
+            :key="index"
+            @click="makeRoom(item)"
+            >{{ item.fullName }}</b-dropdown-item
+          >
+        </b-dropdown>
+      </div>
+      <div class="room-list">
         <div
           class="d-flex justify-content-start py-2 room-item"
-          v-for="(item, index) in admin"
+          v-for="(item, index) in chatRoom"
           :key="index"
-          @click="clickRoom(item)"
+          @click="chatThisUser(item)"
         >
           <div class="chat-img">
             <img
@@ -26,48 +45,22 @@
             <div class="d-flex flex-column">
               <div>
                 <p>
-                  <strong>Admin - {{ item.fullName }}</strong>
+                  <strong>{{ item.fullName }}</strong>
                 </p>
               </div>
               <div>
-                <p class="text-grey">Lorem ipsum</p>
+                <p class="text-grey">
+                  {{ item.message.slice(0, 10) + ' ...' }}
+                </p>
               </div>
             </div>
           </div>
           <div class="chat-info">
             <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="room-list" v-if="role === 1">
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p>
-                  <strong>user</strong>
+              <div class="text-right">
+                <p class="text-grey time">
+                  {{ item.createdAt.slice(11, 16) }}
                 </p>
-              </div>
-              <div>
-                <p class="text-grey">Lorem ipsum</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
               </div>
             </div>
           </div>
@@ -93,10 +86,16 @@ export default {
   },
   created() {
     this.getAdminList()
+    this.getChatRoom(this.user.userId)
+    this.socket.on('chatMessage', data => {
+      this.pushMessages(data)
+      this.getChatRoom(this.user.userId)
+    })
   },
   computed: {
     ...mapGetters({
       admin: 'getterAdmin',
+      chatRoom: 'getChatRoom',
       user: 'setUser'
     })
   },
@@ -105,33 +104,32 @@ export default {
       'getAdminList',
       'changeChatActive',
       'createRoomChat',
-      'getRoomId'
+      'getRoomId',
+      'getChatRoom',
+      'getMessagesHistory'
     ]),
-    ...mapMutations(['clearMessages']),
-    async clickRoom(item) {
+    ...mapMutations(['clearMessages', 'pushMessages']),
+
+    async makeRoom(item) {
       const setData = {
         sender: this.user.userId,
         receiver: item.userId
       }
-      // ========= create room =============
       await this.createRoomChat(setData)
         .then(result => {
-          console.log(result)
+          this.$toasted.success(result)
+          this.getChatRoom(this.user.userId)
         })
         .catch(error => {
-          console.log(error)
+          this.$toasted.error(error)
         })
+    },
+    chatThisUser(item) {
       // ======== chat this user ============
-      await this.changeChatActive(item)
+      this.changeChatActive(item)
       // ======== socket io  ================
-      await this.getRoomId(setData)
-        .then(result => {
-          this.roomId = result
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      const data = this.roomId
+      const data = item.roomIdUniq
+      this.getMessagesHistory(data)
       if (this.oldRoom) {
         this.clearMessages()
         // this.getMessagesHistory(data)
@@ -140,7 +138,7 @@ export default {
           room: data,
           oldRoom: this.oldRoom
         })
-        this.oldRoom = data
+        this.oldRoom = item.roomIdUniq
       } else {
         this.clearMessages()
         // this.getMessagesHistory(data)
@@ -225,5 +223,13 @@ p {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(177, 177, 177);
+}
+@media screen AND (max-width: 500px) {
+  .room-container {
+    height: auto;
+  }
+  .room-list {
+    height: auto;
+  }
 }
 </style>
