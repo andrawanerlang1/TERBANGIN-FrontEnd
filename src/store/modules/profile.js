@@ -14,7 +14,6 @@ export default {
   },
   mutations: {
     patchUser(context, payload) {
-      console.log(payload)
       context.form.email = payload.email
       context.form.fullName = payload.fullName
       context.form.phoneNumber = payload.phoneNumber
@@ -43,6 +42,7 @@ export default {
     },
     patchUserProfile(context, payload) {
       return new Promise((resolve, reject) => {
+        console.log(payload)
         axios
           .patch(`http://localhost:3000/user/${payload}`, context.state.form)
           .then(response => {
@@ -90,6 +90,9 @@ export default {
     setProfile(state) {
       console.log(state)
       return state.profile
+    },
+    seUser(state) {
+      return state.user
     }
   }
 }

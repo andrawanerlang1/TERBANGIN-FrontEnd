@@ -34,17 +34,11 @@
                     v-model="profile.fullName"
                   />
                   <label class="text-muted">City</label>
-                  <b-form-select>
-                    <b-form-select-option disabled value="null"
-                      >Select Category</b-form-select-option
-                    >
-                    <b-form-select-option>
-                      Bandung
-                    </b-form-select-option>
-                    <b-form-select-option>
-                      Jakarta
-                    </b-form-select-option>
-                  </b-form-select>
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.city"
+                  />
                   <br />
                   <br />
                   <label class="text-muted">Address</label>
@@ -62,7 +56,7 @@
                   <button
                     type="submit"
                     class="btn btn-save"
-                    @click="updateProfile"
+                    @click="updateProfile()"
                   >
                     Save
                   </button>
@@ -104,7 +98,6 @@ export default {
   created() {
     this.getUserProfile(this.user.userId)
       .then(response => {
-        console.log(response)
         this.form = {
           email: response.email,
           fullName: response.fullName,
@@ -113,9 +106,10 @@ export default {
           nationality: response.nationality,
           postCode: response.postCode
         }
+        console.log(this.form)
       })
       .catch(error => {
-        console.log(error)
+        console.log(`ini error ${error}`)
       })
   },
   methods: {
@@ -130,7 +124,7 @@ export default {
     ...mapMutations(['patchUser']),
     updateProfile() {
       console.log('connected to this function')
-      console.log(this.form)
+      console.log(this.profile)
       this.form.fullName = this.profile.fullName
       this.form.phoneNumber = this.profile.phoneNumber
       this.form.city = this.profile.city
