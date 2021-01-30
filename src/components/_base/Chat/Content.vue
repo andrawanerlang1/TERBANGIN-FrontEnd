@@ -150,7 +150,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['sendMessages']),
+    ...mapActions(['sendMessages', 'getChatRoom']),
     sendMessage() {
       var today = new Date()
       var time = today.getHours() + ':' + today.getMinutes()
@@ -171,6 +171,7 @@ export default {
       this.sendMessages(dataMessage)
       // ========================================================
       this.message = ''
+      this.getChatRoom(this.user.userId)
     }
   }
 }
@@ -186,7 +187,7 @@ export default {
   border-left: 1px solid #ededed;
   padding: 10px;
   overflow: auto;
-  background: #fff;
+  background: rgb(238, 234, 234);
 }
 .chat-input {
   height: 100px;
@@ -210,13 +211,15 @@ input {
 }
 
 .header {
-  background: #ededed;
+  background: rgba(0, 17, 255, 0.8);
   padding: 10px;
+  border: rgb(44, 31, 43) 1px solid;
 }
 
 .profile-name {
   font-weight: 600;
   font-size: 18px;
+  color: white;
 }
 
 .profile-img img {
@@ -244,7 +247,7 @@ input {
 }
 
 .right .msg {
-  background: rgba(221, 221, 221, 0.8);
+  background: white;
   padding: 8px 20px 8px 15px;
   border-radius: 15px 15px 5px 15px;
   color: rgb(0, 0, 0);

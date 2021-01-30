@@ -4,47 +4,23 @@
       <div class="header">
         <h4>Chat</h4>
       </div>
-      <div class="room-list" v-if="user.role === 0">
-        <div
-          class="d-flex justify-content-start py-2 room-item"
-          v-for="(item, index) in admin"
-          :key="index"
-          @click="clickRoom(item)"
+      <div v-if="user.role === 0">
+        <b-dropdown
+          text="Pick Admin to chat"
+          style="margin-bottom:20px; margin-top:10px;"
+          variant="primary"
+          dropright
         >
-          <div class="chat-img">
-            <img
-              v-if="!item.profileImage"
-              src="../../../assets/img-admin.png"
-            />
-            <img
-              v-if="item.profileImage"
-              :src="`${process.env.VUE_APP_PORT}/user/` + item.profileImage"
-            />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p>
-                  <strong>Admin - {{ item.fullName }}</strong>
-                </p>
-              </div>
-              <div>
-                <p class="text-grey">Lorem ipsum</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
+          <b-dropdown-item
+            class="d-flex justify-content-start py-2 room-item"
+            v-for="(item, index) in admin"
+            :key="index"
+            @click="makeRoom(item)"
+            >{{ item.fullName }}</b-dropdown-item
+          >
+        </b-dropdown>
       </div>
-      <div class="room-list" v-if="user.role === 1">
+      <div class="room-list">
         <div
           class="d-flex justify-content-start py-2 room-item"
           v-for="(item, index) in chatRoom"
@@ -109,6 +85,7 @@ export default {
     this.getChatRoom(this.user.userId)
     this.socket.on('chatMessage', data => {
       this.pushMessages(data)
+      this.getChatRoom(this.user.userId)
     })
   },
   computed: {
@@ -128,55 +105,20 @@ export default {
       'getMessagesHistory'
     ]),
     ...mapMutations(['clearMessages', 'pushMessages']),
-    async clickRoom(item) {
+
+    async makeRoom(item) {
       const setData = {
         sender: this.user.userId,
         receiver: item.userId
       }
-      // ========= create room =============
       await this.createRoomChat(setData)
         .then(result => {
-          console.log(result)
+          this.$toasted.success(result)
+          this.getChatRoom(this.user.userId)
         })
         .catch(error => {
-          console.log(error)
+          this.$toasted.error(error)
         })
-      // ======= set room id ===========
-      await this.getRoomId(setData)
-        .then(result => {
-          this.roomId = result
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      const data = this.roomId
-      this.getMessagesHistory(data)
-      // ======== chat this user ============
-      const newItem = {
-        ...item,
-        roomIdUniq: this.roomId
-      }
-      await this.changeChatActive(newItem)
-      // ======== socket io  ================
-
-      if (this.oldRoom) {
-        this.clearMessages()
-        // this.getMessagesHistory(data)
-        this.socket.emit('changeRoom', {
-          username: this.user.fullName,
-          room: data,
-          oldRoom: this.oldRoom
-        })
-        this.oldRoom = data
-      } else {
-        this.clearMessages()
-        // this.getMessagesHistory(data)
-        this.socket.emit('joinRoom', {
-          username: this.user.fullName,
-          room: data
-        })
-        this.oldRoom = data
-      }
     },
     chatThisUser(item) {
       // ======== chat this user ============
@@ -277,5 +219,13 @@ p {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(177, 177, 177);
+}
+@media screen AND (max-width: 500px) {
+  .room-container {
+    height: auto;
+  }
+  .room-list {
+    height: auto;
+  }
 }
 </style>
