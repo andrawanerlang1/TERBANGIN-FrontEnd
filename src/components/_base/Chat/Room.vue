@@ -1,11 +1,10 @@
 <template>
   <div>
-    {{ room + 'room' }} {{ oldRoom + 'oldroom' }} {{ roomId + 'roomId' }} tes
     <div class="room-container">
       <div class="header">
         <h4>Chat</h4>
       </div>
-      <div class="room-list" v-if="role === 0">
+      <div class="room-list" v-if="user.role === 0">
         <div
           class="d-flex justify-content-start py-2 room-item"
           v-for="(item, index) in admin"
@@ -45,16 +44,28 @@
           </div>
         </div>
       </div>
-      <div class="room-list" v-if="role === 1">
-        <div class="d-flex justify-content-start py-2 room-item">
+      <div class="room-list" v-if="user.role === 1">
+        <div
+          class="d-flex justify-content-start py-2 room-item"
+          v-for="(item, index) in chatRoom"
+          :key="index"
+          @click="chatThisUser(item)"
+        >
           <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
+            <img
+              v-if="!item.profileImage"
+              src="../../../assets/img-admin.png"
+            />
+            <img
+              v-if="item.profileImage"
+              :src="`${process.env.VUE_APP_PORT}/user/` + item.profileImage"
+            />
           </div>
           <div class="chat-msg">
             <div class="d-flex flex-column">
               <div>
                 <p>
-                  <strong>user</strong>
+                  <strong>{{ item.fullName }}</strong>
                 </p>
               </div>
               <div>
@@ -93,10 +104,15 @@ export default {
   },
   created() {
     this.getAdminList()
+    this.getChatRoom(this.user.userId)
+    this.socket.on('chatMessage', data => {
+      this.pushMessages(data)
+    })
   },
   computed: {
     ...mapGetters({
       admin: 'getterAdmin',
+      chatRoom: 'getChatRoom',
       user: 'setUser'
     })
   },
@@ -105,9 +121,10 @@ export default {
       'getAdminList',
       'changeChatActive',
       'createRoomChat',
-      'getRoomId'
+      'getRoomId',
+      'getChatRoom'
     ]),
-    ...mapMutations(['clearMessages']),
+    ...mapMutations(['clearMessages', 'pushMessages']),
     async clickRoom(item) {
       const setData = {
         sender: this.user.userId,
@@ -121,9 +138,7 @@ export default {
         .catch(error => {
           console.log(error)
         })
-      // ======== chat this user ============
-      await this.changeChatActive(item)
-      // ======== socket io  ================
+      // ======= set room id ===========
       await this.getRoomId(setData)
         .then(result => {
           this.roomId = result
@@ -132,6 +147,14 @@ export default {
           console.log(error)
         })
       const data = this.roomId
+      // ======== chat this user ============
+      const newItem = {
+        ...item,
+        roomIdUniq: this.roomId
+      }
+      await this.changeChatActive(newItem)
+      // ======== socket io  ================
+
       if (this.oldRoom) {
         this.clearMessages()
         // this.getMessagesHistory(data)
@@ -141,6 +164,30 @@ export default {
           oldRoom: this.oldRoom
         })
         this.oldRoom = data
+      } else {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('joinRoom', {
+          username: this.user.fullName,
+          room: data
+        })
+        this.oldRoom = data
+      }
+    },
+    chatThisUser(item) {
+      // ======== chat this user ============
+      this.changeChatActive(item)
+      // ======== socket io  ================
+      const data = item.roomIdUniq
+      if (this.oldRoom) {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('changeRoom', {
+          username: this.user.fullName,
+          room: data,
+          oldRoom: this.oldRoom
+        })
+        this.oldRoom = item.roomIdUniq
       } else {
         this.clearMessages()
         // this.getMessagesHistory(data)

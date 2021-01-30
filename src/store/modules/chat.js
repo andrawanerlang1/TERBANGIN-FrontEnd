@@ -6,7 +6,10 @@ export default {
     chatActive: {},
     chatMode: false,
     messages: [],
-    messagesHistory: []
+    messagesHistory: [],
+    activeRoom: null,
+
+    chatRoom: []
   },
   mutations: {
     setAdminRoom(state, payload) {
@@ -18,9 +21,18 @@ export default {
     setChatMode(state, payload) {
       state.chatMode = payload
     },
+    setActiveRoom(state, payload) {
+      state.activeRoom = payload
+    },
     clearMessages(state) {
       state.messages = []
       state.messagesHistory = []
+    },
+    setChatRoom(state, payload) {
+      state.chatRoom = payload
+    },
+    pushMessages(state, payload) {
+      state.messages.push(payload)
     }
   },
   actions: {
@@ -62,7 +74,34 @@ export default {
             `${process.env.VUE_APP_PORT}/chat/rooms?sender=${payload.sender}&receiver=${payload.receiver}`
           )
           .then(result => {
+            context.commit('setActiveRoom', result.data.data[0].roomIdUniq)
             resolve(result.data.data[0].roomIdUniq)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
+    },
+    getChatRoom(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_PORT}/chat/room/${payload}`)
+          .then(result => {
+            context.commit('setChatRoom', result.data.data)
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
+    },
+    sendMessages(context, payload) {
+      console.log(context)
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_PORT}/chat/message`, payload)
+          .then(result => {
+            resolve(result)
           })
           .catch(error => {
             reject(error.response.data.msg)
@@ -73,6 +112,21 @@ export default {
   getters: {
     getterAdmin(state) {
       return state.admin
+    },
+    getterChatMode(state) {
+      return state.chatMode
+    },
+    getterChatActive(state) {
+      return state.chatActive
+    },
+    getterActiveRoom(state) {
+      return state.activeRoom
+    },
+    getChatRoom(state) {
+      return state.chatRoom
+    },
+    getterMessages(state) {
+      return state.messages
     }
   }
 }

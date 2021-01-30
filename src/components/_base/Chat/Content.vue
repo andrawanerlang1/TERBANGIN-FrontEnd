@@ -1,19 +1,30 @@
 <template>
   <div>
-    <div class="chat-content">
+    <div v-if="chatMode" class="chat-content">
       <div class="header">
         <div class="d-flex flex-row align-items-center">
           <div class="profile-img">
-            <img src="../../../assets/img-admin.png" />
+            <img
+              v-if="!chatActive.profileImage"
+              src="../../../assets/img-admin.png"
+              style="width:50px;height:50px;border-radius:15px;"
+            />
+            <img
+              id="imageUploads"
+              class="imgUpload"
+              style="width:50px;height:50px;border-radius:15px;"
+              v-if="chatActive.profileImage"
+              :src="'http://localhost:3000/user/' + chatActive.profileImage"
+            />
           </div>
           <div class="profile-name">
-            <p class="ml-3">Firman - Admin</p>
+            <p class="ml-3">{{ chatActive.fullName }}</p>
           </div>
         </div>
       </div>
       <div class="chat-list">
-        <div class="chat" v-for="item in pesanList" :key="item">
-          <div v-if="userId !== item.id" class="left mt-1">
+        <div class="chat" v-for="item in messages" :key="item">
+          <div v-if="user.userId !== item.sender" class="left mt-1">
             <div class="d-flex flex-row align-items-end">
               <div class="img mr-2">
                 <img
@@ -22,7 +33,7 @@
                 />
               </div>
               <div class="msg">
-                <p>{{ item.pesan }}</p>
+                <p>{{ item.message }}</p>
               </div>
             </div>
           </div>
@@ -30,7 +41,7 @@
             <div class="d-flex flex-row align-items-end">
               <div class="msg ml-auto">
                 <p>
-                  {{ item.pesan }}
+                  {{ item.message }}
                 </p>
               </div>
               <div class="img ml-2">
@@ -43,20 +54,45 @@
           </div>
         </div>
       </div>
+      {{ message + ' ini message' }}
       <div class="chat-input">
         <div class="input-border">
-          <input type="text" placeholder="type your message" />
+          <form v-on:submit.prevent="sendMessage">
+            <input
+              v-model="message"
+              type="text"
+              placeholder="type your message"
+            />
+          </form>
         </div>
       </div>
+    </div>
+    <div v-if="!chatMode" class="chatEmpty">
+      <div>Please select a chat to start messaging</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+import io from 'socket.io-client'
+
 export default {
   name: 'Chat',
+
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      chatMode: 'getterChatMode',
+      chatActive: 'getterChatActive',
+      activeRoom: 'getterActiveRoom',
+      messages: 'getterMessages'
+    })
+  },
   data() {
     return {
+      socket: io('http://localhost:3000'),
+      message: '',
       userId: 1,
       pesanList: [
         {
@@ -66,52 +102,30 @@ export default {
         {
           id: 2,
           pesan: 'uy hallo broh'
-        },
-        {
-          id: 2,
-          pesan: 'pesan dari kiri'
-        },
-        {
-          id: 1,
-          pesan: 'pesan kanan'
-        },
-        {
-          id: 2,
-          pesan: 'kiri lagi'
-        },
-        {
-          id: 1,
-          pesan: 'kanan dong'
-        },
-        {
-          id: 1,
-          pesan: 'kanan lagi nih'
-        },
-        {
-          id: 2,
-          pesan: 'uy hallo broh'
-        },
-        {
-          id: 2,
-          pesan: 'pesan dari kiri'
-        },
-        {
-          id: 1,
-          pesan: 'pesan kanan'
-        },
-        {
-          id: 2,
-          pesan: 'kiri lagi'
-        },
-        {
-          id: 1,
-          pesan: 'kanan dong'
-        },
-        {
-          id: 1,
-          pesan: 'kanan lagi nih'
         }
       ]
+    }
+  },
+  methods: {
+    ...mapActions(['sendMessages']),
+    sendMessage() {
+      const setData = {
+        sender: this.user.userId,
+        message: this.message,
+        room: this.chatActive.roomIdUniq
+      }
+      console.log(setData)
+      this.socket.emit('roomMessage', setData)
+      //kode untuk kirim message ke DATABASE message ==============================================
+      const dataMessage = {
+        roomIdUniq: this.chatActive.roomIdUniq,
+        sender: this.user.userId,
+        receiver: this.chatActive.userId,
+        message: this.message
+      }
+      this.sendMessages(dataMessage)
+      // ========================================================
+      this.message = ''
     }
   }
 }
@@ -207,5 +221,12 @@ input {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(177, 177, 177);
+}
+.chatEmpty {
+  background-color: white;
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

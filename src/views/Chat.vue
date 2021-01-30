@@ -4,10 +4,22 @@
     <div class="main">
       <b-container>
         <b-row class="pt-2">
-          <b-col col lg="4" md="4" sm="4" cols="4" style=" width:100%;"
+          <b-col
+            col
+            lg="4"
+            md="4"
+            sm="4"
+            cols="4"
+            style=" width:100% ;box-shadow: 0px 8px 27px rgba(14, 63, 108, 0.19);; "
             ><Room
           /></b-col>
-          <b-col col lg="8" md="8" sm="8" cols="8" style="width:100%;"
+          <b-col
+            col
+            lg="8"
+            md="8"
+            sm="8"
+            cols="8"
+            style="width:100%; box-shadow: 0px 8px 27px rgba(14, 63, 108, 0.19);"
             ><Content
           /></b-col>
         </b-row>
