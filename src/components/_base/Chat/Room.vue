@@ -69,16 +69,18 @@
                 </p>
               </div>
               <div>
-                <p class="text-grey">Lorem ipsum</p>
+                <p class="text-grey">
+                  {{ item.message.slice(0, 10) + ' ...' }}
+                </p>
               </div>
             </div>
           </div>
           <div class="chat-info">
             <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
+              <div class="text-right">
+                <p class="text-grey time">
+                  {{ item.createdAt.slice(11, 16) }}
+                </p>
               </div>
             </div>
           </div>
@@ -122,7 +124,8 @@ export default {
       'changeChatActive',
       'createRoomChat',
       'getRoomId',
-      'getChatRoom'
+      'getChatRoom',
+      'getMessagesHistory'
     ]),
     ...mapMutations(['clearMessages', 'pushMessages']),
     async clickRoom(item) {
@@ -147,6 +150,7 @@ export default {
           console.log(error)
         })
       const data = this.roomId
+      this.getMessagesHistory(data)
       // ======== chat this user ============
       const newItem = {
         ...item,
@@ -179,6 +183,7 @@ export default {
       this.changeChatActive(item)
       // ======== socket io  ================
       const data = item.roomIdUniq
+      this.getMessagesHistory(data)
       if (this.oldRoom) {
         this.clearMessages()
         // this.getMessagesHistory(data)

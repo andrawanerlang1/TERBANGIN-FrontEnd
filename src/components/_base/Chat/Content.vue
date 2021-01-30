@@ -23,6 +23,43 @@
         </div>
       </div>
       <div class="chat-list">
+        <div class="chat" v-for="item in messagesHistory" :key="item">
+          <div v-if="user.userId !== item.userId" class="left mt-1">
+            <div class="d-flex flex-row align-items-end">
+              <div class="img mr-2">
+                <img
+                  src="../../../assets/img-admin.png"
+                  class="profile-img-chat "
+                />
+              </div>
+              <div class="msg">
+                <p>{{ item.message }}</p>
+                <p style="font-size: 10px; text-align:left;color:white">
+                  {{ item.createdAt.slice(11, 16) }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div v-else class="right mt-1">
+            <div class="d-flex flex-row align-items-end">
+              <div class="msg ml-auto">
+                <p>
+                  {{ item.message }}
+                </p>
+                <p style="font-size: 10px; text-align:right;color:grey">
+                  {{ item.createdAt.slice(11, 16) }}
+                </p>
+              </div>
+
+              <div class="img ml-2">
+                <img
+                  src="../../../assets/img-admin.png"
+                  class="profile-img-chat "
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="chat" v-for="item in messages" :key="item">
           <div v-if="user.userId !== item.sender" class="left mt-1">
             <div class="d-flex flex-row align-items-end">
@@ -34,6 +71,9 @@
               </div>
               <div class="msg">
                 <p>{{ item.message }}</p>
+                <p style="font-size: 10px; text-align:right;color:white">
+                  {{ item.time }}
+                </p>
               </div>
             </div>
           </div>
@@ -42,6 +82,9 @@
               <div class="msg ml-auto">
                 <p>
                   {{ item.message }}
+                </p>
+                <p style="font-size: 10px; text-align:right;color:grey">
+                  {{ item.time }}
                 </p>
               </div>
               <div class="img ml-2">
@@ -54,7 +97,6 @@
           </div>
         </div>
       </div>
-      {{ message + ' ini message' }}
       <div class="chat-input">
         <div class="input-border">
           <form v-on:submit.prevent="sendMessage">
@@ -86,7 +128,8 @@ export default {
       chatMode: 'getterChatMode',
       chatActive: 'getterChatActive',
       activeRoom: 'getterActiveRoom',
-      messages: 'getterMessages'
+      messages: 'getterMessages',
+      messagesHistory: 'getterMessagesHistory'
     })
   },
   data() {
@@ -109,12 +152,14 @@ export default {
   methods: {
     ...mapActions(['sendMessages']),
     sendMessage() {
+      var today = new Date()
+      var time = today.getHours() + ':' + today.getMinutes()
       const setData = {
         sender: this.user.userId,
         message: this.message,
-        room: this.chatActive.roomIdUniq
+        room: this.chatActive.roomIdUniq,
+        time: time
       }
-      console.log(setData)
       this.socket.emit('roomMessage', setData)
       //kode untuk kirim message ke DATABASE message ==============================================
       const dataMessage = {
