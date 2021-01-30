@@ -9,7 +9,9 @@
         </div>
       </div>
       <span class="mr-4 text-header">Medan (IDN)</span>
-      <span><img src="../../../assets/icon-airplane.png"/></span>
+      <span
+        ><img src="../../../assets/icon-airplane.png" style="width:20px;"
+      /></span>
       <span class="ml-3 text-header">Tokyo (JPN)</span>
       <div class="time mt-2">
         <span class="text-grey">Sunday, 15 Augustus 2020</span>

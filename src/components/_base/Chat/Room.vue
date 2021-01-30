@@ -4,18 +4,32 @@
       <div class="header">
         <h4>Chat</h4>
       </div>
-      <div class="room-list">
-        <div class="d-flex justify-content-start py-2 room-item">
+      <div class="room-list" v-if="user.role === 0">
+        <div
+          class="d-flex justify-content-start py-2 room-item"
+          v-for="(item, index) in admin"
+          :key="index"
+          @click="clickRoom(item)"
+        >
           <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
+            <img
+              v-if="!item.profileImage"
+              src="../../../assets/img-admin.png"
+            />
+            <img
+              v-if="item.profileImage"
+              :src="`${process.env.VUE_APP_PORT}/user/` + item.profileImage"
+            />
           </div>
           <div class="chat-msg">
             <div class="d-flex flex-column">
               <div>
-                <p><strong>Firman - Admin</strong></p>
+                <p>
+                  <strong>Admin - {{ item.fullName }}</strong>
+                </p>
               </div>
               <div>
-                <p class="text-grey">Thanks for your help</p>
+                <p class="text-grey">Lorem ipsum</p>
               </div>
             </div>
           </div>
@@ -29,233 +43,33 @@
             </div>
           </div>
         </div>
-        <div class="d-flex justify-content-start py-2 room-item">
+      </div>
+      <div class="room-list" v-if="user.role === 1">
+        <div
+          class="d-flex justify-content-start py-2 room-item"
+          v-for="(item, index) in chatRoom"
+          :key="index"
+          @click="chatThisUser(item)"
+        >
           <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
+            <img
+              v-if="!item.profileImage"
+              src="../../../assets/img-admin.png"
+            />
+            <img
+              v-if="item.profileImage"
+              :src="`${process.env.VUE_APP_PORT}/user/` + item.profileImage"
+            />
           </div>
           <div class="chat-msg">
             <div class="d-flex flex-column">
               <div>
-                <p><strong>Firman - Admin</strong></p>
+                <p>
+                  <strong>{{ item.fullName }}</strong>
+                </p>
               </div>
               <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
-              </div>
-            </div>
-          </div>
-          <div class="chat-info">
-            <div class="d-flex flex-column ">
-              <div class="text-right"><p class="text-grey time">08:30</p></div>
-
-              <div class="unread-msg rounded-circle text-center mt-1">
-                <p class="mt-1">14</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start py-2 room-item">
-          <div class="chat-img">
-            <img src="../../../assets/img-admin.png" />
-          </div>
-          <div class="chat-msg">
-            <div class="d-flex flex-column">
-              <div>
-                <p><strong>Firman - Admin</strong></p>
-              </div>
-              <div>
-                <p class="text-grey">Thanks for your help</p>
+                <p class="text-grey">Lorem ipsum</p>
               </div>
             </div>
           </div>
@@ -274,6 +88,120 @@
   </div>
 </template>
 
+<script>
+import { mapGetters, mapActions, mapMutations } from 'vuex'
+import io from 'socket.io-client'
+
+export default {
+  data() {
+    return {
+      role: 0,
+      socket: io('http://localhost:3000'),
+      room: '',
+      oldRoom: '',
+      roomId: null
+    }
+  },
+  created() {
+    this.getAdminList()
+    this.getChatRoom(this.user.userId)
+    this.socket.on('chatMessage', data => {
+      this.pushMessages(data)
+    })
+  },
+  computed: {
+    ...mapGetters({
+      admin: 'getterAdmin',
+      chatRoom: 'getChatRoom',
+      user: 'setUser'
+    })
+  },
+  methods: {
+    ...mapActions([
+      'getAdminList',
+      'changeChatActive',
+      'createRoomChat',
+      'getRoomId',
+      'getChatRoom'
+    ]),
+    ...mapMutations(['clearMessages', 'pushMessages']),
+    async clickRoom(item) {
+      const setData = {
+        sender: this.user.userId,
+        receiver: item.userId
+      }
+      // ========= create room =============
+      await this.createRoomChat(setData)
+        .then(result => {
+          console.log(result)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      // ======= set room id ===========
+      await this.getRoomId(setData)
+        .then(result => {
+          this.roomId = result
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      const data = this.roomId
+      // ======== chat this user ============
+      const newItem = {
+        ...item,
+        roomIdUniq: this.roomId
+      }
+      await this.changeChatActive(newItem)
+      // ======== socket io  ================
+
+      if (this.oldRoom) {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('changeRoom', {
+          username: this.user.fullName,
+          room: data,
+          oldRoom: this.oldRoom
+        })
+        this.oldRoom = data
+      } else {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('joinRoom', {
+          username: this.user.fullName,
+          room: data
+        })
+        this.oldRoom = data
+      }
+    },
+    chatThisUser(item) {
+      // ======== chat this user ============
+      this.changeChatActive(item)
+      // ======== socket io  ================
+      const data = item.roomIdUniq
+      if (this.oldRoom) {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('changeRoom', {
+          username: this.user.fullName,
+          room: data,
+          oldRoom: this.oldRoom
+        })
+        this.oldRoom = item.roomIdUniq
+      } else {
+        this.clearMessages()
+        // this.getMessagesHistory(data)
+        this.socket.emit('joinRoom', {
+          username: this.user.fullName,
+          room: data
+        })
+        this.oldRoom = data
+      }
+    }
+  }
+}
+</script>
+
 <style scoped>
 .room-container {
   background: #fff;
@@ -286,7 +214,10 @@
   height: 560px;
   padding-right: 8px;
 }
-
+.room-item:hover {
+  background-color: rgb(142, 196, 231);
+  border: black 1px solid;
+}
 p {
   margin-bottom: unset;
 }
