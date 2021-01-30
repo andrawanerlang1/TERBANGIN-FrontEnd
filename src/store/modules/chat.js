@@ -8,7 +8,6 @@ export default {
     messages: [],
     messagesHistory: [],
     activeRoom: null,
-
     chatRoom: []
   },
   mutations: {
@@ -33,6 +32,9 @@ export default {
     },
     pushMessages(state, payload) {
       state.messages.push(payload)
+    },
+    setMessagesHistory(state, payload) {
+      state.messagesHistory = payload
     }
   },
   actions: {
@@ -107,6 +109,19 @@ export default {
             reject(error.response.data.msg)
           })
       })
+    },
+    getMessagesHistory(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_PORT}/chat/message/${payload}`)
+          .then(result => {
+            context.commit('setMessagesHistory', result.data.data)
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
     }
   },
   getters: {
@@ -127,6 +142,9 @@ export default {
     },
     getterMessages(state) {
       return state.messages
+    },
+    getterMessagesHistory(state) {
+      return state.messagesHistory
     }
   }
 }
