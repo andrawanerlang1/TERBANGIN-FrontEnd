@@ -60,6 +60,20 @@ export default {
             reject(error.response)
           })
       })
+    },
+    patchFlightCapacity(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`${process.env.VUE_APP_PORT}/flight`, payload)
+          .then(result => {
+            console.log(result)
+            resolve(result)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error.response)
+          })
+      })
     }
   },
   getters: {

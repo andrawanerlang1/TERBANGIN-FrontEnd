@@ -106,7 +106,7 @@ export default {
     this.userId = this.setUser.userId
   },
   methods: {
-    ...mapActions(['postBooking']),
+    ...mapActions(['postBooking', 'patchFlightCapacity']),
     show() {
       console.log(this.params)
     },
@@ -122,15 +122,25 @@ export default {
       }
 
       const setData = [dataBooking, ...this.formPassenger]
-      console.log(setData)
-      this.postBooking(setData)
+
+      const patchFlight = {
+        flightId: this.flight.flightId,
+        totalPassenger: this.formPassenger.length
+      }
+
+      this.patchFlightCapacity(patchFlight)
         .then(result => {
-          console.log(result.data.msg)
-          console.log('ini dari mixins')
-          this.successAlert(result.data.msg)
+          console.log(result)
+          this.postBooking(setData)
+            .then(result => {
+              this.successAlert(result.data.msg)
+            })
+            .catch(error => {
+              this.errorAlert(error.data.msg)
+            })
         })
-        .catch(error => {
-          this.errorAlert(error.data.msg)
+        .catch(err => {
+          this.errorAlert(err.data.msg)
         })
     }
   }
