@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-if="chatMode" class="chat-content">
-      <div class="header">
+    <div v-if="chatMode" class="chat-content" style="margin-bottom:100px;">
+      <div class="header" style="border-radius: 15px 15px 0px 0px">
         <div class="d-flex flex-row align-items-center">
           <div class="profile-img">
             <img
@@ -109,7 +109,11 @@
         </div>
       </div>
     </div>
-    <div v-if="!chatMode" class="chatEmpty">
+    <div
+      v-if="!chatMode"
+      class="chatEmpty"
+      style="border-radius: 15px 15px 0px 0px"
+    >
       <div>Please select a chat to start messaging</div>
     </div>
   </div>
@@ -190,7 +194,7 @@ export default {
   background: rgb(238, 234, 234);
 }
 .chat-input {
-  height: 100px;
+  height: 10px;
 }
 
 p {

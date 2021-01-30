@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div class="room-container">
+    <div
+      class="room-container"
+      style="
+  border-radius: 15px;"
+    >
       <div class="header">
         <h4>Chat</h4>
       </div>
