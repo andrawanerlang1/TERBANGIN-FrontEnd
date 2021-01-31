@@ -25,16 +25,16 @@ export default {
           })
       })
     },
-    forgot(context, payload) {
+    forgotPassword(context, payload) {
       return new Promise((resolve, reject) => {
         axios
           .post(`${process.env.VUE_APP_PORT}/user/forgot`, payload)
           .then(result => {
-            const type = 'reset'
-            context.commit('setPage', type)
+            console.log(result)
             resolve(result)
           })
           .catch(error => {
+            console.log(error)
             reject(error.response)
           })
       })

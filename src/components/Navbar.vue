@@ -9,21 +9,30 @@
         <img src="../assets/img/search.png" alt="" />
         Where you want to go?
       </button>
-      <div class="findTicket">
+      <div class="findTicket" @click="getAllTicket">
         Find Ticket
       </div>
-      <div class="myBooking">
-        My Booking
+      <div v-if="setUser.email">
+        <div class="myBooking">
+          <router-link v-if="setUser.role === 0" to="/mybooking"
+            >My Booking</router-link
+          >
+          <router-link v-else to="">Post Flight</router-link>
+        </div>
       </div>
     </div>
     <div class="profile">
-      <div>
-        <img src="../assets/img/mail.png" alt="" />
+      <div v-if="setUser.email">
+        <router-link to="/chat">
+          <img src="../assets/img/mail.png" alt=""
+        /></router-link>
       </div>
-      <div>
-        <img src="../assets/img/bell.png" alt="" />
+      <div v-if="setUser.email">
+        <router-link to="/notifications">
+          <img src="../assets/img/bell.png" alt=""
+        /></router-link>
       </div>
-      <div>
+      <div v-if="setUser.email">
         <b-dropdown right text="Right align" variant="link" no-caret>
           <template #button-content>
             <img
@@ -32,17 +41,43 @@
               alt=""
             />
           </template>
-          <b-dropdown-item @click="logOut">Log Out</b-dropdown-item>
+          <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-dropdown>
       </div>
+      <router-link  v-if="!setUser.email" to=/login>
+      login</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      form: {
+        fromCity: '',
+        toCity: '',
+        flightDate: '',
+        clas: '',
+        totalPassanger: ''
+      }
+    }
+  },
+  created() {},
+  computed: {
+    ...mapGetters(['getParams','setUser'])
+  },
+  methods: {
+    ...mapActions(['search','logout']),
+    ...mapMutations(['setParams']),
+    getAllTicket() {
+      this.setParams(this.form)
+      this.search('payload')
+    },
+    show() {
+      console.log(this.setUser)
+    }
   }
 }
 </script>
