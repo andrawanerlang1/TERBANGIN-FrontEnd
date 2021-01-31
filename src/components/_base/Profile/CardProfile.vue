@@ -14,9 +14,8 @@
             <input type="file" />
             <b>Select Photo</b>
           </label>
-          <h5>Andrawan Ganteng</h5>
-          <!-- <h5>{{ form.user_name }}</h5> -->
-          <p class="small text-muted">Medan, Indonesia</p>
+          <h5>{{ profile.fullName }}</h5>
+          <p class="small text-muted">{{ profile.city }}</p>
         </div>
       </form>
       <b-row>
@@ -44,7 +43,9 @@
           </li>
           <li>
             <b-icon-gear-fill class="text-secondary mr-3"></b-icon-gear-fill>
-            Change Password
+            <b-button v-b-modal.modal-1 class="modal-1"
+              >Change Password</b-button
+            >
           </li>
           <li class="text-danger">
             <b-icon-box-arrow-right class="mr-3"></b-icon-box-arrow-right>Logout
@@ -52,6 +53,15 @@
         </ul>
       </div>
     </div>
+    <b-modal id="modal-1" v-bind:hide-footer="true" title="Change Password">
+      <p class="my-4">Inpur Your Email Password</p>
+      {{ form }}
+      <input
+        type="text"
+        class="form-control mb-4"
+        v-model="form.changepassword"
+      />
+    </b-modal>
   </div>
 </template>
 
@@ -62,31 +72,12 @@ export default {
   data() {
     return {
       form: {
-        email: '',
-        fullName: '',
-        phoneNumber: '',
-        city: '',
-        nationality: '',
-        postCode: ''
+        changepassword: ''
       }
     }
   },
   created() {
     this.getUserProfile(this.user.userId)
-      .then(response => {
-        this.form = {
-          email: response.email,
-          fullName: response.fullName,
-          phoneNumber: response.phoneNumber,
-          city: response.city,
-          nationality: response.nationality,
-          postCode: response.postCode
-        }
-        console.log(this.form)
-      })
-      .catch(error => {
-        console.log(`ini error ${error}`)
-      })
   },
   methods: {
     ...mapActions([
@@ -99,16 +90,14 @@ export default {
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
-      console.log('connected to this function')
-      console.log(this.profile)
-      this.form.fullName = this.profile.fullName
-      this.form.phoneNumber = this.profile.phoneNumber
-      this.form.city = this.profile.city
-      this.form.nationality = this.profile.nationality
-      this.form.postCode = this.profile.postCode
-      this.patchUser(this.form)
-      this.patchUserProfile(this.user.userId)
-      this.getUserProfile(this.user.userId)
+      const setData = { id: this.user.userId, data: this.profile }
+      this.patchUserProfile(setData)
+        .then(result => {
+          this.$toasted.success(result)
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
     }
   },
   computed: {
@@ -120,6 +109,21 @@ export default {
 }
 </script>
 <style scoped>
+button.modal-1 {
+  border: none;
+  background: white;
+  padding-left: 0px;
+  color: black;
+  font-weight: bold;
+}
+button.modal-1:hover {
+  outline: none;
+  border: none;
+}
+button.modal-1:focus {
+  outline: none;
+  border: none;
+}
 input[type='file'] {
   display: none;
   border-radius: 10px;

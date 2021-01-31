@@ -80,9 +80,6 @@ export default {
     }
   },
   getters: {
-    getProfile(state) {
-      return state.profile
-    },
     setProfile(state) {
       console.log(state)
       return state.profile
