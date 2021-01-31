@@ -135,7 +135,6 @@
         </div>
         <b-form-input v-model="form.flightCode"></b-form-input>
       </div>
-      <h6>{{ form }}</h6>
       <br />
       <b-button @click="addFlight">Post</b-button>
     </div>

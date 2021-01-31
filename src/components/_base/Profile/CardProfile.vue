@@ -67,7 +67,6 @@
         class="form-control mb-4"
         v-model="form.confirmPassword"
       />
-      {{ form }}
     </b-modal>
   </div>
 </template>
