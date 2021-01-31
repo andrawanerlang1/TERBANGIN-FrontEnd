@@ -1,5 +1,5 @@
 # Terbangin.in
-<p align="center">![stronghold logo](src/assets/img/example.jpg)</p>
+<p align="center"><img width=60% src="https://github.com/andrawanerlang1/TERBANGIN-FrontEnd/blob/development/src/assets/img/example.jpg"></p>
 ## Project setup
 ```
 npm install
