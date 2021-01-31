@@ -30,8 +30,10 @@
 
 <script>
 import { mapActions } from 'vuex'
+import alert from '../../../mixins/alert'
 export default {
   name: 'forgot',
+  mixins: [alert],
   data() {
     return {
       form: {
@@ -39,16 +41,26 @@ export default {
       }
     }
   },
+  created() {},
   methods: {
-    ...mapActions(['forgot']),
+    ...mapActions(['forgotPassword']),
     forgotPass() {
-      this.forgot(this.form)
-        .then(result => {
-          console.log(result)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.forgotPassword(this.form)
+      //   .then(result => {
+      //     console.log(result)
+      //     this.makeToast(
+      //       `${result.data.msg}`,
+      //       `Congratulations, ${this.form.email}`,
+      //       'success'
+      //     )
+      //   })
+      //   .catch(error => {
+      //     this.makeToast(
+      //       `${error.data.msg}`,
+      //       `Failed send to, ${this.form.email}`,
+      //       'danger'
+      //     )
+      //   })
     }
   }
 }

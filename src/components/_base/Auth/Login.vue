@@ -93,8 +93,9 @@ export default {
             'success'
           )
           setTimeout(() => {
-            this.$router.push('/search')
+            this.$router.push('/landing')
           }, 2500)
+          console.log(result)
         })
         .catch(error => {
           this.makeToast('Failed', `${error.data.msg}`, 'danger')

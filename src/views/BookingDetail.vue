@@ -15,18 +15,25 @@
             <div class="booking-left col-sm-6">
               <b-row>
                 <b-col>
-                  <img src="../assets/img/garuda.png" alt="logo garuda" />
+                  <img
+                    :src="
+                      'http://localhost:3000/mascapai/' + flight.mascapaiImage
+                    "
+                    alt="logo garuda"
+                    class="maskapai-img"
+                  />
                 </b-col>
-                <b-col>
-                  <b class="departure font-weight-bold mr-2">
-                    IDN
+                <b-col class="pt-4">
+                  <b class="departure font-weight-bold">
+                    {{ flight.fromCountry }}
                   </b>
                   <img
                     src="../assets/img/logoGrey.png"
                     alt="gray-small-plane"
+                    class="logo-grey"
                   />
                   <b class="departure font-weight-bold ml-2">
-                    JPN
+                    {{ flight.toCountry }}
                   </b>
                 </b-col>
               </b-row>
@@ -39,13 +46,13 @@
                 </b-col>
                 <b-col>
                   <b class="small text-muted">Class</b>
-                  <p class="small">Economy</p>
+                  <p class="small">{{ flightClass }}</p>
                 </b-col>
               </b-row>
               <b-row>
                 <b-col>
                   <b class="small text-muted">Terminal</b>
-                  <p class="small">A</p>
+                  <p class="small">{{ flight.terminal }}</p>
                 </b-col>
                 <b-col>
                   <b class="small text-muted">Gate</b>
@@ -54,11 +61,15 @@
               </b-row>
               <p class="small text-muted">Departure</p>
               <p class="small">
-                Monday,20 July 20 - 12:33
+                {{ formatTime(flight.departureTime) }}
               </p>
             </div>
-            <div class="booking-right col-sm-4">
-              <img src="../assets/img/qrcode.png" alt="qr code" />
+            <div class="booking-right col-sm-4 text-center">
+              <img
+                class="qr-code"
+                src="../assets/img/qrcode.png"
+                alt="qr code"
+              />
             </div>
           </div>
         </div>
@@ -69,6 +80,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import moment from 'moment'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
@@ -77,11 +90,48 @@ export default {
   components: {
     Navbar,
     Footer
+  },
+  computed: {
+    ...mapGetters({
+      flight: 'getFlightDetail'
+    }),
+    flightClass() {
+      if (this.flight.clas === 2) {
+        return 'First Class'
+      } else if (this.flight.clas === 1) {
+        return 'Business'
+      } else {
+        return 'Economy'
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['getFlightById']),
+    formatTime(value) {
+      const day = moment(value).format('dddd')
+      const date = moment(value).format('ll')
+      const time = moment(value).format('LT')
+      return `${day}, ${date} - ${time}`
+    }
+  },
+  created() {
+    const bookingId = this.$route.params.id
+    this.getFlightById(bookingId)
   }
 }
 </script>
 
 <style>
+.booking-left img.maskapai-img {
+  width: 140px;
+  height: 100px;
+}
+
+.booking-left img.logo-grey {
+  width: 20px;
+  height: 20px;
+}
+
 .booking-detail {
   background-color: #2395ff;
   overflow: hidden;
@@ -109,19 +159,21 @@ export default {
   border-left: none;
   border-radius: 10px;
 }
-.booking-right img {
+.booking-right img.qr-code {
   margin: 10% 0;
+  height: 255px;
+  width: 255px;
 }
 .departure {
-  font-size: 20px;
+  font-size: 27px;
 }
 @media (min-width: 581px) {
-  .booking-right img {
+  .booking-right img.qr-code {
     width: 100%;
   }
 }
 @media (max-width: 576px) {
-  .booking-right img {
+  .booking-right img.qr-code {
     margin: 10% auto;
   }
   .booking-left {
