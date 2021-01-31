@@ -79,14 +79,15 @@ export default {
       })
     },
     changePassword(constext, payload) {
+      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
-          .patch(`http://localhost:3000/user${payload.userId}`)
+          .patch(`http://localhost:3000/user/changePassword`, payload)
           .then(response => {
-            resolve(response.data.data)
+            resolve(response.data.msg)
           })
           .catch(error => {
-            reject(error.response.data.message)
+            reject(error.response.data.msg)
           })
       })
     }

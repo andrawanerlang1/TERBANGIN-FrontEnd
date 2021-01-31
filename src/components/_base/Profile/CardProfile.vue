@@ -66,9 +66,10 @@
         class="form-control mb-4"
         v-model="form.confirmPassword"
       />
-      {{ form }}
       <br />
-      <button class="btn btn-save">Change Password</button>
+      <button class="btn btn-save" @click="patchPasword">
+        Change Password
+      </button>
     </b-modal>
   </div>
 </template>
@@ -93,6 +94,7 @@ export default {
       'getUserProfile',
       'logout',
       'patchUserProfile',
+      'changePassword',
       'patchLocation',
       'patchProfilePict',
       'deleteProfilePict'
@@ -113,6 +115,16 @@ export default {
       this.$router.push({
         name: 'MyBooking'
       })
+    },
+    patchPasword() {
+      const setData = { id: this.user.userId, ...this.form }
+      this.changePassword(setData)
+        .then(result => {
+          this.$toasted.success(result)
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
     }
   },
   computed: {
