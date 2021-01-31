@@ -54,7 +54,6 @@
       </div>
     </div>
     <b-modal id="modal-1" v-bind:hide-footer="true" title="Change Password">
-      <p class="my-4">Inpur Your Email Password</p>
       <label>New Password</label>
       <input
         type="password"
