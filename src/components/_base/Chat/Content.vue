@@ -122,6 +122,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import io from 'socket.io-client'
+import moment from 'moment'
 
 export default {
   name: 'Chat',
@@ -156,8 +157,9 @@ export default {
   methods: {
     ...mapActions(['sendMessages', 'getChatRoom']),
     sendMessage() {
-      var today = new Date()
-      var time = today.getHours() + ':' + today.getMinutes()
+      var time = moment()
+        .format()
+        .slice(11, 16)
       const setData = {
         sender: this.user.userId,
         message: this.message,
