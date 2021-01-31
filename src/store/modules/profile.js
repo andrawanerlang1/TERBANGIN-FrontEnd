@@ -81,7 +81,7 @@ export default {
     changePassword(constext, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .patch(`http://localhost:3000/user/delete/image/${payload.userId}`)
+          .patch(`http://localhost:3000/user${payload.userId}`)
           .then(response => {
             resolve(response.data.data)
           })

@@ -1,6 +1,5 @@
 <template>
   <div class="mainWrapper">
-    <!-- {{ getSearch }} -->
     <div class="filter">
       <div style="font-weight:bold; font-size: 20px">
         Select Ticket

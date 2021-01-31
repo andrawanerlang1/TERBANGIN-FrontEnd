@@ -135,7 +135,6 @@
         </div>
         <b-form-input v-model="form.flightCode"></b-form-input>
       </div>
-      <h6>{{ form }}</h6>
       <br />
       <b-button @click="addFlight">Post</b-button>
     </div>
@@ -270,6 +269,23 @@ export default {
           this.makeToast('Failed', `${error.data.msg}`, 'danger')
           console.log(error)
         })
+      this.form = {
+        mascapai: null,
+        departureTime: null,
+        arrivalTime: null,
+        flightDate: null,
+        price: '0',
+        wifi: '0',
+        food: '0',
+        capacity: '0',
+        luggage: '0',
+        flightCode: null,
+        from: null,
+        to: null,
+        terminal: null,
+        transit: null,
+        flightClass: []
+      }
     }
   }
 }

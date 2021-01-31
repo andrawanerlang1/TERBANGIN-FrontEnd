@@ -240,7 +240,6 @@
                 <div>${{ price[0] }}</div>
                 <div>${{ price[1] }}</div>
               </div>
-              {{ price }}
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
