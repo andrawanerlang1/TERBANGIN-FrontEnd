@@ -7,6 +7,7 @@ import Search from './modules/search'
 import Booking from './modules/booking'
 import Chat from './modules/chat'
 import Notif from './modules/notif'
+import Flight from './modules/flight'
 import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   mutations: {},
   actions: {},
   modules: { Register, Auth, Booking, Profile, Search, Chat, Notif },
+  modules: { Register, Auth, Booking, Profile, Search, Chat, Flight },
   getters: {},
   plugins: [
     createPersistedState({
