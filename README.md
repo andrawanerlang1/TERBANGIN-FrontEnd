@@ -1,5 +1,5 @@
 # Terbangin
-<center>![stronghold logo](src/assets/img/example.jpg)</center>
+![stronghold logo](src/assets/img/example.jpg)
 ## Project setup
 ```
 npm install
