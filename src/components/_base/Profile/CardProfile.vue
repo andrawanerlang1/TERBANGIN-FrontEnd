@@ -68,6 +68,8 @@
         v-model="form.confirmPassword"
       />
       {{ form }}
+      <br />
+      <button class="btn btn-save">Change Password</button>
     </b-modal>
   </div>
 </template>
@@ -98,6 +100,7 @@ export default {
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
+      console.log(this.form)
       const setData = { id: this.user.userId, data: this.profile }
       this.patchUserProfile(setData)
         .then(result => {
@@ -117,6 +120,14 @@ export default {
 }
 </script>
 <style scoped>
+.btn-save {
+  color: #fff;
+  background: #2395ff;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px 35px;
+  float: right;
+}
 button.modal-1 {
   border: none;
   background: white;
