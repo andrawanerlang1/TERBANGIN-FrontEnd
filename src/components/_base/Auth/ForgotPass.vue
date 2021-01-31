@@ -46,21 +46,21 @@ export default {
     ...mapActions(['forgotPassword']),
     forgotPass() {
       this.forgotPassword(this.form)
-      //   .then(result => {
-      //     console.log(result)
-      //     this.makeToast(
-      //       `${result.data.msg}`,
-      //       `Congratulations, ${this.form.email}`,
-      //       'success'
-      //     )
-      //   })
-      //   .catch(error => {
-      //     this.makeToast(
-      //       `${error.data.msg}`,
-      //       `Failed send to, ${this.form.email}`,
-      //       'danger'
-      //     )
-      //   })
+        .then(result => {
+          console.log(result)
+          this.makeToast(
+            `${result.data.msg}`,
+            `Congratulations, ${this.form.email}`,
+            'success'
+          )
+        })
+        .catch(error => {
+          this.makeToast(
+            `${error.data.msg}`,
+            `Failed send to, ${this.form.email}`,
+            'danger'
+          )
+        })
     }
   }
 }
