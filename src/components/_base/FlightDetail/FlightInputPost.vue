@@ -269,6 +269,23 @@ export default {
           this.makeToast('Failed', `${error.data.msg}`, 'danger')
           console.log(error)
         })
+      this.form = {
+        mascapai: null,
+        departureTime: null,
+        arrivalTime: null,
+        flightDate: null,
+        price: '0',
+        wifi: '0',
+        food: '0',
+        capacity: '0',
+        luggage: '0',
+        flightCode: null,
+        from: null,
+        to: null,
+        terminal: null,
+        transit: null,
+        flightClass: []
+      }
     }
   }
 }
