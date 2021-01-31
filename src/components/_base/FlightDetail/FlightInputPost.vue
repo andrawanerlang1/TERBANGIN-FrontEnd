@@ -111,6 +111,12 @@
           required
         ></b-form-select>
       </div>
+      <div class="formSeparator">
+        <div class="separatorName">
+          Flight Code
+        </div>
+        <b-form-input></b-form-input>
+      </div>
     </div>
   </div>
 </template>
