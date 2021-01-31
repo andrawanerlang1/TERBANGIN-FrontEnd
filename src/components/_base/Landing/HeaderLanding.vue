@@ -17,7 +17,11 @@
         <p>Where you want to go?</p>
         <div class="detailSearch">
           <div @click="showModal">
-            <p style="font-weight:500; font-size:14px; color:#979797">from</p>
+            <p
+              style="font-weight:500; font-size:14px; color:#979797; cursor: pointer;"
+            >
+              from
+            </p>
             <p style="font-size:25px">{{ form.fromCity }}</p>
             <p style="font-weight:500">Indonesia</p>
           </div>
@@ -30,7 +34,9 @@
             />
           </div>
           <div style="text-align:right">
-            <p style="font-weight:500; font-size:14px; color:#979797">to</p>
+            <p style="font-weight:500; font-size:14px; color:#979797;">
+              to
+            </p>
             <p style="font-size:25px">{{ form.toCity }}</p>
             <p style="font-weight:500">Indonesia</p>
           </div>
@@ -129,9 +135,9 @@ export default {
       },
       place: [
         { value: null, text: 'Please select an option' },
-        { value: 'Surabaya', text: 'Surabaya' },
-        { value: 'Medan', text: 'Medan' },
         { value: 'Jakarta', text: 'Jakarta' },
+        { value: 'Medan', text: 'Medan' },
+        { value: 'Surabaya', text: 'Surabaya' },
         { value: 'Kuala Lumpur', text: 'Kuala Lumpur' },
         { value: 'Tokyo', text: 'Tokyo' }
       ]
