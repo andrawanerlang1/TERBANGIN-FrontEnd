@@ -60,9 +60,15 @@
           Flight Class
         </div>
         <div style="display:flex;justify-content:space-around; font-weight:500">
-          <b-form-checkbox value="economy">Economy</b-form-checkbox>
-          <b-form-checkbox value="business">Business</b-form-checkbox>
-          <b-form-checkbox value="firstclass">First Class</b-form-checkbox>
+          <b-form-checkbox v-model="form.flightClass" value="economy"
+            >Economy</b-form-checkbox
+          >
+          <b-form-checkbox v-model="form.flightClass" value="business"
+            >Business</b-form-checkbox
+          >
+          <b-form-checkbox v-model="form.flightClass" value="firstclass"
+            >First Class</b-form-checkbox
+          >
         </div>
       </div>
       <div class="formSeparator">
@@ -129,7 +135,9 @@
         </div>
         <b-form-input v-model="form.flightCode"></b-form-input>
       </div>
-      <h6>{{ form }}</h6>
+      <!-- <h6>{{ form }}</h6> -->
+      <br />
+      <b-button @click="postFlight">Post</b-button>
     </div>
   </div>
 </template>
@@ -152,7 +160,8 @@ export default {
         from: null,
         to: null,
         terminal: null,
-        transit: null
+        transit: null,
+        flightClass: []
       },
       options: [
         { value: null, text: 'Please select airlines' },
@@ -180,7 +189,8 @@ export default {
         { value: '2', text: 'Transit Twice' }
       ]
     }
-  }
+  },
+  methods: {}
 }
 </script>
 
@@ -236,5 +246,12 @@ export default {
   border-radius: 13px;
   margin-left: 0px !important;
   margin-right: 0px !important;
+}
+
+button {
+  background-color: #2395ff;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
 }
 </style>
