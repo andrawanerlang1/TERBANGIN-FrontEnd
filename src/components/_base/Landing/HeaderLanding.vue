@@ -1,60 +1,105 @@
 <template>
   <div>
     <div class="search">
+      <b-modal centered ref="my-modal" hide-footer title="Choose City">
+        <b-form>
+          <label>Form City</label>
+          <b-form-select v-model="form.fromCity" class="mb-3">
+            <b-form-select-option :value="null"
+              >Please select an option</b-form-select-option
+            >
+            <b-form-select-option value="Surabaya"
+              >Surabaya</b-form-select-option
+            >
+            <b-form-select-option value="Medan">Medan</b-form-select-option>
+          </b-form-select>
+          <label>To City</label>
+          <b-form-select v-model="form.toCity" class="mb-3">
+            <b-form-select-option :value="null"
+              >Please select an option</b-form-select-option
+            >
+            <b-form-select-option value="Surabaya"
+              >Surabaya</b-form-select-option
+            >
+            <b-form-select-option value="Medan">Medan</b-form-select-option>
+          </b-form-select>
+          <b-button variant="primary" block @click="hideModal">Done</b-button>
+        </b-form>
+      </b-modal>
       <div style="font-size:16px; font-weight:600">
         <p>Hey,</p>
         <p>Where you want to go?</p>
         <div class="detailSearch">
-          <div>
+          <div @click="showModal">
             <p style="font-weight:500; font-size:14px; color:#979797">from</p>
-            <p style="font-size:25px">Medan</p>
+            <p style="font-size:25px">{{ form.fromCity }}</p>
             <p style="font-weight:500">Indonesia</p>
           </div>
           <div style="margin-top:40px">
-            <img src="../../../assets/img/arrowreverse.png" alt="" />
+            <img
+              style="cursor:pointer"
+              @click="swap"
+              src="../../../assets/img/arrowreverse.png"
+              alt=""
+            />
           </div>
           <div style="text-align:right">
             <p style="font-weight:500; font-size:14px; color:#979797">to</p>
-            <p style="font-size:25px">Shanghai</p>
-            <p style="font-weight:500">China</p>
+            <p style="font-size:25px">{{ form.toCity }}</p>
+            <p style="font-weight:500">Indonesia</p>
           </div>
         </div>
-        <div class="trip">
-          <div style="background-color:#2395FF;color:white" class="buttonTrip">
-            <img src="../../../assets/img/logowhite.png" /> One Way
+        <b-form @submit.prevent="searchData">
+          <div class="trip">
+            <div
+              style="background-color:#2395FF;color:white"
+              class="buttonTrip"
+            >
+              <img src="../../../assets/img/logowhite.png" /> One Way
+            </div>
+            <div class="buttonTrip">
+              <img src="../../../assets/img/roundarrow.png" /> Round Trip
+            </div>
           </div>
-          <div class="buttonTrip">
-            <img src="../../../assets/img/roundarrow.png" /> Round Trip
+          <div class="departure">
+            Departure
+            <b-form-datepicker
+              id="datepicker-placeholder"
+              placeholder="Choose a date"
+              locale="en"
+              style="margin-top:10px"
+              v-model="form.flightDate"
+              required
+            ></b-form-datepicker>
           </div>
-        </div>
-        <div class="departure">
-          Departure
-          <b-form-datepicker
-            id="datepicker-placeholder"
-            placeholder="Choose a date"
-            locale="en"
-            style="margin-top:10px"
-          ></b-form-datepicker>
-        </div>
-        <div class="departure">
-          How many person?
-          <b-form-input
-            type="number"
-            placeholder="number of passengers"
-            style="margin-top:10px"
-          ></b-form-input>
-        </div>
-        <div class="departure">
-          Which class do you want?
-          <div class="searchRadio">
-            <b-form-radio>Economy</b-form-radio>
-            <b-form-radio>Business</b-form-radio>
-            <b-form-radio>First Class</b-form-radio>
+          <div class="departure">
+            How many person?
+            <b-form-input
+              type="number"
+              placeholder="number of passengers"
+              style="margin-top:10px"
+              v-model="form.totalPassanger"
+              required
+            ></b-form-input>
           </div>
-        </div>
-        <div class="searchButton">
-          <button>Search FLight</button>
-        </div>
+          <div class="departure">
+            Which class do you want?
+            <div class="searchRadio">
+              <b-form-radio name="clas" v-model="form.clas" value="1" required
+                >Economy</b-form-radio
+              >
+              <b-form-radio name="clas" v-model="form.clas" value="2"
+                >Business</b-form-radio
+              >
+              <b-form-radio name="clas" v-model="form.clas" value="3"
+                >First Class</b-form-radio
+              >
+            </div>
+          </div>
+          <div class="searchButton">
+            <button type="submit">Search FLight</button>
+          </div>
+        </b-form>
       </div>
     </div>
     <b-row>
@@ -82,9 +127,65 @@
 </template>
 
 <script>
+import { mapActions, mapMutations, mapGetters } from 'vuex'
+import alert from '../../../mixins/alert'
 export default {
   name: 'HeaderLanding',
-  component: {}
+  mixins: [alert],
+  data() {
+    return {
+      form: {
+        fromCity: 'Surabaya',
+        toCity: 'Medan',
+        flightDate: '',
+        clas: '',
+        totalPassanger: ''
+      }
+    }
+  },
+  created() {},
+  computed: {
+    ...mapGetters(['getParams'])
+  },
+  methods: {
+    ...mapActions(['search']),
+    ...mapMutations(['setParams']),
+    showModal() {
+      this.$refs['my-modal'].show()
+    },
+    swap() {
+      const data1 = this.form.fromCity
+      const data2 = this.form.toCity
+      const data3 = data2
+      const data4 = data1
+      if (data3 === data2) {
+        this.form.fromCity = data3
+        this.form.toCity = data4
+      }
+    },
+    hideModal() {
+      if (this.form.fromCity === this.form.toCity) {
+        this.makeToast('Same value !', 'Change your input value', 'warning')
+      } else if (this.form.toCity === null || this.form.fromCity === null) {
+        this.makeToast('input empty !', 'Fill your input', 'warning')
+      } else {
+        this.$refs['my-modal'].hide()
+      }
+    },
+    searchData() {
+      this.setParams(this.form)
+      this.search(this.form)
+        .then(result => {
+          this.makeToast('Done', `${result.length} Flight Found`, 'primary')
+          setTimeout(() => {
+            this.$router.push('/search')
+          }, 3000)
+        })
+        .catch(error => {
+          this.makeToast('Warning', `${error.data.msg}`, 'danger')
+        })
+    }
+  }
 }
 </script>
 

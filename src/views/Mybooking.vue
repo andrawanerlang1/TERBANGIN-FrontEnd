@@ -11,35 +11,66 @@
             <p class="text-primary font-weight-bold">Order History</p>
           </div>
         </div>
-        <div class="booking-history mt-4 p-3">
-          <p>Monday, 20 July 20 - 12.33</p>
+        <div
+          v-for="(item, index) in booking"
+          :key="index"
+          class="booking-history mt-4 p-3"
+        >
+          <p>{{ formatTime(item.flightDate) }}</p>
           <div class="route-way">
             <div class="from-title">
-              <p class="font-weight-bold">IDN</p>
+              <p class="font-weight-bold">{{ item.fromCountry }}</p>
             </div>
             <img src="../assets/img/logoGrey.png" alt="gray-small-plane" />
             <div class="from-title">
-              <p class="font-weight-bold">JPN</p>
+              <p class="font-weight-bold">{{ item.toCountry }}</p>
             </div>
           </div>
           <p class="text-secondary name-airplane">
-            Garuda Indonesia, AB-221
+            {{ item.mascapai }}, AB-221
           </p>
           <div class="navigation-button mt-4">
             <p class="font-weight-bold text-secondary mr-2">status</p>
             <div style="margin-top: -6px;">
-              <p class="payment-status">
+              <p v-if="item.paymentStatus" class="payment-status bg-success">
+                E-ticket Issued
+              </p>
+              <p v-else class="payment-status" style="width: 190px;">
                 waiting for payment
               </p>
-              <!-- <p class="payment-status bg-success" style="width: 140px;">
-                E-ticket Issued
-              </p> -->
             </div>
-            <p class="font-weight-bold text-primary" style="cursor: pointer;">
-              <router-link to="/detail-booking">
-                View Detail
-              </router-link>
+            <p
+              @click="showDetail(index)"
+              class="font-weight-bold text-primary"
+              style="cursor: pointer;"
+            >
+              <!-- <router-link :to="'/detail-booking/' + item.flightId"> -->
+              View Detail
+              <!-- </router-link> -->
             </p>
+          </div>
+          <div v-if="index === detailIndex" class="booking-detail">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p>Booking Code : {{ item.code }}</p>
+              </div>
+              <div>
+                <p>Passenger Total : {{ item.totalPassenger }}</p>
+              </div>
+              <div>
+                <p>Rp {{ item.totalPayment }}</p>
+              </div>
+              <div>
+                <router-link
+                  v-if="item.paymentStatus"
+                  :to="'/detail-booking/' + item.flightId"
+                >
+                  <button class="btn btn-primary mb-5">
+                    Booking detail
+                  </button>
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,6 +80,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+import moment from 'moment'
 import Navbar from '../components/Navbar'
 import CardProfile from '../components/_base/Profile/CardProfile'
 import Footer from '../components/Footer'
@@ -58,11 +91,42 @@ export default {
     Navbar,
     CardProfile,
     Footer
+  },
+  data() {
+    return {
+      detailIndex: ''
+    }
+  },
+  computed: {
+    ...mapGetters({ user: 'setUser', booking: 'getBooking' })
+  },
+  methods: {
+    ...mapActions(['getBookingByUserId']),
+    showDetail(index) {
+      this.detailIndex = index
+      console.log(this.detailIndex)
+    },
+    formatTime(value) {
+      const day = moment(value).format('dddd')
+      const date = moment(value).format('ll')
+      const time = moment(value).format('LT')
+      return `${day}, ${date} - ${time}`
+    }
+  },
+  created() {
+    this.getBookingByUserId(this.user.userId)
   }
 }
 </script>
 
 <style scoped>
+.booking-detail {
+  background: rgb(235, 235, 235);
+  height: 80px;
+  padding: 20px 20px;
+  border-radius: 5px;
+}
+
 .main-booking {
   background-color: #f5f6fa;
   padding: 35px 30px;
@@ -108,7 +172,7 @@ export default {
 .payment-status {
   background-color: #ff7f23;
   color: white;
-  width: 185px;
+  width: 145px;
   padding: 7px 10px;
   border-radius: 10px;
 }

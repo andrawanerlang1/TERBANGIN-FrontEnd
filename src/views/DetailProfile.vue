@@ -8,38 +8,58 @@
           <div class="profile mt-3 p-4">
             <p class="sub">PROFILE</p>
             <h3>Profile</h3>
-            <form>
+            <form @submit.prevent="updateProfile">
               <div class="row mt-4">
                 <div class="col-sm-6">
                   <p>Contact</p>
                   <label class="text-muted">Email</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.email"
+                  />
                   <label class="text-muted">Phone Number</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.phoneNumber"
+                  />
                 </div>
                 <div class="col-sm-6">
                   <p>Biodata</p>
                   <label class="text-muted">Username</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.fullName"
+                  />
                   <label class="text-muted">City</label>
-                  <b-form-select>
-                    <b-form-select-option disabled value="null"
-                      >Select Category</b-form-select-option
-                    >
-                    <b-form-select-option>
-                      Medan
-                    </b-form-select-option>
-                  </b-form-select>
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.city"
+                  />
                   <br />
                   <br />
                   <label class="text-muted">Address</label>
-                  <input type="text" class="form-control mb-4" />
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.nationality"
+                  />
                   <label class="text-muted">Post Code</label>
-                  <input type="text" class="form-control mb-4" />
-                  <button type="submit" class="btn btn-save">Save</button>
+                  <input
+                    type="text"
+                    class="form-control mb-4"
+                    v-model="profile.postCode"
+                  />
+                  <button type="submit" class="btn btn-save">
+                    Save
+                  </button>
                 </div>
               </div>
             </form>
+            {{ profile }}
           </div>
         </b-col>
       </b-row>
@@ -49,6 +69,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import Navbar from '../components/Navbar'
 import CardProfile from '../components/_base/Profile/CardProfile'
 import Footer from '../components/Footer'
@@ -58,6 +79,70 @@ export default {
     Navbar,
     CardProfile,
     Footer
+  },
+  data() {
+    return {
+      // form: {
+      //   email: '',
+      //   fullName: '',
+      //   phoneNumber: '',
+      //   city: '',
+      //   nationality: '',
+      //   postCode: ''
+      // }
+    }
+  },
+  created() {
+    this.getUserProfile(this.user.userId)
+    // .then(response => {
+    //   this.form = {
+    //     email: response.email,
+    //     fullName: response.fullName,
+    //     phoneNumber: response.phoneNumber,
+    //     city: response.city,
+    //     nationality: response.nationality,
+    //     postCode: response.postCode
+    //   }
+    //   console.log(this.form)
+    // })
+    // .catch(error => {
+    //   console.log(`ini error ${error}`)
+    // })
+  },
+  methods: {
+    ...mapActions([
+      'getUserProfile',
+      'logout',
+      'patchUserProfile',
+      'patchLocation',
+      'patchProfilePict',
+      'deleteProfilePict'
+    ]),
+    ...mapMutations(['patchUser']),
+    updateProfile() {
+      // console.log('connected to this function')
+      // console.log(this.profile)
+      // this.form.fullName = this.profile.fullName
+      // this.form.phoneNumber = this.profile.phoneNumber
+      // this.form.city = this.profile.city
+      // this.form.nationality = this.profile.nationality
+      // this.form.postCode = this.profile.postCode
+      // this.patchUser(this.form)
+      const setData = { id: this.user.userId, data: this.profile }
+      this.patchUserProfile(setData)
+        .then(result => {
+          this.$toasted.success(result)
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      profile: 'setProfile'
+    })
   }
 }
 </script>
