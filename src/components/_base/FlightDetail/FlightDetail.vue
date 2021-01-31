@@ -105,5 +105,6 @@ p {
 
 .mascapai-img {
   max-width: 150px;
+  max-height: 100px;
 }
 </style>
