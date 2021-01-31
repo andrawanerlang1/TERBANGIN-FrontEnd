@@ -61,7 +61,8 @@
               </b-row>
               <p class="small text-muted">Departure</p>
               <p class="small">
-                {{ formatTime(flight.departureTime) }}
+                {{ formatDate(flight.flightDate) }}
+                - {{ flight.departureTime }}
               </p>
             </div>
             <div class="booking-right col-sm-4 text-center">
@@ -107,11 +108,10 @@ export default {
   },
   methods: {
     ...mapActions(['getFlightById']),
-    formatTime(value) {
+    formatDate(value) {
       const day = moment(value).format('dddd')
       const date = moment(value).format('ll')
-      const time = moment(value).format('LT')
-      return `${day}, ${date} - ${time}`
+      return `${day}, ${date}`
     }
   },
   created() {

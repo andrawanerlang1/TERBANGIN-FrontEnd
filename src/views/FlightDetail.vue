@@ -46,7 +46,6 @@
         </b-row>
       </b-container>
     </div>
-    <button @click="show">show</button>
     <Footer />
   </div>
 </template>
@@ -106,9 +105,6 @@ export default {
   },
   methods: {
     ...mapActions(['postBooking', 'patchFlightCapacity']),
-    show() {
-      console.log(this.flight)
-    },
     addBooking() {
       if (
         this.formBooking.contactFullName === '' ||
