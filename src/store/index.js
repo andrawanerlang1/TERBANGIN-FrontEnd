@@ -15,8 +15,7 @@ export default new Vuex.Store({
   state: {},
   mutations: {},
   actions: {},
-  modules: { Register, Auth, Booking, Profile, Search, Chat, Notif },
-  modules: { Register, Auth, Booking, Profile, Search, Chat, Flight },
+  modules: { Register, Auth, Booking, Profile, Search, Chat, Notif, Flight },
   getters: {},
   plugins: [
     createPersistedState({
