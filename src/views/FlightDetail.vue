@@ -106,7 +106,7 @@ export default {
     this.userId = this.setUser.userId
   },
   methods: {
-    ...mapActions(['postBooking', 'patchFlightCapacity']),
+    ...mapActions(['postBooking', 'patchFlightCapacity', 'sendNotif']),
     show() {
       console.log(this.params)
     },
@@ -134,6 +134,18 @@ export default {
           this.postBooking(setData)
             .then(result => {
               this.successAlert(result.data.msg)
+              const dataNotif = {
+                notifTitle: 'Booking status',
+                notifMessage: `Hello there! Your booking status is received and waiting for payment. Booking code: ${result.data.data.code} .`,
+                receiverId: this.setUser.userId
+              }
+              this.sendNotif(dataNotif)
+                .then(result => {
+                  this.$toasted.success(result.data.msg)
+                })
+                .catch(error => {
+                  this.errorAlert(error.data.msg)
+                })
             })
             .catch(error => {
               this.errorAlert(error.data.msg)
