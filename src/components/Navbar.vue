@@ -9,7 +9,7 @@
         <img src="../assets/img/search.png" alt="" />
         Where you want to go?
       </button>
-      <div class="findTicket">
+      <div class="findTicket" @click="getAllTicket">
         Find Ticket
       </div>
       <div class="myBooking">
@@ -40,9 +40,31 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      form: {
+        fromCity: '',
+        toCity: '',
+        flightDate: '',
+        clas: '',
+        totalPassanger: ''
+      }
+    }
+  },
+  created() {},
+  computed: {
+    ...mapGetters(['getParams'])
+  },
+  methods: {
+    ...mapActions(['search']),
+    ...mapMutations(['setParams']),
+    getAllTicket() {
+      this.setParams(this.form)
+      this.search('payload')
+    },
+    logOut() {}
   }
 }
 </script>

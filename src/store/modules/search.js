@@ -24,7 +24,8 @@ export default {
     price: {
       min: '',
       max: ''
-    }
+    },
+    chooseFlight: ''
   },
   mutations: {
     setSearch(state, payload) {
@@ -68,19 +69,21 @@ export default {
     },
     sortBy(state, payload) {
       state.sort = payload
+    },
+    setChooseFlight(state, payload) {
+      state.chooseFlight = payload
     }
   },
   actions: {
     search(context, payload) {
-      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .get(
             `${process.env.VUE_APP_PORT}/flight?fromCity=${context.state.params.fromCity}&toCity=${context.state.params.toCity}&flightDate=${context.state.params.flightDate}&clas=${context.state.params.clas}&transitDirect=${context.state.transitDirect}&transit1=${context.state.transit1}&transit2=${context.state.transit2}&food=${context.state.food}&wifi=${context.state.wifi}&luggage=${context.state.luggage}&departureTimeStr=${context.state.deperature.start}&departureTimeEnd=${context.state.deperature.end}&arrivedTimeStr=${context.state.arrive.start}&arrivedTimeEnd=${context.state.arrive.end}&mascapai=${context.state.airline}&priceMin=${context.state.price.min}&priceMax=${context.state.price.max}&sort=${context.state.sort}`
           )
           .then(result => {
+            console.log(payload)
             context.commit('setSearch', result.data.data)
-            console.log(result.data.data)
             resolve(result.data.data)
           })
           .catch(error => {
@@ -100,6 +103,9 @@ export default {
     },
     getFilter(state) {
       return state.filter
+    },
+    getChooseFlight(state) {
+      return state.chooseFlight
     }
   }
 }

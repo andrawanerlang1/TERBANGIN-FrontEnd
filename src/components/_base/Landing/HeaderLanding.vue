@@ -37,6 +37,7 @@
           </div>
           <div style="margin-top:40px">
             <img
+              style="cursor:pointer"
               @click="swap"
               src="../../../assets/img/arrowreverse.png"
               alt=""
@@ -48,50 +49,57 @@
             <p style="font-weight:500">Indonesia</p>
           </div>
         </div>
-        <div class="trip">
-          <div style="background-color:#2395FF;color:white" class="buttonTrip">
-            <img src="../../../assets/img/logowhite.png" /> One Way
-          </div>
-          <div class="buttonTrip">
-            <img src="../../../assets/img/roundarrow.png" /> Round Trip
-          </div>
-        </div>
-        <div class="departure">
-          Departure
-          <b-form-datepicker
-            id="datepicker-placeholder"
-            placeholder="Choose a date"
-            locale="en"
-            style="margin-top:10px"
-            v-model="form.flightDate"
-          ></b-form-datepicker>
-        </div>
-        <div class="departure">
-          How many person?
-          <b-form-input
-            type="number"
-            placeholder="number of passengers"
-            style="margin-top:10px"
-            v-model="form.totalPassanger"
-          ></b-form-input>
-        </div>
-        <div class="departure">
-          Which class do you want?
-          <div class="searchRadio">
-            <b-form-radio name="clas" v-model="form.clas" value="1"
-              >Economy</b-form-radio
+        <b-form @submit.prevent="searchData">
+          <div class="trip">
+            <div
+              style="background-color:#2395FF;color:white"
+              class="buttonTrip"
             >
-            <b-form-radio name="clas" v-model="form.clas" value="2"
-              >Business</b-form-radio
-            >
-            <b-form-radio name="clas" v-model="form.clas" value="3"
-              >First Class</b-form-radio
-            >
+              <img src="../../../assets/img/logowhite.png" /> One Way
+            </div>
+            <div class="buttonTrip">
+              <img src="../../../assets/img/roundarrow.png" /> Round Trip
+            </div>
           </div>
-        </div>
-        <div class="searchButton">
-          <button @click="searchData">Search FLight</button>
-        </div>
+          <div class="departure">
+            Departure
+            <b-form-datepicker
+              id="datepicker-placeholder"
+              placeholder="Choose a date"
+              locale="en"
+              style="margin-top:10px"
+              v-model="form.flightDate"
+              required
+            ></b-form-datepicker>
+          </div>
+          <div class="departure">
+            How many person?
+            <b-form-input
+              type="number"
+              placeholder="number of passengers"
+              style="margin-top:10px"
+              v-model="form.totalPassanger"
+              required
+            ></b-form-input>
+          </div>
+          <div class="departure">
+            Which class do you want?
+            <div class="searchRadio">
+              <b-form-radio name="clas" v-model="form.clas" value="1" required
+                >Economy</b-form-radio
+              >
+              <b-form-radio name="clas" v-model="form.clas" value="2"
+                >Business</b-form-radio
+              >
+              <b-form-radio name="clas" v-model="form.clas" value="3"
+                >First Class</b-form-radio
+              >
+            </div>
+          </div>
+          <div class="searchButton">
+            <button type="submit">Search FLight</button>
+          </div>
+        </b-form>
       </div>
     </div>
     <b-row>
@@ -148,20 +156,18 @@ export default {
     swap() {
       const data1 = this.form.fromCity
       const data2 = this.form.toCity
-      // console.log(`data1 ${data1}`)
-      // console.log(`data2 ${data2}`)
       const data3 = data2
       const data4 = data1
       if (data3 === data2) {
         this.form.fromCity = data3
         this.form.toCity = data4
-        console.log(`data1 ${this.form.fromCity}`)
-        console.log(`data2 ${this.form.toCity}`)
       }
     },
     hideModal() {
       if (this.form.fromCity === this.form.toCity) {
-        alert('asal dan tujuan sama')
+        this.makeToast('Same value !', 'Change your input value', 'warning')
+      } else if (this.form.toCity === null || this.form.fromCity === null) {
+        this.makeToast('input empty !', 'Fill your input', 'warning')
       } else {
         this.$refs['my-modal'].hide()
       }
@@ -170,13 +176,13 @@ export default {
       this.setParams(this.form)
       this.search(this.form)
         .then(result => {
-          this.makeToast('Done', `${result.length} Flight Found`, 'success')
+          this.makeToast('Done', `${result.length} Flight Found`, 'primary')
           setTimeout(() => {
             this.$router.push('/search')
           }, 3000)
         })
         .catch(error => {
-          alert(error)
+          this.makeToast('Warning', `${error.data.msg}`, 'danger')
         })
     }
   }
