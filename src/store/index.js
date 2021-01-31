@@ -19,7 +19,7 @@ export default new Vuex.Store({
   getters: {},
   plugins: [
     createPersistedState({
-      paths: ['Auth.user']
+      paths: ['Auth.user', 'Search.params']
     })
   ]
 })

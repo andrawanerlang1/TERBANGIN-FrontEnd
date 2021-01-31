@@ -240,6 +240,7 @@
                 <div>${{ price[0] }}</div>
                 <div>${{ price[1] }}</div>
               </div>
+              {{ price }}
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
@@ -259,6 +260,9 @@ export default {
       slideOption: {
         min: 550000,
         max: 1000000
+      },
+      transit: {
+        direct: ''
       }
     }
   },
@@ -296,7 +300,13 @@ export default {
       this.search('payload')
     },
     filterTransitDirect(x) {
-      this.setTransitDirect(x)
+      if (x === this.transit.direct) {
+        this.setTransitDirect('')
+        this.transit.direct = ''
+      } else {
+        this.setTransitDirect(x)
+        this.transit.direct = x
+      }
       this.search('payload')
     },
     filterTransit1(x) {

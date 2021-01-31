@@ -174,7 +174,7 @@ export default {
     },
     searchData() {
       this.setParams(this.form)
-      this.search(this.form)
+      this.search()
         .then(result => {
           this.makeToast('Done', `${result.length} Flight Found`, 'primary')
           setTimeout(() => {

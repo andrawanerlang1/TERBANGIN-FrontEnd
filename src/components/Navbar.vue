@@ -67,7 +67,7 @@ export default {
   },
   created() {},
   computed: {
-    ...mapGetters(['getParams','setUser'])
+    ...mapGetters(['setUser'])
   },
   methods: {
     ...mapActions(['search','logout']),

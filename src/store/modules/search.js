@@ -79,7 +79,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .get(
-            `${process.env.VUE_APP_PORT}/flight?fromCity=${context.state.params.fromCity}&toCity=${context.state.params.toCity}&flightDate=${context.state.params.flightDate}&clas=${context.state.params.clas}&transitDirect=${context.state.transitDirect}&transit1=${context.state.transit1}&transit2=${context.state.transit2}&food=${context.state.food}&wifi=${context.state.wifi}&luggage=${context.state.luggage}&departureTimeStr=${context.state.deperature.start}&departureTimeEnd=${context.state.deperature.end}&arrivedTimeStr=${context.state.arrive.start}&arrivedTimeEnd=${context.state.arrive.end}&mascapai=${context.state.airline}&priceMin=${context.state.price.min}&priceMax=${context.state.price.max}&sort=${context.state.sort}`
+            `${process.env.VUE_APP_PORT}/flight?fromCity=${context.state.params.fromCity}&toCity=${context.state.params.toCity}&flightDate=${context.state.params.flightDate}&clas=${context.state.params.clas}&transitDirect=${context.state.transitDirect}&transit1=${context.state.transit1}&transit2=${context.state.transit2}&food=${context.state.food}&wifi=${context.state.wifi}&luggage=${context.state.luggage}&departureTimeStr=${context.state.deperature.start}&departureTimeEnd=${context.state.deperature.end}&arrivedTimeStr=${context.state.arrive.start}&arrivedTimeEnd=${context.state.arrive.end}&mascapai=${context.state.airline}&priceMin=${context.state.price.min}&priceMax=${context.state.price.max}&sort=${context.state.sort}&page=1&limit=5`
           )
           .then(result => {
             console.log(payload)
