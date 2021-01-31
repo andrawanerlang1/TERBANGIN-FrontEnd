@@ -14,7 +14,7 @@
         <div
           v-for="(item, index) in booking"
           :key="index"
-          class="booking-history mt-4 p-3"
+          class="booking-history mt-3 p-3"
         >
           <p>{{ formatTime(item.flightDate) }}</p>
           <div class="route-way">
@@ -29,6 +29,29 @@
           <p class="text-secondary name-airplane">
             {{ item.mascapai }}, AB-221
           </p>
+          <div v-if="index === detailIndex" class="booking-detail">
+            <div class="d-flex justify-content-between">
+              <div>
+                <p>Booking Code : {{ item.code }}</p>
+              </div>
+              <div>
+                <p>Passenger : {{ item.totalPassenger }}</p>
+              </div>
+              <div>
+                <p>Payment : Rp {{ item.totalPayment }}</p>
+              </div>
+              <div>
+                <router-link
+                  v-if="item.paymentStatus"
+                  :to="'/detail-booking/' + item.flightId"
+                >
+                  <button class="btn-detail">
+                    Boarding pass
+                  </button>
+                </router-link>
+              </div>
+            </div>
+          </div>
           <div class="navigation-button mt-4">
             <p class="font-weight-bold text-secondary mr-2">status</p>
             <div style="margin-top: -6px;">
@@ -48,29 +71,6 @@
               View Detail
               <!-- </router-link> -->
             </p>
-          </div>
-          <div v-if="index === detailIndex" class="booking-detail">
-            <div class="d-flex justify-content-between">
-              <div>
-                <p>Booking Code : {{ item.code }}</p>
-              </div>
-              <div>
-                <p>Passenger Total : {{ item.totalPassenger }}</p>
-              </div>
-              <div>
-                <p>Rp {{ item.totalPayment }}</p>
-              </div>
-              <div>
-                <router-link
-                  v-if="item.paymentStatus"
-                  :to="'/detail-booking/' + item.flightId"
-                >
-                  <button class="btn btn-primary mb-5">
-                    Booking detail
-                  </button>
-                </router-link>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -120,11 +120,12 @@ export default {
 </script>
 
 <style scoped>
+.booking-detail p {
+  margin-bottom: unset;
+}
+
 .booking-detail {
-  background: rgb(235, 235, 235);
-  height: 80px;
-  padding: 20px 20px;
-  border-radius: 5px;
+  background: rgb(255, 255, 255);
 }
 
 .main-booking {
@@ -179,6 +180,17 @@ export default {
 .navigation-button {
   display: grid;
   grid-template-columns: 1fr 8fr 2fr;
+}
+.btn-detail {
+  background: blue;
+  color: #fff;
+  outline: unset;
+  border: unset;
+  border-radius: 5px;
+  transition-duration: 0.6s;
+}
+.btn-detail:hover {
+  background: rgb(0, 0, 194);
 }
 @media screen and (max-width: 992px) {
   .navigation-button {

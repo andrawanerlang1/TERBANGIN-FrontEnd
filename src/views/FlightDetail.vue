@@ -6,11 +6,11 @@
         <b-row>
           <b-col col lg="8" md="8" sm="12" cols="12" style="width: 100%;">
             <h4 class="text-white mb-4">Contact Person Details</h4>
-            <ContactPersonDetail :formBooking="formBooking" />
+            <ContactPersonDetail :formBooking="formBooking" :error="error" />
           </b-col>
           <b-col col lg="4" md="4" sm="12" cols="12" style="width: 100%;">
             <h4 class="text-white mb-4">Flight Detail</h4>
-            <FlightDetailCard />
+            <FlightDetailCard :flight="flight" :total="total" />
           </b-col>
         </b-row>
         <b-row>
@@ -23,6 +23,7 @@
               :passenger="passenger"
               :flight="flight"
               :params="params"
+              :errorPassenger="errorPassenger"
             />
           </b-col>
         </b-row>
@@ -45,7 +46,6 @@
         </b-row>
       </b-container>
     </div>
-    <button @click="show">show</button>
     <Footer />
   </div>
 </template>
@@ -86,17 +86,15 @@ export default {
         nationality: 'Indonesia'
       },
       userId: '',
-      // data flight by flight id
-      flight: {
-        flightId: 3,
-        price: 500000
-      }
+      error: '',
+      errorPassenger: ''
     }
   },
   computed: {
     ...mapGetters({
       setUser: 'setUser',
-      params: 'getParams'
+      params: 'getParams',
+      flight: 'getChooseFlight'
     }),
     total() {
       return this.formPassenger.length * this.flight.price
@@ -107,10 +105,21 @@ export default {
   },
   methods: {
     ...mapActions(['postBooking', 'patchFlightCapacity', 'sendNotif']),
-    show() {
-      console.log(this.params)
-    },
     addBooking() {
+      if (
+        this.formBooking.contactFullName === '' ||
+        this.formBooking.contactEmail === '' ||
+        this.formBooking.phoneNumber === ''
+      ) {
+        return (this.error = '*Please fill contact person details ')
+      }
+      this.error = ''
+
+      if (this.formPassenger.length < 1) {
+        return (this.errorPassenger = '*Please add passenger')
+      }
+      this.errorPassenger = ''
+
       const dataBooking = {
         userId: this.userId,
         flightId: this.flight.flightId,
