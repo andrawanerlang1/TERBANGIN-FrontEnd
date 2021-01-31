@@ -80,33 +80,10 @@ export default {
     Footer
   },
   data() {
-    return {
-      // form: {
-      //   email: '',
-      //   fullName: '',
-      //   phoneNumber: '',
-      //   city: '',
-      //   nationality: '',
-      //   postCode: ''
-      // }
-    }
+    return {}
   },
   created() {
     this.getUserProfile(this.user.userId)
-    // .then(response => {
-    //   this.form = {
-    //     email: response.email,
-    //     fullName: response.fullName,
-    //     phoneNumber: response.phoneNumber,
-    //     city: response.city,
-    //     nationality: response.nationality,
-    //     postCode: response.postCode
-    //   }
-    //   console.log(this.form)
-    // })
-    // .catch(error => {
-    //   console.log(`ini error ${error}`)
-    // })
   },
   methods: {
     ...mapActions([

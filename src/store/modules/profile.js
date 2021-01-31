@@ -54,8 +54,8 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://localhost:3000/user/update/image/${payload.userId}`,
-            payload.user_data
+            `http://localhost:3000/user/img/${payload.userId}`,
+            payload.payload.data
           )
           .then(response => {
             resolve(response.data.data)
