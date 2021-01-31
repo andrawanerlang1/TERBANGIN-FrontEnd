@@ -18,34 +18,39 @@
         <div class="separatorName">
           Departure Time
         </div>
-        <b-form-input type="time"></b-form-input>
+        <b-form-input type="time" v-model="departureTime"></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
           Arrival Time
         </div>
-        <b-form-input type="time"></b-form-input>
+        <b-form-input type="time" v-model="arrivalTime"></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
           Flight Date
         </div>
-        <b-form-input type="date"></b-form-input>
+        <b-form-input type="date" v-model="flightDate"></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
           Ticket Price (IDR) / pax
         </div>
-        <b-form-input type="number" min="0" max="10000000"></b-form-input>
+        <b-form-input
+          type="number"
+          min="0"
+          max="10000000"
+          v-model="price"
+        ></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
           Facilities
         </div>
         <div style="display:flex;justify-content:space-around; font-weight:500">
-          <b-form-checkbox value="wifi">Wifi</b-form-checkbox>
-          <b-form-checkbox value="food">Meal</b-form-checkbox>
-          <b-form-checkbox value="luggage">Luggage</b-form-checkbox>
+          <b-form-checkbox v-model="wifi" value="1">Wifi</b-form-checkbox>
+          <b-form-checkbox v-model="food" value="1">Meal</b-form-checkbox>
+          <b-form-checkbox v-model="luggage" value="1">Luggage</b-form-checkbox>
         </div>
       </div>
       <div class="formSeparator">
@@ -62,7 +67,12 @@
         <div class="separatorName">
           Capacity
         </div>
-        <b-form-input type="number" min="10" max="5000"></b-form-input>
+        <b-form-input
+          type="number"
+          min="10"
+          max="5000"
+          v-model="capacity"
+        ></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
@@ -115,7 +125,7 @@
         <div class="separatorName">
           Flight Code
         </div>
-        <b-form-input></b-form-input>
+        <b-form-input v-model="flightCode"></b-form-input>
       </div>
     </div>
   </div>
@@ -126,6 +136,15 @@ export default {
   data() {
     return {
       mascapai: null,
+      departureTime: null,
+      arrivalTime: null,
+      flightDate: null,
+      price: 0,
+      wifi: 0,
+      food: 0,
+      capacity: 0,
+      luggage: 0,
+      flightCode: null,
       from: null,
       to: null,
       terminal: null,
