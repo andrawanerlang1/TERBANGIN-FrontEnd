@@ -59,7 +59,6 @@
                 </div>
               </div>
             </form>
-            {{ profile }}
           </div>
         </b-col>
       </b-row>

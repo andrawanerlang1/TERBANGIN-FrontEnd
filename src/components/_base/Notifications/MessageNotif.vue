@@ -1,25 +1,51 @@
 <template>
-  <div class="row mt-3 justify-content-center">
-    <div class="col box mx-lg-2">
-      <div class="row mt-3 ">
-        <div class="col mx-1 congratulations">Congratulations</div>
-      </div>
-      <div class="row mt-3">
-        <div class="col mx-1 message maxMesg">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            id, consequuntur totam error unde quia neque delectus vel quod
-            placeat voluptate non voluptatum inventore soluta, nostrum impedit
-            similique ea repudiandae.
-          </p>
+  <div class="mainWrapper">
+    <div
+      class="row mt-3 justify-content-center"
+      v-for="(item, index) in notif"
+      :key="index"
+    >
+      <div class="col box mx-lg-2">
+        <div class="row mt-3 ">
+          <div class="col mx-1 congratulations">{{ item.notifTitle }}</div>
         </div>
-      </div>
-      <div class="row mt-lg-4 mb-3">
-        <div class="col mx-1 time">5h ago</div>
+        <div class="row mt-3">
+          <div class="col mx-1 message maxMesg">
+            <p>
+              {{ item.notifMessage }}
+            </p>
+          </div>
+        </div>
+        <div class="row mt-lg-4 mb-3">
+          <div class="col mx-1 time">{{ item.createdAt }}</div>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+
+export default {
+  name: 'NotifComponent',
+  data() {
+    return {}
+  },
+  created() {
+    this.getNotifByUserId(this.user.userId)
+  },
+  methods: {
+    ...mapActions(['getNotifByUserId'])
+  },
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      notif: 'getterNotif'
+    })
+  }
+}
+</script>
 
 <style scoped>
 .maxMesg p {

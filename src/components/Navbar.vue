@@ -41,6 +41,7 @@
               alt=""
             />
           </template>
+          <b-dropdown-item @click="goProfile">My Profile</b-dropdown-item>
           <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-dropdown>
       </div>
@@ -74,6 +75,9 @@ export default {
     getAllTicket() {
       this.setParams(this.form)
       this.search('payload')
+    },
+    goProfile(){
+    this.$router.push('/detail-profile')
     },
     show() {
       console.log(this.setUser)

@@ -9,7 +9,7 @@
       />
     </div>
     <div class="row justify-content-center">
-      <div class="col-10 boxMessage col-lg-8  mt-5" style="height:1200px">
+      <div class="col-10 boxMessage col-lg-8  mt-5" style="height:1430px">
         <div class="container">
           <div class="row">
             <div class="col mx-lg-4">

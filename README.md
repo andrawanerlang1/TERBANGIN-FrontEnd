@@ -1,4 +1,4 @@
-# terbangin
+# Terbangin
 
 ## Project setup
 ```

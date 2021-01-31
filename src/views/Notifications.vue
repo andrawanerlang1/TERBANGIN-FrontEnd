@@ -22,8 +22,10 @@
                 <div class="pl-0 pl-lg col Notifications2 ">
                   Notifications
                 </div>
-                <div class="col text-right clearNotif  mt-2">
-                  <a class="text-decoration-none" href="#"> Clear</a>
+                <div class="col text-right clearNotif  mt-2 ">
+                  <button class="notifButton" @click="deleteNotif">
+                    Clear
+                  </button>
                 </div>
               </div>
               <Notif />
@@ -36,16 +38,59 @@
   </div>
 </template>
 
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import Notif from '../components/_base/Notifications/MessageNotif'
+export default {
+  components: {
+    Navbar,
+    Footer,
+    Notif
+  },
+  created() {},
+  methods: {
+    ...mapActions(['deleteNotifByUserId', 'getNotifByUserId']),
+
+    deleteNotif() {
+      this.deleteNotifByUserId(this.user.userId)
+        .then(result => {
+          this.$toasted.success(result)
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
+      this.getNotifByUserId(this.user.userId)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      notif: 'getterNotif'
+    })
+  }
+}
+</script>
+
 <style>
 div .row img {
   width: 100%;
   height: 55%;
 }
-.clearNotif {
+.notifButton {
   font-family: Poppins;
   font-weight: 600;
   font-size: 16px;
   color: #2395ff;
+  background-color: white;
+  border: 0px;
+}
+.notifButton:hover {
+  background-color: #2395ff;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 8px 6px -6px black;
 }
 .Notifications2 {
   font-family: Poppins;
@@ -89,15 +134,3 @@ div .row img {
   }
 }
 </style>
-<script>
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Notif from '../components/_base/Notifications/MessageNotif'
-export default {
-  components: {
-    Navbar,
-    Footer,
-    Notif
-  }
-}
-</script>
