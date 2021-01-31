@@ -3,7 +3,12 @@
     <div class="main">
       <div class="d-flex justify-content-start">
         <div class="d-flex align-items-center mb-3">
-          <div><img src="../../../assets/icon-garuda.png" alt="" /></div>
+          <div>
+            <img
+              :src="'http://localhost:3000/mascapai/' + flight.mascapaiImage"
+              class="mascapai-img"
+            />
+          </div>
           <div class="ml-4 text-dark-grey">{{ flight.mascapai }}</div>
           <div></div>
         </div>
@@ -39,10 +44,10 @@
       </div>
       <hr />
       <div class="d-flex justify-content-between align-items-center">
-        <div><h5>Total Payment</h5></div>
+        <div><p class="text-bold">Total Payment</p></div>
         <div>
-          <h3 v-if="total" class="text-blue">Rp {{ total }}</h3>
-          <h3 v-else class="text-blue">Rp {{ flight.price }}</h3>
+          <h4 v-if="total" class="text-blue">Rp {{ total }}</h4>
+          <h4 v-else class="text-blue">Rp {{ flight.price }}</h4>
         </div>
       </div>
     </div>
@@ -92,5 +97,13 @@ p {
 .text-blue {
   color: #2395ff;
   font-size: 500;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.mascapai-img {
+  max-width: 150px;
 }
 </style>
