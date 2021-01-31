@@ -135,14 +135,16 @@
         </div>
         <b-form-input v-model="form.flightCode"></b-form-input>
       </div>
-      <!-- <h6>{{ form }}</h6> -->
+      <h6>{{ form }}</h6>
       <br />
-      <b-button @click="postFlight">Post</b-button>
+      <b-button @click="addFlight">Post</b-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   data() {
     return {
@@ -190,7 +192,34 @@ export default {
       ]
     }
   },
-  methods: {}
+  methods: {
+    ...mapActions(['postFlight']),
+    addFlight() {
+      console.log(this.form.flightClass)
+      const classs =
+        this.form.flightClass[0] === 'economy' &&
+        this.form.flightClass[1] === 'business' &&
+        this.form.flightClass[2] === 'firstclass'
+          ? 7
+          : this.form.flightClass[0] === 'economy' &&
+            this.form.flightClass[1] === 'business'
+          ? 4
+          : this.form.flightClass[0] === 'business' &&
+            this.form.flightClass[1] === 'firstclass'
+          ? 5
+          : this.form.flightClass[0] === 'economy' &&
+            this.form.flightClass[1] === 'firstclass'
+          ? 6
+          : this.form.flightClass[0] === 'economy'
+          ? 1
+          : this.form.flightClass[0] === 'business'
+          ? 2
+          : this.form.flightClass[0] === 'firstclass'
+          ? 3
+          : 100
+      console.log(classs)
+    }
+  }
 }
 </script>
 
