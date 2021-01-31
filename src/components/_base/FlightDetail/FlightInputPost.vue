@@ -7,7 +7,7 @@
         </div>
         <div>
           <b-form-select
-            v-model="mascapai"
+            v-model="form.mascapai"
             :options="options"
             size="sm"
             class="mt-3"
@@ -18,19 +18,19 @@
         <div class="separatorName">
           Departure Time
         </div>
-        <b-form-input type="time" v-model="departureTime"></b-form-input>
+        <b-form-input type="time" v-model="form.departureTime"></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
           Arrival Time
         </div>
-        <b-form-input type="time" v-model="arrivalTime"></b-form-input>
+        <b-form-input type="time" v-model="form.arrivalTime"></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
           Flight Date
         </div>
-        <b-form-input type="date" v-model="flightDate"></b-form-input>
+        <b-form-input type="date" v-model="form.flightDate"></b-form-input>
       </div>
       <div class="formSeparator">
         <div class="separatorName">
@@ -40,7 +40,7 @@
           type="number"
           min="0"
           max="10000000"
-          v-model="price"
+          v-model="form.price"
         ></b-form-input>
       </div>
       <div class="formSeparator">
@@ -48,9 +48,11 @@
           Facilities
         </div>
         <div style="display:flex;justify-content:space-around; font-weight:500">
-          <b-form-checkbox v-model="wifi" value="1">Wifi</b-form-checkbox>
-          <b-form-checkbox v-model="food" value="1">Meal</b-form-checkbox>
-          <b-form-checkbox v-model="luggage" value="1">Luggage</b-form-checkbox>
+          <b-form-checkbox v-model="form.wifi" value="1">Wifi</b-form-checkbox>
+          <b-form-checkbox v-model="form.food" value="1">Meal</b-form-checkbox>
+          <b-form-checkbox v-model="form.luggage" value="1"
+            >Luggage</b-form-checkbox
+          >
         </div>
       </div>
       <div class="formSeparator">
@@ -71,7 +73,7 @@
           type="number"
           min="10"
           max="5000"
-          v-model="capacity"
+          v-model="form.capacity"
         ></b-form-input>
       </div>
       <div class="formSeparator">
@@ -83,7 +85,7 @@
             From :
             <div style="display:flex">
               <b-form-select
-                v-model="from"
+                v-model="form.from"
                 :options="place"
                 required
               ></b-form-select>
@@ -93,7 +95,7 @@
             To :
             <div style="display:flex">
               <b-form-select
-                v-model="to"
+                v-model="form.to"
                 :options="place"
                 required
               ></b-form-select>
@@ -106,7 +108,7 @@
           Terminal
         </div>
         <b-form-select
-          v-model="terminal"
+          v-model="form.terminal"
           :options="terminals"
           required
         ></b-form-select>
@@ -116,7 +118,7 @@
           Transit
         </div>
         <b-form-select
-          v-model="transit"
+          v-model="form.transit"
           :options="transits"
           required
         ></b-form-select>
@@ -125,8 +127,9 @@
         <div class="separatorName">
           Flight Code
         </div>
-        <b-form-input v-model="flightCode"></b-form-input>
+        <b-form-input v-model="form.flightCode"></b-form-input>
       </div>
+      <h6>{{ form }}</h6>
     </div>
   </div>
 </template>
@@ -135,32 +138,34 @@
 export default {
   data() {
     return {
-      mascapai: null,
-      departureTime: null,
-      arrivalTime: null,
-      flightDate: null,
-      price: 0,
-      wifi: 0,
-      food: 0,
-      capacity: 0,
-      luggage: 0,
-      flightCode: null,
-      from: null,
-      to: null,
-      terminal: null,
-      transit: null,
+      form: {
+        mascapai: null,
+        departureTime: null,
+        arrivalTime: null,
+        flightDate: null,
+        price: 0,
+        wifi: 0,
+        food: 0,
+        capacity: 0,
+        luggage: 0,
+        flightCode: null,
+        from: null,
+        to: null,
+        terminal: null,
+        transit: null
+      },
       options: [
         { value: null, text: 'Please select airlines' },
-        { value: 'garuda', text: 'Garuda Indonesia' },
-        { value: 'lion', text: 'Lion Air' },
-        { value: 'air', text: 'Air Asia' }
+        { value: 'Garuda Indonesia', text: 'Garuda Indonesia' },
+        { value: 'Lion Air', text: 'Lion Air' },
+        { value: 'Air Asia', text: 'Air Asia' }
       ],
       place: [
         { value: null, text: 'Please select the place' },
-        { value: '[Medan, Indonesia]', text: 'Medan, Indonesia' },
-        { value: '[Jakarta, Indonesia]', text: 'Jakarta, Indonesia' },
-        { value: '[Tokyo, Jepang]', text: 'Tokyo, Jepang' },
-        { value: '[Kuala, Malaysia]', text: 'Kuala Lumpur, Malaysia' }
+        { value: '[Medan, IDN]', text: 'Medan, Indonesia' },
+        { value: '[Jakarta, IDN]', text: 'Jakarta, Indonesia' },
+        { value: '[Tokyo, JPN]', text: 'Tokyo, Japan' },
+        { value: '[Kuala, MAS]', text: 'Kuala Lumpur, Malaysia' }
       ],
       terminals: [
         { value: null, text: 'Please select terminal' },
