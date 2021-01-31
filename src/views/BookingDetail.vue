@@ -42,7 +42,7 @@
               <b-row>
                 <b-col>
                   <b class="small text-muted">Code</b>
-                  <p class="small">AB-221</p>
+                  <p class="small">{{ flight.code }}</p>
                 </b-col>
                 <b-col>
                   <b class="small text-muted">Class</b>
