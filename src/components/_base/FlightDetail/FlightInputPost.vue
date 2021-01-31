@@ -144,8 +144,11 @@
 
 <script>
 import { mapActions } from 'vuex'
+import alert from '../../../mixins/alert'
 
 export default {
+  name: 'FlightInput',
+  mixins: [alert],
   data() {
     return {
       form: {
@@ -153,11 +156,11 @@ export default {
         departureTime: null,
         arrivalTime: null,
         flightDate: null,
-        price: 0,
-        wifi: 0,
-        food: 0,
-        capacity: 0,
-        luggage: 0,
+        price: '0',
+        wifi: '0',
+        food: '0',
+        capacity: '0',
+        luggage: '0',
         flightCode: null,
         from: null,
         to: null,
@@ -173,10 +176,10 @@ export default {
       ],
       place: [
         { value: null, text: 'Please select the place' },
-        { value: '[Medan, IDN]', text: 'Medan, Indonesia' },
-        { value: '[Jakarta, IDN]', text: 'Jakarta, Indonesia' },
-        { value: '[Tokyo, JPN]', text: 'Tokyo, Japan' },
-        { value: '[Kuala, MAS]', text: 'Kuala Lumpur, Malaysia' }
+        { value: ['Medan', 'IDN'], text: 'Medan, Indonesia' },
+        { value: ['Jakarta', 'IDN'], text: 'Jakarta, Indonesia' },
+        { value: ['Tokyo', 'JPN'], text: 'Tokyo, Japan' },
+        { value: ['Kuala Lumpur', 'MAS'], text: 'Kuala Lumpur, Malaysia' }
       ],
       terminals: [
         { value: null, text: 'Please select terminal' },
@@ -200,24 +203,73 @@ export default {
         this.form.flightClass[0] === 'economy' &&
         this.form.flightClass[1] === 'business' &&
         this.form.flightClass[2] === 'firstclass'
-          ? 7
+          ? '7'
           : this.form.flightClass[0] === 'economy' &&
             this.form.flightClass[1] === 'business'
-          ? 4
-          : this.form.flightClass[0] === 'business' &&
-            this.form.flightClass[1] === 'firstclass'
-          ? 5
+          ? '4'
           : this.form.flightClass[0] === 'economy' &&
             this.form.flightClass[1] === 'firstclass'
-          ? 6
+          ? '5'
+          : this.form.flightClass[0] === 'business' &&
+            this.form.flightClass[1] === 'firstclass'
+          ? '6'
           : this.form.flightClass[0] === 'economy'
-          ? 1
+          ? '1'
           : this.form.flightClass[0] === 'business'
-          ? 2
+          ? '2'
           : this.form.flightClass[0] === 'firstclass'
-          ? 3
+          ? '3'
           : 100
       console.log(classs)
+      const fromCity = this.form.from[0]
+      const fromCountry = this.form.from[1]
+      const toCity = this.form.to[0]
+      const toCountry = this.form.to[1]
+      const {
+        mascapai,
+        departureTime,
+        arrivalTime,
+        flightDate,
+        price,
+        wifi,
+        food,
+        capacity,
+        luggage,
+        flightCode,
+        terminal,
+        transit
+      } = this.form
+      const data = {
+        mascapai,
+        mascapaiImage: '',
+        departureTime,
+        arrivedTime: arrivalTime,
+        flightDate,
+        price,
+        food,
+        wifi,
+        luggage,
+        capacity,
+        clas: classs,
+        fromCity,
+        fromCountry,
+        toCity,
+        toCountry,
+        tripType: '1',
+        terminal,
+        transitType: transit,
+        flightCode
+      }
+      console.log(data)
+      this.postFlight(data)
+        .then(result => {
+          this.makeToast(`${result.data.msg}`, 'Success add flight', 'success')
+          console.log(result)
+        })
+        .catch(error => {
+          this.makeToast('Failed', `${error.data.msg}`, 'danger')
+          console.log(error)
+        })
     }
   }
 }
