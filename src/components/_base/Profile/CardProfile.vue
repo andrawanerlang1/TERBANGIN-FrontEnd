@@ -95,7 +95,6 @@ export default {
       'logout',
       'patchUserProfile',
       'changePassword',
-      'patchLocation',
       'patchProfilePict',
       'deleteProfilePict'
     ]),
