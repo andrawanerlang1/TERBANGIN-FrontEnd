@@ -12,6 +12,10 @@
       </div>
       <div class="trending">
         <div class="trending-konten">
+          <p>
+            Tokyo, <br />
+            <span>Japan</span>
+          </p>
           <img
             class="trending-img"
             src="../../../assets/img/trending1.png"
@@ -20,6 +24,10 @@
           <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
+          <p>
+            Barcelona, <br />
+            <span>Spain</span>
+          </p>
           <img
             class="trending-img"
             src="../../../assets/img/trendin2.png"
@@ -28,6 +36,22 @@
           <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
+          <p>
+            Tokyo, <br />
+            <span>Japan</span>
+          </p>
+          <img
+            class="trending-img"
+            src="../../../assets/img/trending1.png"
+            alt=""
+          />
+          <div class="trending-text"></div>
+        </div>
+        <div class="trending-konten">
+          <p>
+            Barcelona, <br />
+            <span>Spain</span>
+          </p>
           <img
             class="trending-img"
             src="../../../assets/img/trendin2.png"
@@ -36,17 +60,13 @@
           <div class="trending-text"></div>
         </div>
         <div class="trending-konten">
+          <p>
+            Tokyo, <br />
+            <span>Japan</span>
+          </p>
           <img
             class="trending-img"
-            src="../../../assets/img/trendin2.png"
-            alt=""
-          />
-          <div class="trending-text"></div>
-        </div>
-        <div class="trending-konten">
-          <img
-            class="trending-img"
-            src="../../../assets/img/trendin2.png"
+            src="../../../assets/img/trending1.png"
             alt=""
           />
           <div class="trending-text"></div>

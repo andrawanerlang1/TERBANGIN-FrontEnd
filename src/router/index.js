@@ -10,6 +10,7 @@ import BookingDetail from '../views/BookingDetail.vue'
 import Chat from '../views/Chat.vue'
 import Notifications from '../views/Notifications.vue'
 import PostFlight from '../views/PostFlight.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -17,12 +18,14 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    meta: { requiresVisitor: true }
   },
   {
     path: '/detail',
     name: 'FlightDetail',
-    component: FlightDetail
+    component: FlightDetail,
+    meta: { requiresAuth: true }
   },
   {
     path: '/search',
@@ -30,39 +33,45 @@ const routes = [
     component: Search
   },
   {
-    path: '/landing',
+    path: '/',
     name: 'Landing',
     component: Landing
   },
   {
     path: '/mybooking',
     name: 'MyBooking',
-    component: MyBooking
+    component: MyBooking,
+    meta: { requiresAuth: true }
   },
   {
     path: '/detail-profile',
     name: 'Profile',
-    component: DetailProfile
+    component: DetailProfile,
+    meta: { requiresAuth: true }
   },
   {
     path: '/detail-booking/:id',
     name: 'BookingDetail',
-    component: BookingDetail
+    component: BookingDetail,
+    meta: { requiresAuth: true }
   },
   {
     path: '/chat',
     name: 'Chat',
-    component: Chat
+    component: Chat,
+    meta: { requiresAuth: true }
   },
   {
     path: '/notifications',
     name: 'notifications',
-    component: Notifications
+    component: Notifications,
+    meta: { requiresAuth: true }
   },
   {
     path: '/post-flight',
     name: 'PostFlight',
-    component: PostFlight
+    component: PostFlight,
+    meta: { requiresAuth: true }
   }
 ]
 
@@ -70,6 +79,28 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.isLogin) {
+      next({
+        path: '/login'
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (store.getters.isLogin) {
+      next({
+        path: '/'
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

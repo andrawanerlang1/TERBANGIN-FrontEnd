@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <div class="logo" style="margin-right:10px">
+    <div class="logo" style="margin-right:10px" @click="toLanding">
       <img src="../assets/img/logoflight.png" style="margin-right:10px" />
       Terbang.in
     </div>
@@ -9,15 +9,15 @@
         <img src="../assets/img/search.png" alt="" />
         Where you want to go?
       </button>
-      <div class="findTicket" @click="getAllTicket">
+      <div class="findTicket" @click="getAllTicket" >
         Find Ticket
       </div>
       <div v-if="setUser.email">
         <div class="myBooking">
-          <router-link v-if="setUser.role === 0" to="/mybooking"
+          <router-link v-if="setUser.role === 0" to="/mybooking" class="routerlink"  class-active="active"
             >My Booking</router-link
           >
-          <router-link v-else to="">Post Flight</router-link>
+          <router-link v-else to="/post-flight" class="routerlink">Post Flight</router-link>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
           <b-dropdown-item @click="logout">Log Out</b-dropdown-item>
         </b-dropdown>
       </div>
-      <router-link  v-if="!setUser.email" to=/login>
+      <router-link class="routerlink"  v-if="!setUser.email" to=/login>
       login</router-link>
     </div>
   </div>
@@ -81,6 +81,10 @@ export default {
     },
     show() {
       console.log(this.setUser)
+    },
+    toLanding(){
+    this.$router.push('/')
+
     }
   }
 }
@@ -96,6 +100,13 @@ export default {
   padding-bottom: 45px;
   text-align: center;
   background: #fff;
+}
+.routerlink{
+  color: black;
+  text-decoration: none;
+}
+.routerlink:hover{
+font-weight: bold;
 }
 .logo {
   font-weight: bold;
@@ -115,6 +126,18 @@ export default {
   font-weight: bold;
   border-bottom: 5px solid #2395ff;
   padding-bottom: 5px;
+}
+.router-link-active{
+    font-weight: bold;
+  border-bottom: 5px solid #2395ff;
+  padding-bottom: 5px;
+}
+.logo:hover{
+  border: 2px #2395ff solid;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 0 8px 6px -6px black;
+
 }
 .profile {
   display: flex;

@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="row mt-lg-4 mb-3">
-          <div class="col mx-1 time">{{ item.createdAt }}</div>
+          <div class="col mx-1 time">{{ item.createdAt.slice(0, 10) }}</div>
         </div>
       </div>
     </div>

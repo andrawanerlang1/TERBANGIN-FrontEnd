@@ -93,7 +93,7 @@ export default {
             'success'
           )
           setTimeout(() => {
-            this.$router.push('/landing')
+            this.$router.push('/')
           }, 2500)
           console.log(result)
         })

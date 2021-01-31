@@ -38,6 +38,18 @@ export default {
             reject(error.response.data.msg)
           })
       })
+    },
+    sendNotif(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .post(`${process.env.VUE_APP_PORT}/notif/post`, payload)
+          .then(result => {
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response.data.msg)
+          })
+      })
     }
   },
   getters: {
