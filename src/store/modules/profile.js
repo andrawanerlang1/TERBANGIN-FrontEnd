@@ -77,6 +77,18 @@ export default {
             reject(error.response.data.message)
           })
       })
+    },
+    changePassword(constext, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(`http://localhost:3000/user/delete/image/${payload.userId}`)
+          .then(response => {
+            resolve(response.data.data)
+          })
+          .catch(error => {
+            reject(error.response.data.message)
+          })
+      })
     }
   },
   getters: {

@@ -55,12 +55,19 @@
     </div>
     <b-modal id="modal-1" v-bind:hide-footer="true" title="Change Password">
       <p class="my-4">Inpur Your Email Password</p>
-      {{ form }}
+      <label>New Password</label>
       <input
-        type="text"
+        type="password"
         class="form-control mb-4"
-        v-model="form.changepassword"
+        v-model="form.newPassword"
       />
+      <label>Confirm Pasword </label>
+      <input
+        type="password"
+        class="form-control mb-4"
+        v-model="form.confirmPassword"
+      />
+      {{ form }}
     </b-modal>
   </div>
 </template>
@@ -72,7 +79,8 @@ export default {
   data() {
     return {
       form: {
-        changepassword: ''
+        newPassword: '',
+        confirmPassword: ''
       }
     }
   },
