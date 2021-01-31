@@ -37,7 +37,7 @@
               <b-icon-person-circle class="mr-3"></b-icon-person-circle> Profile
             </router-link>
           </li>
-          <li>
+          <li @click="mybooking">
             <b-icon-star-fill class="text-secondary mr-3"></b-icon-star-fill> My
             Review
           </li>
@@ -47,7 +47,7 @@
               >Change Password</b-button
             >
           </li>
-          <li class="text-danger">
+          <li class="text-danger" @click="logout">
             <b-icon-box-arrow-right class="mr-3"></b-icon-box-arrow-right>Logout
           </li>
         </ul>
@@ -108,6 +108,11 @@ export default {
         .catch(error => {
           this.$toasted.error(error)
         })
+    },
+    mybooking() {
+      this.$router.push({
+        name: 'MyBooking'
+      })
     }
   },
   computed: {
