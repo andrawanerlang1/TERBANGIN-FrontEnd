@@ -49,6 +49,8 @@
         </div>
         <div class="time" style="text-align:center;color:#595959">
           <div>3 hours 11 minutes</div>
+          <br />
+          {{ item.arrivedTime.substr(0, 2) - item.departureTime.substr(0, 2) }}
           <div v-if="item.transitType === 0">
             Direct
           </div>
@@ -103,12 +105,13 @@ export default {
   name: 'ticket',
   data() {
     return {
-      currentPage: 1
+      currentPage: 1,
+      times: ''
     }
   },
   created() {
     this.sortBy('')
-    this.search('payload')
+    this.search()
     this.handleChangePage(1)
   },
   computed: {
@@ -129,6 +132,9 @@ export default {
       'handleChangePage'
     ]),
     ...mapActions(['search']),
+    toInt(x) {
+      typeof parseInt(x)
+    },
     sortByMenu(x) {
       this.sortBy(x)
       this.search()

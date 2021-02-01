@@ -19,7 +19,7 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Direct</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransitDirect(0)" />
+                  <input type="checkbox" @change="filterTransitDirect(1)" />
                 </div>
               </div>
               <div class="choice">
@@ -31,7 +31,7 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Transit 2+</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransit2(2)" />
+                  <input type="checkbox" @change="filterTransit2(1)" />
                 </div>
               </div>
             </b-navbar-nav>
@@ -297,7 +297,8 @@ export default {
       'setLuggage',
       'setDeperature',
       'setArrive',
-      'setPrice'
+      'setPrice',
+      'handleChangePage'
     ]),
     reset() {
       this.setTransitDirect('')
@@ -310,6 +311,7 @@ export default {
       this.setDeperature({ start: '', end: '' })
       this.setArrive({ start: '', end: '' })
       this.setPrice({ min: '', max: '' })
+      this.handleChangePage(1)
       this.search()
     },
     filterTransitDirect(x) {
@@ -320,7 +322,9 @@ export default {
         this.setTransitDirect(x)
         this.transit.direct = x
       }
+      this.handleChangePage(1)
       this.search()
+      console.log(this.transit.direct)
     },
     filterTransit1(x) {
       if (x === this.transit.transit1) {
@@ -330,6 +334,8 @@ export default {
         this.setTransit1(x)
         this.transit.transit1 = x
       }
+      this.handleChangePage(1)
+      console.log(this.transit.transit1)
       this.search()
     },
     filterTransit2(x) {
@@ -340,6 +346,8 @@ export default {
         this.setTransit2(x)
         this.transit.transit2 = x
       }
+      this.handleChangePage(1)
+      console.log(this.transit.transit2)
       this.search()
     },
     filterFood(x) {
@@ -350,6 +358,7 @@ export default {
         this.setFood(x)
         this.transit.food = x
       }
+      this.handleChangePage(1)
       this.search()
     },
     filterWifi(x) {
@@ -360,6 +369,7 @@ export default {
         this.setWifi(x)
         this.transit.wifi = x
       }
+      this.handleChangePage(1)
       this.search()
     },
     filterLuggage(x) {
@@ -370,6 +380,7 @@ export default {
         this.setLuggage(x)
         this.transit.luggage = x
       }
+      this.handleChangePage(1)
       this.search()
     },
     filterMascapai(x) {
@@ -380,18 +391,20 @@ export default {
         this.setAirline(x)
         this.transit.airline = x
       }
+      this.handleChangePage(1)
       this.search()
     },
     filterDeperature(x, y) {
       if (x === this.departure.start && y === this.departure.end) {
         this.departure.start = ''
         this.departure.end = ''
-        this.setDeperature({ start: '', end: '' })
+        this.setDeperature(this.departure)
       } else {
         this.departure.start = x
         this.departure.end = y
         this.setDeperature(this.departure)
       }
+      this.handleChangePage(1)
       this.search()
     },
     filterArrive(x, y) {
@@ -404,6 +417,7 @@ export default {
         this.arrive.end = y
         this.setArrive(this.arrive)
       }
+      this.handleChangePage(1)
       this.search()
     },
     filterPrice() {
@@ -412,6 +426,7 @@ export default {
         max: this.price[1]
       }
       this.setPrice(data)
+      this.handleChangePage(1)
       this.search()
     }
   }

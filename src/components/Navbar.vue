@@ -74,7 +74,8 @@ export default {
     ...mapMutations(['setParams']),
     getAllTicket() {
       this.setParams(this.form)
-      this.search('payload')
+      this.search()
+      this.$router.push('/search')
     },
     goProfile(){
     this.$router.push('/detail-profile')
