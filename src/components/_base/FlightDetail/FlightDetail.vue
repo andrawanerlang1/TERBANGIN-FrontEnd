@@ -21,15 +21,24 @@
           <div></div>
         </div>
       </div>
-      <span class="mr-4 text-header"
-        >{{ flight.fromCity }} ({{ flight.fromCountry }})</span
-      >
-      <span
-        ><img src="../../../assets/icon-airplane.png" style="width:20px;"
-      /></span>
-      <span class="ml-3 text-header"
-        >{{ flight.toCity }}({{ flight.toCountry }})</span
-      >
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="text-center" style="width:45%;">
+          <p class="text-header">{{ flight.fromCity }}</p>
+          <p>({{ flight.fromCountry }})</p>
+        </div>
+        <div class="text-center" style="width:10%;">
+          <span
+            ><img
+              src="../../../assets/icon-airplane.png"
+              style="width:20px; height:20px;"
+          /></span>
+        </div>
+        <div class="text-center" style="width:45%;">
+          <p class="text-header">{{ flight.toCity }}</p>
+          <p>({{ flight.toCountry }})</p>
+        </div>
+      </div>
+
       <div class="time mt-2">
         <span class="text-grey">{{ formatDate(flight.flightDate) }}</span>
         <span class="ml-4 text-grey">{{ flight.departureTime }}</span>
@@ -114,5 +123,17 @@ p {
 .mascapai-img {
   max-width: 150px;
   max-height: 100px;
+}
+
+@media (max-width: 768px) {
+  .d-flex.justify-content-between.align-items-center {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 576px) {
+  .d-flex.justify-content-between.align-items-center {
+    flex-direction: column;
+  }
 }
 </style>
