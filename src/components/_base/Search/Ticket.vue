@@ -1,11 +1,10 @@
 <template>
   <div class="mainWrapper">
-    <!-- {{ getSearch }} -->
     <div class="filter">
       <div style="font-weight:bold; font-size: 20px">
         Select Ticket
         <span style="color:#979797;font-weight:300;font-size:15px">
-          ({{ getSearch.length }} flight found)
+          ({{ getTotalRow }} flight found)
         </span>
       </div>
       <div style="font-weight:600">
@@ -50,6 +49,8 @@
         </div>
         <div class="time" style="text-align:center;color:#595959">
           <div>3 hours 11 minutes</div>
+          <br />
+          {{ item.arrivedTime.substr(0, 2) - item.departureTime.substr(0, 2) }}
           <div v-if="item.transitType === 0">
             Direct
           </div>
@@ -87,6 +88,14 @@
         </div>
       </div>
     </div>
+    <div class="overflow-auto" v-if="getTotalRow > 0">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="getTotalRow"
+        :per-page="getLimit"
+        @change="changePage"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
@@ -95,26 +104,51 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'ticket',
   data() {
-    return {}
+    return {
+      currentPage: 1,
+      times: ''
+    }
   },
   created() {
     this.sortBy('')
-    this.search('payload')
+    this.search()
+    this.handleChangePage(1)
   },
   computed: {
-    ...mapGetters(['getSearch', 'getChooseFlight', 'getParams'])
+    ...mapGetters([
+      'getSearch',
+      'getChooseFlight',
+      'getParams',
+      'getPage',
+      'getLimit',
+      'getTotalRow'
+    ])
   },
   methods: {
-    ...mapMutations(['setChooseFlight', 'sortBy', 'setParams']),
+    ...mapMutations([
+      'setChooseFlight',
+      'sortBy',
+      'setParams',
+      'handleChangePage'
+    ]),
     ...mapActions(['search']),
+    toInt(x) {
+      typeof parseInt(x)
+    },
     sortByMenu(x) {
       this.sortBy(x)
-      this.search('payload')
+      this.search()
     },
     setChooseFlights(x) {
       this.setChooseFlight(x)
       console.log(x)
       this.$router.push('/detail')
+    },
+    changePage(numberPage) {
+      this.handleChangePage(numberPage)
+      this.search()
+      // this.page = numberPage
+      // this.getProduct('', '', this.sort)
     }
   }
 }

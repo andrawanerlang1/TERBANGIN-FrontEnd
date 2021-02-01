@@ -38,7 +38,7 @@
             />
             <img
               v-if="item.profileImage"
-              :src="`${process.env.VUE_APP_PORT}/user/` + item.profileImage"
+              :src="`${URL}/user/` + item.profileImage"
             />
           </div>
           <div class="chat-msg">
@@ -81,7 +81,8 @@ export default {
       socket: io('http://localhost:3000'),
       room: '',
       oldRoom: '',
-      roomId: null
+      roomId: null,
+      URL: process.env.VUE_APP_PORT
     }
   },
   created() {

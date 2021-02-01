@@ -4,14 +4,23 @@
       <form>
         <div class="text-center">
           <div class="user-profile">
+            <img v-if="url" :src="url" alt="" class="rounded-circle mt-4" />
             <img
-              src="../../../assets/img/profile.png"
-              alt="profile"
+              v-else-if="profile.profileImage"
+              :src="`${URLS}/user/` + profile.profileImage"
+              alt=""
               class="rounded-circle mt-4"
             />
+            <div v-else>
+              <img
+                src="../../../assets/img/profile.png"
+                alt="profile"
+                class="rounded-circle mt-4"
+              />
+            </div>
           </div>
           <label class="custom-file-upload">
-            <input type="file" />
+            <input @change="handleFile" type="file" />
             <b>Select Photo</b>
           </label>
           <h5>{{ profile.fullName }}</h5>
@@ -37,7 +46,7 @@
               <b-icon-person-circle class="mr-3"></b-icon-person-circle> Profile
             </router-link>
           </li>
-          <li>
+          <li @click="mybooking">
             <b-icon-star-fill class="text-secondary mr-3"></b-icon-star-fill> My
             Review
           </li>
@@ -47,14 +56,13 @@
               >Change Password</b-button
             >
           </li>
-          <li class="text-danger">
+          <li class="text-danger" @click="logout">
             <b-icon-box-arrow-right class="mr-3"></b-icon-box-arrow-right>Logout
           </li>
         </ul>
       </div>
     </div>
     <b-modal id="modal-1" v-bind:hide-footer="true" title="Change Password">
-      <p class="my-4">Inpur Your Email Password</p>
       <label>New Password</label>
       <input
         type="password"
@@ -67,21 +75,29 @@
         class="form-control mb-4"
         v-model="form.confirmPassword"
       />
-      {{ form }}
+      <br />
+      <button class="btn btn-save" @click="patchPasword">
+        Change Password
+      </button>
     </b-modal>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import alert from '../../../mixins/alert'
+
 export default {
   name: 'Profile',
+  mixins: [alert],
   data() {
     return {
       form: {
         newPassword: '',
         confirmPassword: ''
-      }
+      },
+      url: null,
+      URLS: process.env.VUE_APP_PORT
     }
   },
   created() {
@@ -92,12 +108,13 @@ export default {
       'getUserProfile',
       'logout',
       'patchUserProfile',
-      'patchLocation',
+      'changePassword',
       'patchProfilePict',
       'deleteProfilePict'
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
+      console.log(this.form)
       const setData = { id: this.user.userId, data: this.profile }
       this.patchUserProfile(setData)
         .then(result => {
@@ -106,6 +123,50 @@ export default {
         .catch(error => {
           this.$toasted.error(error)
         })
+    },
+    mybooking() {
+      this.$router.push({
+        name: 'MyBooking'
+      })
+    },
+    patchPasword() {
+      const setData = { id: this.user.userId, ...this.form }
+      this.changePassword(setData)
+        .then(result => {
+          this.$toasted.success(result)
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
+    },
+    handleFile(event) {
+      if (event.target.files[0].size > 2000000) {
+        this.makeToast('Failed', `File too large`, 'danger')
+      } else {
+        console.log('file oke')
+        this.profile.profileImage = event.target.files[0]
+        const img = this.profile.profileImage
+        this.url = URL.createObjectURL(img)
+        const { profileImage } = this.profile
+        const data = new FormData()
+        data.append('profileImage', profileImage)
+        this.patchProfilePict(data)
+          .then(result => {
+            this.makeToast(
+              `Profile Image Updated`,
+              'Success update profile image',
+              'success'
+            )
+            this.getUserProfile(this.user.userId)
+            console.log(result)
+            console.log('berhasil patching')
+          })
+          .catch(error => {
+            this.makeToast('Failed', `Update Image Fail`, 'danger')
+            console.log(error)
+            console.log('error patching')
+          })
+      }
     }
   },
   computed: {
@@ -117,6 +178,14 @@ export default {
 }
 </script>
 <style scoped>
+.btn-save {
+  color: #fff;
+  background: #2395ff;
+  box-shadow: 0px 8px 10px rgba(35, 149, 255, 0.3);
+  border-radius: 10px;
+  padding: 10px 35px;
+  float: right;
+}
 button.modal-1 {
   border: none;
   background: white;

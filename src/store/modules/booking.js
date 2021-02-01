@@ -4,7 +4,8 @@ export default {
   state: {
     flight: {},
     flightDetail: {},
-    booking: {}
+    booking: {},
+    allBooking: []
   },
   mutations: {
     setFlight(context, payload) {
@@ -15,6 +16,9 @@ export default {
     },
     setBooking(context, payload) {
       context.booking = payload
+    },
+    setAllBooking(context, payload) {
+      context.allBooking = payload
     }
   },
   actions: {
@@ -40,6 +44,19 @@ export default {
           .get(`${process.env.VUE_APP_PORT}/flight/${payload}`)
           .then(result => {
             context.commit('setFlightDetail', result.data.data[0])
+            resolve(result)
+          })
+          .catch(error => {
+            reject(error.response)
+          })
+      })
+    },
+    getAllBooking(context) {
+      return new Promise((resolve, reject) => {
+        axios
+          .get(`${process.env.VUE_APP_PORT}/booking`)
+          .then(result => {
+            context.commit('setAllBooking', result.data.data)
             resolve(result)
           })
           .catch(error => {
@@ -74,6 +91,22 @@ export default {
             reject(error.response)
           })
       })
+    },
+    patchBookingStatus(context, payload) {
+      return new Promise((resolve, reject) => {
+        axios
+          .patch(
+            `${process.env.VUE_APP_PORT}/book/?userId=${payload.userId}&id=${payload.id}`,
+            payload
+          )
+          .then(result => {
+            resolve(result.data.msg)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error.response.msg)
+          })
+      })
     }
   },
   getters: {
@@ -85,6 +118,9 @@ export default {
     },
     getBooking(state) {
       return state.booking
+    },
+    getAllBooking(state) {
+      return state.allBooking
     }
   }
 }

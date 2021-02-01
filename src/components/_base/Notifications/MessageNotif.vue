@@ -1,27 +1,106 @@
 <template>
-  <div class="row mt-3 justify-content-center">
-    <div class="col box mx-lg-2">
-      <div class="row mt-3 ">
-        <div class="col mx-1 congratulations">Congratulations</div>
-      </div>
-      <div class="row mt-3">
-        <div class="col mx-1 message maxMesg">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
-            id, consequuntur totam error unde quia neque delectus vel quod
-            placeat voluptate non voluptatum inventore soluta, nostrum impedit
-            similique ea repudiandae.
-          </p>
+  <div class="containerNotif">
+    <div class="mainWrapper" v-if="user.role === 0">
+      <div
+        style="width:80%"
+        class="row mt-3 justify-content-center"
+        v-for="(item, index) in notif"
+        :key="index"
+      >
+        <div class="col box mx-lg-2">
+          <div class="row mt-3 ">
+            <div class="col mx-1 congratulations">{{ item.notifTitle }}</div>
+          </div>
+          <div class="row mt-3">
+            <div class="col mx-1 message maxMesg">
+              <p>
+                {{ item.notifMessage }}
+              </p>
+            </div>
+          </div>
+          <div class="row mt-lg-4 mb-3">
+            <div class="col mx-1 time">{{ item.createdAt.slice(0, 10) }}</div>
+          </div>
         </div>
       </div>
-      <div class="row mt-lg-4 mb-3">
-        <div class="col mx-1 time">5h ago</div>
+    </div>
+    <div class="adminWrapper" v-if="user.role === 1">
+      <div
+        style="width:80%"
+        class="row mt-3 justify-content-center"
+        v-for="(item, index) in allBooking"
+        :key="index"
+      >
+        <div class="col box mx-lg-2">
+          <div class="row mt-3 ">
+            <div class="col mx-1 congratulations">
+              Booking Code : {{ item.code }}
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col mx-1 message maxMesg">
+              <p>Contact Name : {{ item.contactFullname }}</p>
+              <p>Airlines : {{ item.mascapai }}</p>
+              <p>Payment Totals : {{ item.totalPayment }}</p>
+            </div>
+          </div>
+          <div class="row mt-lg-4 mb-3">
+            <div class="col mx-1 time">{{ item.createdAt.slice(0, 10) }}</div>
+            <div class="col mx-1 time">
+              <button
+                class="buttonApprove"
+                @click="approveBooking(item.userId)"
+              >
+                Approve Payment
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+import { mapActions, mapGetters } from 'vuex'
+
+export default {
+  name: 'NotifComponent',
+  data() {
+    return {}
+  },
+  created() {
+    this.getNotifByUserId(this.user.userId)
+    this.getAllBooking()
+  },
+  methods: {
+    ...mapActions(['getNotifByUserId', 'getAllBooking', 'patchBookingStatus']),
+    approveBooking(id) {
+      const setData = { id: id, userId: this.user.userId }
+      this.patchBookingStatus(setData)
+    }
+  },
+  computed: {
+    ...mapGetters({
+      user: 'setUser',
+      notif: 'getterNotif',
+      allBooking: 'getAllBooking'
+    })
+  }
+}
+</script>
+
 <style scoped>
+.containerNotif {
+  height: 600px;
+  overflow: auto;
+}
+.adminWrapper,
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .maxMesg p {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -40,6 +119,14 @@
   font-size: 12px;
   line-height: 14px;
   color: #6b6b6b;
+}
+.buttonApprove {
+  background-color: rgba(19, 168, 236, 0.973);
+  border: 0px;
+  color: white;
+  border-radius: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .congratulations {
   font-family: Lato;

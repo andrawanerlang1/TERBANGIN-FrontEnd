@@ -24,6 +24,9 @@
         </div>
       </div>
       <div class="form-input-passenger">
+        <div v-if="errorPassenger" class="error">
+          {{ errorPassenger }}
+        </div>
         <div class="input-form">
           <p class="text-grey">Title</p>
           <div>
@@ -99,7 +102,14 @@
 
 <script>
 export default {
-  props: ['formBooking', 'formPassenger', 'passenger', 'flight', 'params'],
+  props: [
+    'formBooking',
+    'formPassenger',
+    'passenger',
+    'flight',
+    'params',
+    'errorPassenger'
+  ],
   data() {
     return {
       error: ''

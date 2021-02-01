@@ -17,7 +17,12 @@
             src="../../../assets/img/trending1.png"
             alt=""
           />
-          <div class="trending-text"></div>
+          <div class="trending-text">
+            <p>
+              Tokyo, <br />
+              <span>Japan</span>
+            </p>
+          </div>
         </div>
         <div class="trending-konten">
           <img
@@ -25,7 +30,25 @@
             src="../../../assets/img/trendin2.png"
             alt=""
           />
-          <div class="trending-text"></div>
+          <div class="trending-text">
+            <p>
+              Barcelona, <br />
+              <span>Spain</span>
+            </p>
+          </div>
+        </div>
+        <div class="trending-konten">
+          <img
+            class="trending-img"
+            src="../../../assets/img/trending1.png"
+            alt=""
+          />
+          <div class="trending-text">
+            <p>
+              Tokyo, <br />
+              <span>Japan</span>
+            </p>
+          </div>
         </div>
         <div class="trending-konten">
           <img
@@ -33,23 +56,25 @@
             src="../../../assets/img/trendin2.png"
             alt=""
           />
-          <div class="trending-text"></div>
+          <div class="trending-text">
+            <p>
+              Barcelona, <br />
+              <span>Spain</span>
+            </p>
+          </div>
         </div>
         <div class="trending-konten">
           <img
             class="trending-img"
-            src="../../../assets/img/trendin2.png"
+            src="../../../assets/img/trending1.png"
             alt=""
           />
-          <div class="trending-text"></div>
-        </div>
-        <div class="trending-konten">
-          <img
-            class="trending-img"
-            src="../../../assets/img/trendin2.png"
-            alt=""
-          />
-          <div class="trending-text"></div>
+          <div class="trending-text">
+            <p>
+              Tokyo, <br />
+              <span>Japan</span>
+            </p>
+          </div>
         </div>
       </div>
       <br />
@@ -152,6 +177,7 @@ export default {
   display: flex;
   justify-content: space-between;
 }
+.trending-konten,
 .trending-img {
   position: relative;
 }
@@ -166,6 +192,20 @@ export default {
   width: 206px;
   border-radius: 20px;
   object-fit: cover;
+}
+.trending-text {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  margin-left: 20px;
+  margin-top: 20px;
+  color: white;
+  font-family: Poppins;
+  font-weight: 600;
+}
+span {
+  font-weight: 600;
+  font-size: 24px;
 }
 h6 {
   font-size: 14px;

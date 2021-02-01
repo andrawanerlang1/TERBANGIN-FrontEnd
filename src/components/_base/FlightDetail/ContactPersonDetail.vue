@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="form">
+      <div v-if="error" class="error">
+        {{ error }}
+      </div>
       <div class="input-form">
         <p class="text-grey">Full Name</p>
         <input
@@ -60,7 +63,7 @@
 
 <script>
 export default {
-  props: ['formBooking']
+  props: ['formBooking', 'error']
 }
 </script>
 
@@ -103,5 +106,14 @@ p {
 
 .text-dark-grey {
   color: #595959;
+}
+
+.error {
+  background: rgba(255, 106, 106, 0.5);
+  border-radius: 10px;
+  padding: 3px 3px 3px 15px;
+  font-size: 12px;
+  margin-top: -20px;
+  width: 220px;
 }
 </style>

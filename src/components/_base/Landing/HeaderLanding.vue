@@ -12,6 +12,11 @@
               >Surabaya</b-form-select-option
             >
             <b-form-select-option value="Medan">Medan</b-form-select-option>
+            <b-form-select-option value="Jakarta">Jakarta</b-form-select-option>
+            <b-form-select-option value="Kuala Lumpur"
+              >Kuala Lumpur</b-form-select-option
+            >
+            <b-form-select-option value="Tokyo">Tokyo</b-form-select-option>
           </b-form-select>
           <label>To City</label>
           <b-form-select v-model="form.toCity" class="mb-3">
@@ -29,9 +34,13 @@
       <div style="font-size:16px; font-weight:600">
         <p>Hey,</p>
         <p>Where you want to go?</p>
-        <div class="detailSearch">
+        <div class="detailSearch" style="cursor:pointer">
           <div @click="showModal">
-            <p style="font-weight:500; font-size:14px; color:#979797">from</p>
+            <p
+              style="font-weight:500; font-size:14px; color:#979797; cursor: pointer;"
+            >
+              from
+            </p>
             <p style="font-size:25px">{{ form.fromCity }}</p>
             <p style="font-weight:500">Indonesia</p>
           </div>
@@ -44,7 +53,9 @@
             />
           </div>
           <div style="text-align:right">
-            <p style="font-weight:500; font-size:14px; color:#979797">to</p>
+            <p style="font-weight:500; font-size:14px; color:#979797;">
+              to
+            </p>
             <p style="font-size:25px">{{ form.toCity }}</p>
             <p style="font-weight:500">Indonesia</p>
           </div>
@@ -145,7 +156,7 @@ export default {
   },
   created() {},
   computed: {
-    ...mapGetters(['getParams'])
+    ...mapGetters(['getParams', 'getTotalRow'])
   },
   methods: {
     ...mapActions(['search']),
@@ -174,9 +185,9 @@ export default {
     },
     searchData() {
       this.setParams(this.form)
-      this.search(this.form)
+      this.search()
         .then(result => {
-          this.makeToast('Done', `${result.length} Flight Found`, 'primary')
+          this.makeToast('Done', `${this.getTotalRow} ${result.msg}`, 'primary')
           setTimeout(() => {
             this.$router.push('/search')
           }, 3000)

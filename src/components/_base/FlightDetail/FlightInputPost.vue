@@ -60,9 +60,15 @@
           Flight Class
         </div>
         <div style="display:flex;justify-content:space-around; font-weight:500">
-          <b-form-checkbox value="economy">Economy</b-form-checkbox>
-          <b-form-checkbox value="business">Business</b-form-checkbox>
-          <b-form-checkbox value="firstclass">First Class</b-form-checkbox>
+          <b-form-checkbox v-model="form.flightClass" value="economy"
+            >Economy</b-form-checkbox
+          >
+          <b-form-checkbox v-model="form.flightClass" value="business"
+            >Business</b-form-checkbox
+          >
+          <b-form-checkbox v-model="form.flightClass" value="firstclass"
+            >First Class</b-form-checkbox
+          >
         </div>
       </div>
       <div class="formSeparator">
@@ -129,13 +135,19 @@
         </div>
         <b-form-input v-model="form.flightCode"></b-form-input>
       </div>
-      <h6>{{ form }}</h6>
+      <br />
+      <b-button @click="addFlight">Post</b-button>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+import alert from '../../../mixins/alert'
+
 export default {
+  name: 'FlightInput',
+  mixins: [alert],
   data() {
     return {
       form: {
@@ -143,16 +155,17 @@ export default {
         departureTime: null,
         arrivalTime: null,
         flightDate: null,
-        price: 0,
-        wifi: 0,
-        food: 0,
-        capacity: 0,
-        luggage: 0,
+        price: '0',
+        wifi: '0',
+        food: '0',
+        capacity: '0',
+        luggage: '0',
         flightCode: null,
         from: null,
         to: null,
         terminal: null,
-        transit: null
+        transit: null,
+        flightClass: []
       },
       options: [
         { value: null, text: 'Please select airlines' },
@@ -162,10 +175,10 @@ export default {
       ],
       place: [
         { value: null, text: 'Please select the place' },
-        { value: '[Medan, IDN]', text: 'Medan, Indonesia' },
-        { value: '[Jakarta, IDN]', text: 'Jakarta, Indonesia' },
-        { value: '[Tokyo, JPN]', text: 'Tokyo, Japan' },
-        { value: '[Kuala, MAS]', text: 'Kuala Lumpur, Malaysia' }
+        { value: ['Medan', 'IDN'], text: 'Medan, Indonesia' },
+        { value: ['Jakarta', 'IDN'], text: 'Jakarta, Indonesia' },
+        { value: ['Tokyo', 'JPN'], text: 'Tokyo, Japan' },
+        { value: ['Kuala Lumpur', 'MAS'], text: 'Kuala Lumpur, Malaysia' }
       ],
       terminals: [
         { value: null, text: 'Please select terminal' },
@@ -179,6 +192,100 @@ export default {
         { value: '1', text: 'Transit Once' },
         { value: '2', text: 'Transit Twice' }
       ]
+    }
+  },
+  methods: {
+    ...mapActions(['postFlight']),
+    addFlight() {
+      console.log(this.form.flightClass)
+      const classs =
+        this.form.flightClass[0] === 'economy' &&
+        this.form.flightClass[1] === 'business' &&
+        this.form.flightClass[2] === 'firstclass'
+          ? '7'
+          : this.form.flightClass[0] === 'economy' &&
+            this.form.flightClass[1] === 'business'
+          ? '4'
+          : this.form.flightClass[0] === 'economy' &&
+            this.form.flightClass[1] === 'firstclass'
+          ? '5'
+          : this.form.flightClass[0] === 'business' &&
+            this.form.flightClass[1] === 'firstclass'
+          ? '6'
+          : this.form.flightClass[0] === 'economy'
+          ? '1'
+          : this.form.flightClass[0] === 'business'
+          ? '2'
+          : this.form.flightClass[0] === 'firstclass'
+          ? '3'
+          : 100
+      console.log(classs)
+      const fromCity = this.form.from[0]
+      const fromCountry = this.form.from[1]
+      const toCity = this.form.to[0]
+      const toCountry = this.form.to[1]
+      const {
+        mascapai,
+        departureTime,
+        arrivalTime,
+        flightDate,
+        price,
+        wifi,
+        food,
+        capacity,
+        luggage,
+        flightCode,
+        terminal,
+        transit
+      } = this.form
+      const data = {
+        mascapai,
+        mascapaiImage: '',
+        departureTime,
+        arrivedTime: arrivalTime,
+        flightDate,
+        price,
+        food,
+        wifi,
+        luggage,
+        capacity,
+        clas: classs,
+        fromCity,
+        fromCountry,
+        toCity,
+        toCountry,
+        tripType: '1',
+        terminal,
+        transitType: transit,
+        flightCode
+      }
+      console.log(data)
+      this.postFlight(data)
+        .then(result => {
+          this.makeToast(`${result.data.msg}`, 'Success add flight', 'success')
+          console.log(result)
+        })
+        .catch(error => {
+          this.makeToast('Failed', `${error.data.msg}`, 'danger')
+          console.log(error)
+        })
+      this.form = {
+        mascapai: null,
+        departureTime: null,
+        arrivalTime: null,
+        flightDate: null,
+        price: '0',
+        wifi: '0',
+        food: '0',
+        capacity: '0',
+        luggage: '0',
+        flightCode: null,
+        from: null,
+        to: null,
+        terminal: null,
+        transit: null,
+        flightClass: []
+      }
     }
   }
 }
@@ -236,5 +343,12 @@ export default {
   border-radius: 13px;
   margin-left: 0px !important;
   margin-right: 0px !important;
+}
+
+button {
+  background-color: #2395ff;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
 }
 </style>

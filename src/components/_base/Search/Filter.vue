@@ -19,7 +19,7 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Direct</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransitDirect(0)" />
+                  <input type="checkbox" @change="filterTransitDirect(1)" />
                 </div>
               </div>
               <div class="choice">
@@ -31,7 +31,7 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Transit 2+</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransit2(2)" />
+                  <input type="checkbox" @change="filterTransit2(1)" />
                 </div>
               </div>
             </b-navbar-nav>
@@ -52,19 +52,19 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Luggage</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterFood(1)" />
+                  <input type="checkbox" @click="filterLuggage(1)" />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">In-Flight Meal</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterWifi(1)" />
+                  <input type="checkbox" @click="filterFood(1)" />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Wi-fi</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterLuggage(1)" />
+                  <input type="checkbox" @click="filterWifi(1)" />
                 </div>
               </div>
             </b-navbar-nav>
@@ -240,7 +240,6 @@
                 <div>${{ price[0] }}</div>
                 <div>${{ price[1] }}</div>
               </div>
-              {{ price }}
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
@@ -256,10 +255,27 @@ export default {
   data() {
     return {
       mascapai: [],
-      price: [550000, 1000000],
+      price: [350000, 1300000],
       slideOption: {
-        min: 550000,
-        max: 1000000
+        min: 350000,
+        max: 1300000
+      },
+      transit: {
+        direct: '',
+        transit1: '',
+        transit2: '',
+        food: '',
+        luggage: '',
+        wifi: '',
+        airline: ''
+      },
+      departure: {
+        start: '',
+        end: ''
+      },
+      arrive: {
+        start: '',
+        end: ''
       }
     }
   },
@@ -281,7 +297,8 @@ export default {
       'setLuggage',
       'setDeperature',
       'setArrive',
-      'setPrice'
+      'setPrice',
+      'handleChangePage'
     ]),
     reset() {
       this.setTransitDirect('')
@@ -294,51 +311,114 @@ export default {
       this.setDeperature({ start: '', end: '' })
       this.setArrive({ start: '', end: '' })
       this.setPrice({ min: '', max: '' })
-      this.search('payload')
+      this.handleChangePage(1)
+      this.search()
     },
     filterTransitDirect(x) {
-      this.setTransitDirect(x)
-      this.search('payload')
+      if (x === this.transit.direct) {
+        this.setTransitDirect('')
+        this.transit.direct = ''
+      } else {
+        this.setTransitDirect(x)
+        this.transit.direct = x
+      }
+      this.handleChangePage(1)
+      this.search()
+      console.log(this.transit.direct)
     },
     filterTransit1(x) {
-      this.setTransit1(x)
-      this.search('payload')
+      if (x === this.transit.transit1) {
+        this.setTransit1('')
+        this.transit.transit1 = ''
+      } else {
+        this.setTransit1(x)
+        this.transit.transit1 = x
+      }
+      this.handleChangePage(1)
+      console.log(this.transit.transit1)
+      this.search()
     },
     filterTransit2(x) {
-      this.setTransit2(x)
-      this.search('payload')
+      if (x === this.transit.transit2) {
+        this.setTransit2('')
+        this.transit.transit2 = ''
+      } else {
+        this.setTransit2(x)
+        this.transit.transit2 = x
+      }
+      this.handleChangePage(1)
+      console.log(this.transit.transit2)
+      this.search()
     },
     filterFood(x) {
-      this.setFood(x)
-      this.search('payload')
+      if (x === this.transit.food) {
+        this.setFood('')
+        this.transit.food = ''
+      } else {
+        this.setFood(x)
+        this.transit.food = x
+      }
+      this.handleChangePage(1)
+      this.search()
     },
     filterWifi(x) {
-      this.setWifi(x)
-      this.search('payload')
+      if (x === this.transit.wifi) {
+        this.setWifi('')
+        this.transit.wifi = ''
+      } else {
+        this.setWifi(x)
+        this.transit.wifi = x
+      }
+      this.handleChangePage(1)
+      this.search()
     },
     filterLuggage(x) {
-      this.setLuggage(x)
-      this.search('payload')
+      if (x === this.transit.luggage) {
+        this.setLuggage('')
+        this.transit.luggage = ''
+      } else {
+        this.setLuggage(x)
+        this.transit.luggage = x
+      }
+      this.handleChangePage(1)
+      this.search()
     },
     filterMascapai(x) {
-      this.setAirline(x)
-      this.search('payload')
+      if (x === this.transit.airline) {
+        this.setAirline('')
+        this.transit.airline = ''
+      } else {
+        this.setAirline(x)
+        this.transit.airline = x
+      }
+      this.handleChangePage(1)
+      this.search()
     },
     filterDeperature(x, y) {
-      const data = {
-        start: x,
-        end: y
+      if (x === this.departure.start && y === this.departure.end) {
+        this.departure.start = ''
+        this.departure.end = ''
+        this.setDeperature(this.departure)
+      } else {
+        this.departure.start = x
+        this.departure.end = y
+        this.setDeperature(this.departure)
       }
-      this.setDeperature(data)
-      this.search('payload')
+      this.handleChangePage(1)
+      this.search()
     },
     filterArrive(x, y) {
-      const data = {
-        start: x,
-        end: y
+      if (x === this.arrive.start && y === this.arrive.end) {
+        this.arrive.start = ''
+        this.arrive.end = ''
+        this.setArrive({ start: '', end: '' })
+      } else {
+        this.arrive.start = x
+        this.arrive.end = y
+        this.setArrive(this.arrive)
       }
-      this.setArrive(data)
-      this.search('payload')
+      this.handleChangePage(1)
+      this.search()
     },
     filterPrice() {
       const data = {
@@ -346,7 +426,8 @@ export default {
         max: this.price[1]
       }
       this.setPrice(data)
-      this.search('payload')
+      this.handleChangePage(1)
+      this.search()
     }
   }
 }

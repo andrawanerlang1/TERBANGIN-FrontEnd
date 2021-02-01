@@ -59,7 +59,6 @@
                 </div>
               </div>
             </form>
-            {{ profile }}
           </div>
         </b-col>
       </b-row>
@@ -81,33 +80,10 @@ export default {
     Footer
   },
   data() {
-    return {
-      // form: {
-      //   email: '',
-      //   fullName: '',
-      //   phoneNumber: '',
-      //   city: '',
-      //   nationality: '',
-      //   postCode: ''
-      // }
-    }
+    return {}
   },
   created() {
     this.getUserProfile(this.user.userId)
-    // .then(response => {
-    //   this.form = {
-    //     email: response.email,
-    //     fullName: response.fullName,
-    //     phoneNumber: response.phoneNumber,
-    //     city: response.city,
-    //     nationality: response.nationality,
-    //     postCode: response.postCode
-    //   }
-    //   console.log(this.form)
-    // })
-    // .catch(error => {
-    //   console.log(`ini error ${error}`)
-    // })
   },
   methods: {
     ...mapActions([
@@ -120,18 +96,11 @@ export default {
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
-      // console.log('connected to this function')
-      // console.log(this.profile)
-      // this.form.fullName = this.profile.fullName
-      // this.form.phoneNumber = this.profile.phoneNumber
-      // this.form.city = this.profile.city
-      // this.form.nationality = this.profile.nationality
-      // this.form.postCode = this.profile.postCode
-      // this.patchUser(this.form)
       const setData = { id: this.user.userId, data: this.profile }
       this.patchUserProfile(setData)
         .then(result => {
           this.$toasted.success(result)
+          this.getUserProfile(this.user.userId)
         })
         .catch(error => {
           this.$toasted.error(error)
