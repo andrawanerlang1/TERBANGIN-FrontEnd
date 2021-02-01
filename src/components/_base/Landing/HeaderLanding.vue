@@ -4,10 +4,24 @@
       <b-modal centered ref="my-modal" hide-footer title="Choose City">
         <b-form>
           <label>Form City</label>
-          <b-form-select v-model="form.fromCity" :options="place" class="mb-3">
+          <b-form-select v-model="form.fromCity" class="mb-3">
+            <b-form-select-option :value="null"
+              >Please select an option</b-form-select-option
+            >
+            <b-form-select-option value="Surabaya"
+              >Surabaya</b-form-select-option
+            >
+            <b-form-select-option value="Medan">Medan</b-form-select-option>
           </b-form-select>
           <label>To City</label>
-          <b-form-select v-model="form.toCity" :options="place" class="mb-3">
+          <b-form-select v-model="form.toCity" class="mb-3">
+            <b-form-select-option :value="null"
+              >Please select an option</b-form-select-option
+            >
+            <b-form-select-option value="Surabaya"
+              >Surabaya</b-form-select-option
+            >
+            <b-form-select-option value="Medan">Medan</b-form-select-option>
           </b-form-select>
           <b-button variant="primary" block @click="hideModal">Done</b-button>
         </b-form>
@@ -126,20 +140,12 @@ export default {
         flightDate: '',
         clas: '',
         totalPassanger: ''
-      },
-      place: [
-        { value: null, text: 'Please select an option' },
-        { value: 'Surabaya', text: 'Surabaya' },
-        { value: 'Medan', text: 'Medan' },
-        { value: 'Jakarta', text: 'Jakarta' },
-        { value: 'Kuala Lumpur', text: 'Kuala Lumpur' },
-        { value: 'Tokyo', text: 'Tokyo' }
-      ]
+      }
     }
   },
   created() {},
   computed: {
-    ...mapGetters(['getParams'])
+    ...mapGetters(['getParams', 'getTotalRow'])
   },
   methods: {
     ...mapActions(['search']),
@@ -170,7 +176,7 @@ export default {
       this.setParams(this.form)
       this.search()
         .then(result => {
-          this.makeToast('Done', `${result.length} Flight Found`, 'primary')
+          this.makeToast('Done', `${this.getTotalRow} ${result.msg}`, 'primary')
           setTimeout(() => {
             this.$router.push('/search')
           }, 3000)
