@@ -13,20 +13,22 @@
             >
             <b-form-select-option value="Medan">Medan</b-form-select-option>
             <b-form-select-option value="Jakarta">Jakarta</b-form-select-option>
-            <b-form-select-option value="Kuala Lumpur"
+            <b-form-select-option value="K.Lumpur"
               >Kuala Lumpur</b-form-select-option
             >
             <b-form-select-option value="Tokyo">Tokyo</b-form-select-option>
           </b-form-select>
           <label>To City</label>
           <b-form-select v-model="form.toCity" class="mb-3">
-            <b-form-select-option :value="null"
-              >Please select an option</b-form-select-option
-            >
             <b-form-select-option value="Surabaya"
               >Surabaya</b-form-select-option
             >
             <b-form-select-option value="Medan">Medan</b-form-select-option>
+            <b-form-select-option value="Jakarta">Jakarta</b-form-select-option>
+            <b-form-select-option value="K.Lumpur"
+              >Kuala Lumpur</b-form-select-option
+            >
+            <b-form-select-option value="Tokyo">Tokyo</b-form-select-option>
           </b-form-select>
           <b-button variant="primary" block @click="hideModal">Done</b-button>
         </b-form>
