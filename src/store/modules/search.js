@@ -90,11 +90,11 @@ export default {
           .then(result => {
             context.commit('setSearch', result.data.data)
             context.state.totalRows = result.data.pagination.totalData
-            context.state.pa
             resolve(result.data)
           })
           .catch(error => {
             const data = []
+            context.state.totalRows = 0
             context.commit('setSearch', data)
             reject(error.response)
           })
