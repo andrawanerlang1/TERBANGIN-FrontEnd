@@ -17,11 +17,11 @@
                 <b-col>
                   <img
                     :src="
-                      flight.mascapai === 'Garuda Indonesia'
+                      flight.mascapaiImage === 'Garuda Indonesia'
                         ? require('../../../assets/stockAirline/logo-garuda.png')
-                        : flight.mascapai === 'Lion Air'
+                        : flight.mascapaiImage === 'Lion Air'
                         ? require('../../../assets/stockAirline/logo-lion1.png')
-                        : flight.mascapai === 'Air Asia'
+                        : flight.mascapaiImage === 'Air Asia'
                         ? require('../../../assets/stockAirline/logo-airasia.png')
                         : '../../../assets/stockAirline/logo-garuda.png'
                     "
