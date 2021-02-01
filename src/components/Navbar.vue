@@ -80,8 +80,8 @@ export default {
     ...mapGetters(['setUser',"setProfile"])
   },
   methods: {
-    ...mapActions(['search','logout']),
-    ...mapMutations(['setParams','getUserProfile']),
+    ...mapActions(['search','logout', 'getUserProfile']),
+    ...mapMutations(['setParams']),
     getAllTicket() {
       this.setParams(this.form)
       this.search()
@@ -187,6 +187,7 @@ font-weight: bold;
     width: 100%;
     justify-content: space-around;
     border-bottom: 2px black solid;
+      margin-right: 0px;
   }
   .buttonSearch{
     display: none;
