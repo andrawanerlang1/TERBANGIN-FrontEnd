@@ -14,7 +14,7 @@
               class="imgUpload"
               style="width:50px;height:50px;border-radius:15px;"
               v-if="chatActive.profileImage"
-              :src="'http://localhost:3000/user/' + chatActive.profileImage"
+              :src="`${URL}/user/` + chatActive.profileImage"
             />
           </div>
           <div class="profile-name">
@@ -35,7 +35,7 @@
                   id="imageUploads"
                   class="profile-img-chat "
                   v-if="item.profileImage"
-                  :src="'http://localhost:3000/user/' + item.profileImage"
+                  :src="`${URL}/user/` + item.profileImage"
                 />
               </div>
               <div class="msg">
@@ -66,7 +66,7 @@
                   id="imageUploads"
                   class="profile-img-chat "
                   v-if="item.profileImage"
-                  :src="'http://localhost:3000/user/' + item.profileImage"
+                  :src="`${URL}/user/` + item.profileImage"
                 />
               </div>
             </div>
@@ -84,7 +84,7 @@
                   id="imageUploads"
                   class="profile-img-chat"
                   v-else
-                  :src="'http://localhost:3000/user/' + chatActive.profileImage"
+                  :src="`${URL}/user/` + chatActive.profileImage"
                 />
               </div>
               <div class="msg">
@@ -114,7 +114,7 @@
                   id="imageUploads"
                   class="profile-img-chat"
                   v-else
-                  :src="'http://localhost:3000/user/' + profile.profileImage"
+                  :src="`${URL}/user/` + profile.profileImage"
                 />
               </div>
             </div>
@@ -165,7 +165,8 @@ export default {
   data() {
     return {
       socket: io('http://localhost:3000'),
-      message: ''
+      message: '',
+      URL: process.env.VUE_APP_PORT
     }
   },
   created() {

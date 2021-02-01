@@ -7,8 +7,9 @@
             <img v-if="url" :src="url" alt="" class="rounded-circle mt-4" />
             <img
               v-else-if="profile.profileImage"
-              :src="'http://localhost:3000/user/' + profile.profileImage"
+              :src="`${URLS}/user/` + profile.profileImage"
               alt=""
+              class="rounded-circle mt-4"
             />
             <div v-else>
               <img
@@ -95,7 +96,8 @@ export default {
         newPassword: '',
         confirmPassword: ''
       },
-      url: null
+      url: null,
+      URLS: process.env.VUE_APP_PORT
     }
   },
   created() {
@@ -155,6 +157,7 @@ export default {
               'Success update profile image',
               'success'
             )
+            this.getUserProfile(this.user.userId)
             console.log(result)
             console.log('berhasil patching')
           })
