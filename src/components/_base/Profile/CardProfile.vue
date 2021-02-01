@@ -4,14 +4,22 @@
       <form>
         <div class="text-center">
           <div class="user-profile">
+            <img v-if="url" :src="url" alt="" class="rounded-circle mt-4" />
             <img
-              src="../../../assets/img/profile.png"
-              alt="profile"
-              class="rounded-circle mt-4"
+              v-else-if="profile.profileImage"
+              :src="'http://localhost:3000/user/' + profile.profileImage"
+              alt=""
             />
+            <div v-else>
+              <img
+                src="../../../assets/img/profile.png"
+                alt="profile"
+                class="rounded-circle mt-4"
+              />
+            </div>
           </div>
           <label class="custom-file-upload">
-            <input type="file" />
+            <input @change="handleFile" type="file" />
             <b>Select Photo</b>
           </label>
           <h5>{{ profile.fullName }}</h5>
@@ -83,7 +91,8 @@ export default {
       form: {
         newPassword: '',
         confirmPassword: ''
-      }
+      },
+      url: null
     }
   },
   created() {
@@ -124,6 +133,32 @@ export default {
         .catch(error => {
           this.$toasted.error(error)
         })
+    },
+    handleFile(event) {
+      // console.log(this.profile)
+      // console.log(event.target.files[0])
+      if (event.target.files[0].size > 2000000) {
+        console.log('file too large')
+      } else {
+        console.log('file oke')
+        this.profile.profileImage = event.target.files[0]
+        const img = this.profile.profileImage
+        this.url = URL.createObjectURL(img)
+        // console.log(img)
+        // console.log(this.profile.userId)
+        const { profileImage } = this.profile
+        const data = new FormData()
+        data.append('profileImage', profileImage)
+        this.patchProfilePict(data)
+          .then(result => {
+            console.log(result)
+            console.log('berhasil patching')
+          })
+          .catch(error => {
+            console.log(error)
+            console.log('error patching')
+          })
+      }
     }
   },
   computed: {
