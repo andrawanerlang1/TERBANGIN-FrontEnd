@@ -138,8 +138,6 @@ export default {
         })
     },
     handleFile(event) {
-      // console.log(this.profile)
-      // console.log(event.target.files[0])
       if (event.target.files[0].size > 2000000) {
         this.makeToast('Failed', `File too large`, 'danger')
       } else {
@@ -147,8 +145,6 @@ export default {
         this.profile.profileImage = event.target.files[0]
         const img = this.profile.profileImage
         this.url = URL.createObjectURL(img)
-        // console.log(img)
-        // console.log(this.profile.userId)
         const { profileImage } = this.profile
         const data = new FormData()
         data.append('profileImage', profileImage)
