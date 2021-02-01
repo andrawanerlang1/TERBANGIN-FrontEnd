@@ -178,7 +178,7 @@ export default {
         { value: ['Medan', 'IDN'], text: 'Medan, Indonesia' },
         { value: ['Jakarta', 'IDN'], text: 'Jakarta, Indonesia' },
         { value: ['Tokyo', 'JPN'], text: 'Tokyo, Japan' },
-        { value: ['Kuala Lumpur', 'MAS'], text: 'Kuala Lumpur, Malaysia' }
+        { value: ['K.Lumpur', 'MAS'], text: 'Kuala Lumpur, Malaysia' }
       ],
       terminals: [
         { value: null, text: 'Please select terminal' },

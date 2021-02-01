@@ -237,8 +237,8 @@
                 ></vue-slider>
               </div>
               <div class="pricetag">
-                <div>${{ price[0] }}</div>
-                <div>${{ price[1] }}</div>
+                <div>IDR {{ price[0] }}</div>
+                <div>IDR {{ price[1] }}</div>
               </div>
             </b-navbar-nav>
           </b-collapse>

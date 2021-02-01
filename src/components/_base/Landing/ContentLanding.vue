@@ -160,6 +160,7 @@ export default {
 }
 .list-img {
   display: flex;
+  overflow: auto;
 }
 .list-img div img {
   border-radius: 50%;
@@ -176,6 +177,7 @@ export default {
   margin-bottom: 60px;
   display: flex;
   justify-content: space-between;
+  overflow: auto;
 }
 .trending-konten,
 .trending-img {
@@ -223,5 +225,27 @@ h3 {
 .content {
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+@media screen AND (max-width: 1000px) {
+  .list-img {
+    width: 650px;
+  }
+}
+
+@media screen AND (max-width: 770px) {
+  .list-img {
+    width: 450px;
+  }
+}
+@media screen AND (max-width: 560px) {
+  .list-img {
+    width: 350px;
+  }
+}
+@media screen AND (max-width: 460px) {
+  .list-img {
+    width: 250px;
+  }
 }
 </style>

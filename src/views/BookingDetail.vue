@@ -17,7 +17,13 @@
                 <b-col>
                   <img
                     :src="
-                      'http://localhost:3000/mascapai/' + flight.mascapaiImage
+                      flight.mascapai === 'Garuda Indonesia'
+                        ? require('../assets/stockAirline/logo-garuda.png')
+                        : flight.mascapai === 'Lion Air'
+                        ? require('../assets/stockAirline/logo-lion1.png')
+                        : flight.mascapai === 'Air Asia'
+                        ? require('../assets/stockAirline/logo-airasia.png')
+                        : '../assets/stockAirline/logo-garuda.png'
                     "
                     alt="logo garuda"
                     class="maskapai-img"
@@ -123,8 +129,8 @@ export default {
 
 <style>
 .booking-left img.maskapai-img {
-  width: 140px;
-  height: 100px;
+  max-width: 180px;
+  max-height: 100px;
 }
 
 .booking-left img.logo-grey {
@@ -170,11 +176,13 @@ export default {
 @media (min-width: 581px) {
   .booking-right img.qr-code {
     width: 100%;
+    height: 300px;
   }
 }
 @media (max-width: 576px) {
   .booking-right img.qr-code {
     margin: 10% auto;
+    width: 100%;
   }
   .booking-left {
     border: 2px dashed #e5e5e5;

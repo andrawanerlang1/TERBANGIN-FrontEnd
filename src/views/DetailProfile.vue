@@ -173,7 +173,7 @@ select:focus {
     background-color: #fff;
   }
   .profile {
-    width: 450px;
+    width: 400px;
     height: 100%;
     margin-bottom: 15px;
   }

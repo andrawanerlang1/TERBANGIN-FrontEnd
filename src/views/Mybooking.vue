@@ -11,70 +11,77 @@
             <p class="text-primary font-weight-bold">Order History</p>
           </div>
         </div>
-        <div
-          v-for="(item, index) in booking"
-          :key="index"
-          class="booking-history mt-3 p-3"
-        >
-          <p>{{ formatTime(item.flightDate) }}</p>
-          <div class="route-way">
-            <div class="from-title">
-              <p class="font-weight-bold">{{ item.fromCountry }}</p>
-            </div>
-            <img src="../assets/img/logoGrey.png" alt="gray-small-plane" />
-            <div class="from-title">
-              <p class="font-weight-bold">{{ item.toCountry }}</p>
-            </div>
-          </div>
-          <p class="text-secondary name-airplane">
-            {{ item.mascapai }}, AB-221
-          </p>
-          <div v-if="index === detailIndex" class="booking-detail">
-            <div class="d-flex justify-content-between">
-              <div>
-                <p>Booking Code : {{ item.code }}</p>
+        <div class="booking-list">
+          <div
+            v-for="(item, index) in booking"
+            :key="index"
+            class="booking-history mt-3 p-3"
+          >
+            <p>{{ formatTime(item.flightDate) }}</p>
+            <div class="route-way">
+              <div class="from-title">
+                <p class="font-weight-bold">{{ item.fromCity }}</p>
               </div>
-              <div>
-                <p>Passenger : {{ item.totalPassenger }}</p>
-              </div>
-              <div>
-                <p>Payment : Rp {{ item.totalPayment }}</p>
-              </div>
-              <div>
-                <router-link
-                  v-if="item.paymentStatus"
-                  :to="'/detail-booking/' + item.flightId"
-                >
-                  <button class="btn-detail">
-                    Boarding pass
-                  </button>
-                </router-link>
+              <img
+                src="../assets/img/logoGrey.png"
+                alt="gray-small-plane"
+                class="mx-3"
+              />
+              <div class="from-title">
+                <p class="font-weight-bold">{{ item.toCity }}</p>
               </div>
             </div>
-          </div>
-          <div class="navigation-button mt-4">
-            <p class="font-weight-bold text-secondary mr-2">status</p>
-            <div style="margin-top: -6px;">
-              <p v-if="item.paymentStatus" class="payment-status bg-success">
-                E-ticket Issued
-              </p>
-              <p v-else class="payment-status" style="width: 190px;">
-                waiting for payment
-              </p>
-            </div>
-            <p
-              @click="showDetail(index)"
-              class="font-weight-bold text-primary"
-              style="cursor: pointer;"
-            >
-              <!-- <router-link :to="'/detail-booking/' + item.flightId"> -->
-              View Detail
-              <!-- </router-link> -->
+            <p class="text-secondary name-airplane">
+              {{ item.mascapai }}, {{ item.flightCode }}
             </p>
+            <div v-if="index === detailIndex" class="booking-detail">
+              <div class="d-flex justify-content-between">
+                <div class="booking-code">
+                  <p>Booking Code : {{ item.code }}</p>
+                </div>
+                <div class="passenger">
+                  <p>Passenger : {{ item.totalPassenger }}</p>
+                </div>
+                <div class="payment">
+                  <p>Payment : Rp {{ item.totalPayment }}</p>
+                </div>
+                <div>
+                  <router-link
+                    v-if="item.paymentStatus"
+                    :to="'/detail-booking/' + item.flightId"
+                  >
+                    <button class="btn-detail">
+                      Boarding pass
+                    </button>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+            <div class="navigation-button mt-2">
+              <p class="font-weight-bold text-secondary mr-2">status</p>
+              <div style="margin-top: -6px;">
+                <p v-if="item.paymentStatus" class="payment-status bg-success">
+                  E-ticket Issued
+                </p>
+                <p v-else class="payment-status" style="width: 190px;">
+                  waiting for payment
+                </p>
+              </div>
+              <p
+                @click="showDetail(index)"
+                class="font-weight-bold text-primary"
+                style="cursor: pointer;"
+              >
+                <!-- <router-link :to="'/detail-booking/' + item.flightId"> -->
+                View Detail
+                <!-- </router-link> -->
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <button @click="show">show</button>
     <Footer />
   </div>
 </template>
@@ -102,6 +109,9 @@ export default {
   },
   methods: {
     ...mapActions(['getBookingByUserId']),
+    show() {
+      console.log(this.booking)
+    },
     showDetail(index) {
       this.detailIndex = index
       console.log(this.detailIndex)
@@ -120,6 +130,12 @@ export default {
 </script>
 
 <style scoped>
+.booking-list {
+  margin-top: 10px;
+  height: 800px;
+  overflow: auto;
+}
+
 .booking-detail p {
   margin-bottom: unset;
 }
@@ -209,9 +225,47 @@ export default {
   .navigation-button {
     grid-template-columns: 4fr 2fr;
   }
-  .navigation-button p {
-    display: none;
+
+  .navigation-button,
+  .mt-4 {
+    margin-top: unset;
   }
+
+  p {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+
+  .btn-detail {
+    font-size: 10px;
+  }
+
+  .btn-detail .d-flex,
+  .justify-content-between {
+    flex-direction: column;
+  }
+
+  .booking-detail p {
+    font-size: 9px;
+    flex-direction: column;
+  }
+
+  /* .booking-detai .booking-code,
+  .passenger,
+  .payment {
+    width: 33%;
+  } */
+
+  .booking-history {
+    height: 240px;
+  }
+
+  .btn-detail {
+    font-size: 9px;
+  }
+  /* .navigation-button p {
+    display: none;
+  } */
 }
 @media screen and (max-width: 400px) {
   .main-booking {
@@ -220,9 +274,9 @@ export default {
   .navigation-button {
     grid-template-columns: 4fr 2fr;
   }
-  .navigation-button p {
+  /* .navigation-button p {
     display: none;
-  }
+  } */
   .booking-history {
     background-size: contain;
     width: 100%;

@@ -1,15 +1,15 @@
 <template>
-  <div class="nav">
+  <b-container class="nav" fluid>
     <div class="logo" style="margin-right:10px" @click="toLanding">
       <img src="../assets/img/logoflight.png" style="margin-right:10px" />
       Terbang.in
     </div>
     <div class="searchFlight" style="margin-right:10px">
-      <button>
+      <button class="buttonSearch">
         <img src="../assets/img/search.png" alt="" />
         Where you want to go?
       </button>
-      <div class="findTicket" @click="getAllTicket" >
+      <div :class=" $route.name == 'Search' ? 'searchActive' : 'findTicket'" id="findTicket" @click="getAllTicket"  >
         Find Ticket
       </div>
       <div v-if="setUser.email">
@@ -55,7 +55,7 @@
       <router-link class="routerlink"  v-if="!setUser.email" to=/login>
       login</router-link>
     </div>
-  </div>
+  </b-container>
 </template>
 
 <script>
@@ -80,8 +80,8 @@ export default {
     ...mapGetters(['setUser',"setProfile"])
   },
   methods: {
-    ...mapActions(['search','logout']),
-    ...mapMutations(['setParams','getUserProfile']),
+    ...mapActions(['search','logout', 'getUserProfile']),
+    ...mapMutations(['setParams']),
     getAllTicket() {
       this.setParams(this.form)
       this.search()
@@ -116,6 +116,7 @@ export default {
   color: black;
   text-decoration: none;
 }
+
 .routerlink:hover{
 font-weight: bold;
 }
@@ -133,7 +134,7 @@ font-weight: bold;
   font-weight: 500;
 }
 .findTicket:hover,
-.myBooking:hover {
+.myBooking:hover, .searchActive {
   font-weight: bold;
   border-bottom: 5px solid #2395ff;
   padding-bottom: 5px;
@@ -164,4 +165,44 @@ font-weight: bold;
   color: #6b6b6b;
   border: 0px;
 }
+
+@media screen AND (max-width:1000px) {
+  .nav {
+  justify-content: center;
+  align-items: center;
+  }
+ 
+}
+@media screen AND (max-width:700px) {
+  .nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .nav div{
+    padding-bottom: 5px;
+  }
+  .profile{
+    width: 100%;
+    justify-content: space-around;
+    border-bottom: 2px black solid;
+      margin-right: 0px;
+  }
+  .buttonSearch{
+    display: none;
+  }
+   .searchFlight{
+    justify-content: center;
+    align-items: flex-end;
+       border-bottom: 2px black solid;
+  }
+  .searchFlight div{
+    margin-right: 15px;
+    margin-left: 15px;
+ 
+
+  }
+}
+
 </style>
