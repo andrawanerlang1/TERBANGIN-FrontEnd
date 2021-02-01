@@ -41,14 +41,14 @@ VUE_APP_PORT = localhost:3000
 
 ## License
 
-© 
-[Andrawan Erlang](https://github.com/andrawanerlang1)
-[M. Ilham H.](https://github.com/IlhamHafsyah)
-[Rizqon Maulana](https://github.com/rizqonmaulana)
-[Hasbi Alwi](https://github.com/hasbiak)
-[Firman Azhar](https://github.com/FirmanAzharR)
-[Milla Aprilia](https://github.com/millaaprillya)
-[Chandra Oktaviani] (https://github.com/chnd-ktvn)
+©  <br />
+[Andrawan Erlang](https://github.com/andrawanerlang1) <br />
+[M. Ilham H.](https://github.com/IlhamHafsyah) <br />
+[Rizqon Maulana](https://github.com/rizqonmaulana) <br />
+[Hasbi Alwi](https://github.com/hasbiak) <br />
+[Firman Azhar](https://github.com/FirmanAzharR) <br />
+[Milla Aprilia](https://github.com/millaaprillya) <br />
+[Chandra Oktaviani](https://github.com/chnd-ktvn)
 
 
 
