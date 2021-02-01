@@ -8,8 +8,9 @@
       <div class="title-form">
         <h1>Reset Password</h1>
       </div>
-      <b-form>
+      <b-form @submit.prevent="patchPassword">
         <b-form-input
+          v-model="form.newPassword"
           type="password"
           autocomplete="off"
           required
@@ -17,6 +18,7 @@
           class="input"
         ></b-form-input>
         <b-form-input
+          v-model="form.confirmPassword"
           type="password"
           autocomplete="off"
           required
@@ -35,16 +37,41 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import alert from '../../../mixins/alert'
 
 export default {
   name: 'Reset',
   mixins: [alert],
   data() {
-    return {}
+    return {
+      form: {
+        key: '',
+        newPassword: '',
+        confirmPassword: ''
+      }
+    }
   },
-  created() {},
-  methods: {}
+  created() {
+    this.form.key = this.$route.query.key
+    console.log(this.form)
+  },
+  methods: {
+    ...mapActions(['resetPassword']),
+    patchPassword() {
+      this.resetPassword(this.form)
+        .then(result => {
+          this.makeToast(`${result.data.msg}`, `Congratulations`, 'success')
+          setTimeout(() => {
+            this.$router.push('/')
+          }, 2500)
+          console.log(result)
+        })
+        .catch(error => {
+          this.makeToast('Failed', `${error.data.msg}`, 'danger')
+        })
+    }
+  }
 }
 </script>
 

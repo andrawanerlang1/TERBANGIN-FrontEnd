@@ -52,19 +52,19 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Luggage</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterFood(1)" />
+                  <input type="checkbox" @click="filterLuggage(1)" />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">In-Flight Meal</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterWifi(1)" />
+                  <input type="checkbox" @click="filterFood(1)" />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Wi-fi</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterLuggage(1)" />
+                  <input type="checkbox" @click="filterWifi(1)" />
                 </div>
               </div>
             </b-navbar-nav>
