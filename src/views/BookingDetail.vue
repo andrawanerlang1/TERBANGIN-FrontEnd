@@ -170,6 +170,7 @@ export default {
 @media (min-width: 581px) {
   .booking-right img.qr-code {
     width: 100%;
+    height: 300px;
   }
 }
 @media (max-width: 576px) {
