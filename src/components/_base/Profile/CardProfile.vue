@@ -84,8 +84,11 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import alert from '../../../mixins/alert'
+
 export default {
   name: 'Profile',
+  mixins: [alert],
   data() {
     return {
       form: {
@@ -138,7 +141,7 @@ export default {
       // console.log(this.profile)
       // console.log(event.target.files[0])
       if (event.target.files[0].size > 2000000) {
-        console.log('file too large')
+        this.makeToast('Failed', `File too large`, 'danger')
       } else {
         console.log('file oke')
         this.profile.profileImage = event.target.files[0]
@@ -151,10 +154,16 @@ export default {
         data.append('profileImage', profileImage)
         this.patchProfilePict(data)
           .then(result => {
+            this.makeToast(
+              `Profile Image Updated`,
+              'Success update profile image',
+              'success'
+            )
             console.log(result)
             console.log('berhasil patching')
           })
           .catch(error => {
+            this.makeToast('Failed', `Update Image Fail`, 'danger')
             console.log(error)
             console.log('error patching')
           })
