@@ -4,7 +4,7 @@
       <div style="font-weight:bold; font-size: 20px">
         Select Ticket
         <span style="color:#979797;font-weight:300;font-size:15px">
-          ({{ getSearch.length }} flight found)
+          ({{ getTotalRow }} flight found)
         </span>
       </div>
       <div style="font-weight:600">
@@ -86,6 +86,14 @@
         </div>
       </div>
     </div>
+    <div class="overflow-auto">
+      <b-pagination
+        v-model="currentPage"
+        :total-rows="getTotalRow"
+        :per-page="getLimit"
+        @change="changePage"
+      ></b-pagination>
+    </div>
   </div>
 </template>
 
@@ -94,26 +102,47 @@ import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'ticket',
   data() {
-    return {}
+    return {
+      currentPage: 1
+    }
   },
   created() {
     this.sortBy('')
     this.search('payload')
+    this.handleChangePage(1)
   },
   computed: {
-    ...mapGetters(['getSearch', 'getChooseFlight', 'getParams'])
+    ...mapGetters([
+      'getSearch',
+      'getChooseFlight',
+      'getParams',
+      'getPage',
+      'getLimit',
+      'getTotalRow'
+    ])
   },
   methods: {
-    ...mapMutations(['setChooseFlight', 'sortBy', 'setParams']),
+    ...mapMutations([
+      'setChooseFlight',
+      'sortBy',
+      'setParams',
+      'handleChangePage'
+    ]),
     ...mapActions(['search']),
     sortByMenu(x) {
       this.sortBy(x)
-      this.search('payload')
+      this.search()
     },
     setChooseFlights(x) {
       this.setChooseFlight(x)
       console.log(x)
       this.$router.push('/detail')
+    },
+    changePage(numberPage) {
+      this.handleChangePage(numberPage)
+      this.search()
+      // this.page = numberPage
+      // this.getProduct('', '', this.sort)
     }
   }
 }

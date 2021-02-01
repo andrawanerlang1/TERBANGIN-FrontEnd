@@ -262,7 +262,9 @@ export default {
         max: 1000000
       },
       transit: {
-        direct: ''
+        direct: '',
+        transit1: '',
+        transit2: ''
       }
     }
   },
@@ -297,7 +299,7 @@ export default {
       this.setDeperature({ start: '', end: '' })
       this.setArrive({ start: '', end: '' })
       this.setPrice({ min: '', max: '' })
-      this.search('payload')
+      this.search()
     },
     filterTransitDirect(x) {
       if (x === this.transit.direct) {
@@ -307,31 +309,43 @@ export default {
         this.setTransitDirect(x)
         this.transit.direct = x
       }
-      this.search('payload')
+      this.search()
     },
     filterTransit1(x) {
-      this.setTransit1(x)
-      this.search('payload')
+      if (x === this.transit.transit1) {
+        this.setTransit1('')
+        this.transit.transit1 = ''
+      } else {
+        this.setTransit1(x)
+        this.transit.transit1 = x
+      }
+      this.search()
     },
     filterTransit2(x) {
-      this.setTransit2(x)
-      this.search('payload')
+      if (x === this.transit.transit2) {
+        this.setTransit2('')
+        this.transit.transit2 = ''
+      } else {
+        this.setTransit2(x)
+        this.transit.transit2 = x
+      }
+      this.search()
     },
     filterFood(x) {
       this.setFood(x)
-      this.search('payload')
+      this.search()
     },
     filterWifi(x) {
       this.setWifi(x)
-      this.search('payload')
+      this.search()
     },
     filterLuggage(x) {
       this.setLuggage(x)
-      this.search('payload')
+      this.search()
     },
     filterMascapai(x) {
       this.setAirline(x)
-      this.search('payload')
+      this.search()
     },
     filterDeperature(x, y) {
       const data = {
@@ -339,7 +353,7 @@ export default {
         end: y
       }
       this.setDeperature(data)
-      this.search('payload')
+      this.search()
     },
     filterArrive(x, y) {
       const data = {
@@ -347,7 +361,7 @@ export default {
         end: y
       }
       this.setArrive(data)
-      this.search('payload')
+      this.search()
     },
     filterPrice() {
       const data = {
@@ -355,7 +369,7 @@ export default {
         max: this.price[1]
       }
       this.setPrice(data)
-      this.search('payload')
+      this.search()
     }
   }
 }
