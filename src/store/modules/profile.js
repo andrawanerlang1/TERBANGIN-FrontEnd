@@ -24,7 +24,6 @@ export default {
           .get(`http://localhost:3000/user/${payload}`)
           .then(response => {
             context.commit('setUserProfile', response.data.data[0])
-
             resolve(response.data.data[0])
           })
           .catch(error => {
@@ -51,18 +50,19 @@ export default {
       })
     },
     patchProfilePict(context, payload) {
+      console.log(payload)
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://localhost:3000/user/img/${payload.userId}`,
-            payload.payload.data
+            `http://localhost:3000/user/img/${context.state.profile.userId}`,
+            payload
           )
           .then(response => {
             resolve(response.data.data)
           })
           .catch(error => {
             console.log(error.response)
-            reject(error.response.data.message)
+            reject(error.response.msg)
           })
       })
     },
