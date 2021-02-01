@@ -3,7 +3,7 @@
     <div class="search">
       <b-modal centered ref="my-modal" hide-footer title="Choose City">
         <b-form>
-          <label>Form City</label>
+          <label>From City</label>
           <b-form-select v-model="form.fromCity" class="mb-3">
             <b-form-select-option :value="null"
               >Please select an option</b-form-select-option
@@ -126,7 +126,7 @@
       </b-col>
       <b-col md="5" lg="5" xl="5" style="padding:0px">
         <img
-          class="images"
+          class="images rightImages"
           style="float:right"
           src="../../../assets/img/rightImg.png"
           alt=""
@@ -285,5 +285,34 @@ h1 {
   padding: 5px 15px 5px 15px;
   border-radius: 5px;
   width: 100%;
+}
+
+@media screen AND (max-width: 770px) {
+  .image-blue {
+    display: none;
+  }
+}
+@media screen AND (max-width: 600px) {
+  .search {
+    width: 380px;
+    right: 0%;
+    top: 200px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    background-image: url('../../../assets/img/bgOpq.jpg');
+  }
+  .rightImages {
+    height: 200px;
+  }
+  .detailSearch {
+    background-color: white;
+  }
+  .departure {
+    color: black;
+    font-weight: bold;
+  }
+  .searchRadio {
+    background-color: white;
+    border-radius: 5px;
+  }
 }
 </style>
