@@ -27,7 +27,10 @@
     </div>
     <div class="ticketCard" v-for="(item, index) in getSearch" :key="index">
       <div class="flightPlate" style="color:#595959">
-        <img style="width:150px" src="../../../assets/img/garuda.png" />
+        <img
+          style="width:150px"
+          :src="'http://localhost:3000/mascapai/' + item.mascapaiImage"
+        />
         {{ item.mascapai }}
       </div>
       <div class="detailPlate">
@@ -48,9 +51,7 @@
           </div>
         </div>
         <div class="time" style="text-align:center;color:#595959">
-          <div>3 hours 11 minutes</div>
-          <br />
-          {{ item.arrivedTime.substr(0, 2) - item.departureTime.substr(0, 2) }}
+          {{ getTime(item.departureTime, item.arrivedTime) }}
           <div v-if="item.transitType === 0">
             Direct
           </div>
@@ -88,7 +89,7 @@
         </div>
       </div>
     </div>
-    <div class="overflow-auto" v-if="getTotalRow > 0">
+    <div class="overflow-auto" v-if="getTotalRow > 0" style="margin-top:70px">
       <b-pagination
         v-model="currentPage"
         :total-rows="getTotalRow"
@@ -100,13 +101,14 @@
 </template>
 
 <script>
+//import moment from 'moment'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'ticket',
   data() {
     return {
       currentPage: 1,
-      times: ''
+      times: []
     }
   },
   created() {
@@ -132,12 +134,28 @@ export default {
       'handleChangePage'
     ]),
     ...mapActions(['search']),
-    toInt(x) {
-      typeof parseInt(x)
-    },
     sortByMenu(x) {
       this.sortBy(x)
       this.search()
+    },
+
+    getTime(x, y) {
+      let hours = y.split(':')[0] - x.split(':')[0]
+      let minutes = y.split(':')[1] - x.split(':')[1]
+      let a
+      if (x <= '12:00:00' && y >= '13:00:00') {
+        a = 1
+      } else {
+        a = 0
+      }
+      minutes = minutes.toString().length < 2 ? '0' + minutes : minutes
+      if (minutes < 0) {
+        hours--
+        minutes = 60 + minutes
+      }
+      hours = hours.toString().length < 2 ? '0' + hours : hours
+      const res = `${hours - a} hours ${minutes} minutes`
+      return res
     },
     setChooseFlights(x) {
       this.setChooseFlight(x)
