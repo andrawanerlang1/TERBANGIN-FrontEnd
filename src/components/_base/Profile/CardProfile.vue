@@ -7,8 +7,9 @@
             <img v-if="url" :src="url" alt="" class="rounded-circle mt-4" />
             <img
               v-else-if="profile.profileImage"
-              :src="'http://localhost:3000/user/' + profile.profileImage"
+              :src="`${URLS}/user/` + profile.profileImage"
               alt=""
+              class="rounded-circle mt-4"
             />
             <div v-else>
               <img
@@ -84,15 +85,19 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import alert from '../../../mixins/alert'
+
 export default {
   name: 'Profile',
+  mixins: [alert],
   data() {
     return {
       form: {
         newPassword: '',
         confirmPassword: ''
       },
-      url: null
+      url: null,
+      URLS: process.env.VUE_APP_PORT
     }
   },
   created() {
@@ -135,26 +140,29 @@ export default {
         })
     },
     handleFile(event) {
-      // console.log(this.profile)
-      // console.log(event.target.files[0])
       if (event.target.files[0].size > 2000000) {
-        console.log('file too large')
+        this.makeToast('Failed', `File too large`, 'danger')
       } else {
         console.log('file oke')
         this.profile.profileImage = event.target.files[0]
         const img = this.profile.profileImage
         this.url = URL.createObjectURL(img)
-        // console.log(img)
-        // console.log(this.profile.userId)
         const { profileImage } = this.profile
         const data = new FormData()
         data.append('profileImage', profileImage)
         this.patchProfilePict(data)
           .then(result => {
+            this.makeToast(
+              `Profile Image Updated`,
+              'Success update profile image',
+              'success'
+            )
+            this.getUserProfile(this.user.userId)
             console.log(result)
             console.log('berhasil patching')
           })
           .catch(error => {
+            this.makeToast('Failed', `Update Image Fail`, 'danger')
             console.log(error)
             console.log('error patching')
           })

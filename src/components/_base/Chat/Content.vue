@@ -14,7 +14,7 @@
               class="imgUpload"
               style="width:50px;height:50px;border-radius:15px;"
               v-if="chatActive.profileImage"
-              :src="'http://localhost:3000/user/' + chatActive.profileImage"
+              :src="`${URL}/user/` + chatActive.profileImage"
             />
           </div>
           <div class="profile-name">
@@ -28,8 +28,14 @@
             <div class="d-flex flex-row align-items-end">
               <div class="img mr-2">
                 <img
+                  v-if="!item.profileImage"
                   src="../../../assets/img-admin.png"
+                />
+                <img
+                  id="imageUploads"
                   class="profile-img-chat "
+                  v-if="item.profileImage"
+                  :src="`${URL}/user/` + item.profileImage"
                 />
               </div>
               <div class="msg">
@@ -53,8 +59,14 @@
 
               <div class="img ml-2">
                 <img
+                  v-if="!item.profileImage"
                   src="../../../assets/img-admin.png"
+                />
+                <img
+                  id="imageUploads"
                   class="profile-img-chat "
+                  v-if="item.profileImage"
+                  :src="`${URL}/user/` + item.profileImage"
                 />
               </div>
             </div>
@@ -65,8 +77,14 @@
             <div class="d-flex flex-row align-items-end">
               <div class="img mr-2">
                 <img
+                  v-if="!item.receiverPic"
                   src="../../../assets/img-admin.png"
-                  class="profile-img-chat "
+                />
+                <img
+                  id="imageUploads"
+                  class="profile-img-chat"
+                  v-else
+                  :src="`${URL}/user/` + chatActive.profileImage"
                 />
               </div>
               <div class="msg">
@@ -89,8 +107,14 @@
               </div>
               <div class="img ml-2">
                 <img
+                  v-if="!item.senderPic"
                   src="../../../assets/img-admin.png"
-                  class="profile-img-chat "
+                />
+                <img
+                  id="imageUploads"
+                  class="profile-img-chat"
+                  v-else
+                  :src="`${URL}/user/` + profile.profileImage"
                 />
               </div>
             </div>
@@ -134,28 +158,22 @@ export default {
       chatActive: 'getterChatActive',
       activeRoom: 'getterActiveRoom',
       messages: 'getterMessages',
-      messagesHistory: 'getterMessagesHistory'
+      messagesHistory: 'getterMessagesHistory',
+      profile: 'setProfile'
     })
   },
   data() {
     return {
       socket: io('http://localhost:3000'),
       message: '',
-      userId: 1,
-      pesanList: [
-        {
-          id: 1,
-          pesan: 'hallo teman'
-        },
-        {
-          id: 2,
-          pesan: 'uy hallo broh'
-        }
-      ]
+      URL: process.env.VUE_APP_PORT
     }
   },
+  created() {
+    this.getUserProfile(this.user.userId)
+  },
   methods: {
-    ...mapActions(['sendMessages', 'getChatRoom']),
+    ...mapActions(['sendMessages', 'getChatRoom', 'getUserProfile']),
     sendMessage() {
       var time = moment()
         .format()
@@ -164,6 +182,8 @@ export default {
         sender: this.user.userId,
         message: this.message,
         room: this.chatActive.roomIdUniq,
+        senderPic: this.profile.profileImage,
+        receiverPic: this.chatActive.profileImage,
         time: time
       }
       this.socket.emit('roomMessage', setData)

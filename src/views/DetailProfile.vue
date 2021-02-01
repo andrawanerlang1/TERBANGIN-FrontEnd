@@ -96,18 +96,11 @@ export default {
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
-      // console.log('connected to this function')
-      // console.log(this.profile)
-      // this.form.fullName = this.profile.fullName
-      // this.form.phoneNumber = this.profile.phoneNumber
-      // this.form.city = this.profile.city
-      // this.form.nationality = this.profile.nationality
-      // this.form.postCode = this.profile.postCode
-      // this.patchUser(this.form)
       const setData = { id: this.user.userId, data: this.profile }
       this.patchUserProfile(setData)
         .then(result => {
           this.$toasted.success(result)
+          this.getUserProfile(this.user.userId)
         })
         .catch(error => {
           this.$toasted.error(error)

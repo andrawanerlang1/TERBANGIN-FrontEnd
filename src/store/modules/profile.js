@@ -41,7 +41,6 @@ export default {
           )
           .then(response => {
             console.log(response.data.data)
-            context.commit('setUserProfile', response.data.data)
             resolve(response.data.msg)
           })
           .catch(error => {

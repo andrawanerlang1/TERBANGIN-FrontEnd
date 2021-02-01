@@ -36,9 +36,16 @@
         <b-dropdown right text="Right align" variant="link" no-caret>
           <template #button-content>
             <img
+            v-if="!setProfile.profileImage"
               src="../assets/img/profile.png"
               style="border-radius:100%; border: 2px solid #2395FF; width:45px"
               alt=""
+            />
+               <img
+              v-if="setProfile.profileImage"
+              :src="`${URL}/user/` + setProfile.profileImage"
+              style="border-radius:100%; border: 2px solid #2395FF; width:45px"
+
             />
           </template>
           <b-dropdown-item @click="goProfile">My Profile</b-dropdown-item>
@@ -62,16 +69,19 @@ export default {
         flightDate: '',
         clas: '',
         totalPassanger: ''
-      }
+      },
+      URL: process.env.VUE_APP_PORT
     }
   },
-  created() {},
+  created() { 
+    this.getUserProfile(this.setUser.userId)
+  },
   computed: {
-    ...mapGetters(['setUser'])
+    ...mapGetters(['setUser',"setProfile"])
   },
   methods: {
     ...mapActions(['search','logout']),
-    ...mapMutations(['setParams']),
+    ...mapMutations(['setParams','getUserProfile']),
     getAllTicket() {
       this.setParams(this.form)
       this.search()

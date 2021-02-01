@@ -5,7 +5,7 @@
       <img
         class="img-fluid"
         src="../../src/assets/header-notif.png"
-        style="position:absolute;"
+        style="position:absolute;height:450px"
       />
     </div>
     <div class="row justify-content-center">
@@ -76,7 +76,7 @@ export default {
 <style>
 div .row img {
   width: 100%;
-  height: 55%;
+  height: 500px;
 }
 .notifButton {
   font-family: Poppins;
