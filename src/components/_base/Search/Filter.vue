@@ -188,6 +188,7 @@
                 <div class="name" style="font-weight:300">Garuda Indonesia</div>
                 <div class="checkbox">
                   <input
+                    v-model="transit.airline"
                     type="checkbox"
                     value="Garuda Indonesia"
                     @change="filterMascapai('Garuda Indonesia')"

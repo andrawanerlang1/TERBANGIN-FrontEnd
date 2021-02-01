@@ -176,11 +176,13 @@ export default {
 @media (min-width: 581px) {
   .booking-right img.qr-code {
     width: 100%;
+    height: 300px;
   }
 }
 @media (max-width: 576px) {
   .booking-right img.qr-code {
     margin: 10% auto;
+    width: 100%;
   }
   .booking-left {
     border: 2px dashed #e5e5e5;
