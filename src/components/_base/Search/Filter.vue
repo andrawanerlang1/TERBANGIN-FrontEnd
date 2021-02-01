@@ -19,19 +19,31 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Direct</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransitDirect(1)" />
+                  <input
+                    v-model="transit.direct"
+                    type="checkbox"
+                    @change="filterTransitDirect(1)"
+                  />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Transit</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransit1(1)" />
+                  <input
+                    v-model="transit.transit1"
+                    type="checkbox"
+                    @change="filterTransit1(1)"
+                  />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Transit 2+</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterTransit2(1)" />
+                  <input
+                    v-model="transit.transit2"
+                    type="checkbox"
+                    @change="filterTransit2(1)"
+                  />
                 </div>
               </div>
             </b-navbar-nav>
@@ -52,19 +64,31 @@
               <div class="choice">
                 <div class="name" style="font-weight:300">Luggage</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterLuggage(1)" />
+                  <input
+                    v-model="transit.luggage"
+                    type="checkbox"
+                    @click="filterLuggage(1)"
+                  />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">In-Flight Meal</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterFood(1)" />
+                  <input
+                    v-model="transit.food"
+                    type="checkbox"
+                    @click="filterFood(1)"
+                  />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Wi-fi</div>
                 <div class="checkbox">
-                  <input type="checkbox" @click="filterWifi(1)" />
+                  <input
+                    v-model="transit.wifi"
+                    type="checkbox"
+                    @click="filterWifi(1)"
+                  />
                 </div>
               </div>
             </b-navbar-nav>
@@ -188,6 +212,7 @@
                 <div class="name" style="font-weight:300">Garuda Indonesia</div>
                 <div class="checkbox">
                   <input
+                    v-model="transit.airline"
                     type="checkbox"
                     value="Garuda Indonesia"
                     @change="filterMascapai('Garuda Indonesia')"
@@ -313,6 +338,13 @@ export default {
       this.setPrice({ min: '', max: '' })
       this.handleChangePage(1)
       this.search()
+      this.transit.direct = ''
+      this.transit.transit1 = ''
+      this.transit.transit2 = ''
+      this.transit.food = ''
+      this.transit.luggage = ''
+      this.transit.wifi = ''
+      this.transit.airline = ''
     },
     filterTransitDirect(x) {
       if (x === this.transit.direct) {
