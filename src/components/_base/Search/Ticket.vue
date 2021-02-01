@@ -29,7 +29,15 @@
       <div class="flightPlate" style="color:#595959">
         <img
           style="width:150px"
-          :src="'http://localhost:3000/mascapai/' + item.mascapaiImage"
+          :src="
+            item.mascapai === 'Garuda Indonesia'
+              ? require('../../../assets/stockAirline/logo-garuda.png')
+              : item.mascapai === 'Lion Air'
+              ? require('../../../assets/stockAirline/logo-lion1.png')
+              : item.mascapai === 'Air Asia'
+              ? require('../../../assets/stockAirline/logo-airasia.png')
+              : '../../../assets/stockAirline/logo-garuda.png'
+          "
         />
         {{ item.mascapai }}
       </div>
