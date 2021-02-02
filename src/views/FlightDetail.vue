@@ -145,7 +145,7 @@ export default {
               this.successAlert(result.data.msg)
               const dataNotif = {
                 notifTitle: 'Booking status',
-                notifMessage: `Hello there! Your booking status is received and waiting for payment. Booking code: ${result.data.data.code} .`,
+                notifMessage: `Hello there! Your booking status is received and waiting for payment. Booking code: ${result.data.data[0].code} . Pay your ticket here :'${result.data.data[1].midtransUrl}`,
                 receiverId: this.setUser.userId
               }
               this.sendNotif(dataNotif)

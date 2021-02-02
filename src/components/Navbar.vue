@@ -44,7 +44,7 @@
                <img
               v-if="setProfile.profileImage"
               :src="`${URL}/user/` + setProfile.profileImage"
-              style="border-radius:100%; border: 2px solid #2395FF; width:45px"
+              style="border-radius:100%; border: 2px solid #2395FF; width:45px;height:45px"
 
             />
           </template>

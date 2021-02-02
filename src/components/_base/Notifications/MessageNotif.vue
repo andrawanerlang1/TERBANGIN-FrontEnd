@@ -9,12 +9,19 @@
       >
         <div class="col box mx-lg-2">
           <div class="row mt-3 ">
-            <div class="col mx-1 congratulations">{{ item.notifTitle }}</div>
+            <div class="col mx-1 congratulations">
+              {{ item.notifTitle }}
+            </div>
           </div>
           <div class="row mt-3">
             <div class="col mx-1 message maxMesg">
               <p>
-                {{ item.notifMessage }}
+                {{ item.notifMessage.slice(0, 101) }}
+              </p>
+              <p>
+                {{ item.notifMessage.slice(102, 125) }}
+
+                <a :href="`${item.notifMessage.slice(126)}`">Payment Link</a>
               </p>
             </div>
           </div>
@@ -49,7 +56,7 @@
             <div class="col mx-1 time">
               <button
                 class="buttonApprove"
-                @click="approveBooking(item.userId)"
+                @click="approveBooking(item.bookingId, item.userId)"
               >
                 Approve Payment
               </button>
@@ -75,9 +82,16 @@ export default {
   },
   methods: {
     ...mapActions(['getNotifByUserId', 'getAllBooking', 'patchBookingStatus']),
-    approveBooking(id) {
-      const setData = { id: id, userId: this.user.userId }
+    approveBooking(idbook, iduser) {
+      const setData = { id: idbook, userId: iduser }
       this.patchBookingStatus(setData)
+        .then(result => {
+          this.$toasted.success(result)
+          this.getAllBooking()
+        })
+        .catch(error => {
+          this.$toasted.error(error)
+        })
     }
   },
   computed: {
