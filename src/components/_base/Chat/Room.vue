@@ -126,14 +126,11 @@ export default {
         })
     },
     chatThisUser(item) {
-      // ======== chat this user ============
       this.changeChatActive(item)
-      // ======== socket io  ================
       const data = item.roomIdUniq
       this.getMessagesHistory(data)
       if (this.oldRoom) {
         this.clearMessages()
-        // this.getMessagesHistory(data)
         this.socket.emit('changeRoom', {
           username: this.user.fullName,
           room: data,
@@ -142,7 +139,6 @@ export default {
         this.oldRoom = item.roomIdUniq
       } else {
         this.clearMessages()
-        // this.getMessagesHistory(data)
         this.socket.emit('joinRoom', {
           username: this.user.fullName,
           room: data

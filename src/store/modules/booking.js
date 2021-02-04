@@ -27,13 +27,9 @@ export default {
         axios
           .post(`${process.env.VUE_APP_PORT}/booking/book`, payload)
           .then(result => {
-            console.log(result)
-            console.log('ini result')
             resolve(result)
           })
           .catch(error => {
-            console.log(error)
-            console.log('ini error')
             reject(error.response)
           })
       })
@@ -83,11 +79,9 @@ export default {
         axios
           .patch(`${process.env.VUE_APP_PORT}/flight`, payload)
           .then(result => {
-            console.log(result)
             resolve(result)
           })
           .catch(error => {
-            console.log(error)
             reject(error.response)
           })
       })

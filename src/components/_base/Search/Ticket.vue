@@ -109,7 +109,6 @@
 </template>
 
 <script>
-//import moment from 'moment'
 import { mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'ticket',
@@ -167,14 +166,11 @@ export default {
     },
     setChooseFlights(x) {
       this.setChooseFlight(x)
-      console.log(x)
       this.$router.push('/detail')
     },
     changePage(numberPage) {
       this.handleChangePage(numberPage)
       this.search()
-      // this.page = numberPage
-      // this.getProduct('', '', this.sort)
     }
   }
 }

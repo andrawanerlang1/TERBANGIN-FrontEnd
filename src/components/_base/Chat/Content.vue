@@ -187,7 +187,6 @@ export default {
         time: time
       }
       this.socket.emit('roomMessage', setData)
-      //kode untuk kirim message ke DATABASE message ==============================================
       const dataMessage = {
         roomIdUniq: this.chatActive.roomIdUniq,
         sender: this.user.userId,
@@ -195,7 +194,6 @@ export default {
         message: this.message
       }
       this.sendMessages(dataMessage)
-      // ========================================================
       this.message = ''
       this.getChatRoom(this.user.userId)
     }

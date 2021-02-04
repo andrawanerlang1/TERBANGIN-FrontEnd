@@ -364,7 +364,6 @@ export default {
       }
       this.handleChangePage(1)
       this.search()
-      console.log(this.transit.direct)
     },
     filterTransit1(x) {
       if (x === this.transit.transit1) {
@@ -375,7 +374,6 @@ export default {
         this.transit.transit1 = x
       }
       this.handleChangePage(1)
-      console.log(this.transit.transit1)
       this.search()
     },
     filterTransit2(x) {
@@ -387,7 +385,6 @@ export default {
         this.transit.transit2 = x
       }
       this.handleChangePage(1)
-      console.log(this.transit.transit2)
       this.search()
     },
     filterFood(x) {

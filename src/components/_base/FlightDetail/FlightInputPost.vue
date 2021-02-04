@@ -197,7 +197,6 @@ export default {
   methods: {
     ...mapActions(['postFlight']),
     addFlight() {
-      console.log(this.form.flightClass)
       const classs =
         this.form.flightClass[0] === 'economy' &&
         this.form.flightClass[1] === 'business' &&
@@ -219,7 +218,6 @@ export default {
           : this.form.flightClass[0] === 'firstclass'
           ? '3'
           : 100
-      console.log(classs)
       const fromCity = this.form.from[0]
       const fromCountry = this.form.from[1]
       const toCity = this.form.to[0]
@@ -259,15 +257,12 @@ export default {
         transitType: transit,
         code
       }
-      console.log(data)
       this.postFlight(data)
         .then(result => {
           this.makeToast(`${result.data.msg}`, 'Success add flight', 'success')
-          console.log(result)
         })
         .catch(error => {
           this.makeToast('Failed', `${error.data.msg}`, 'danger')
-          console.log(error)
         })
       this.form = {
         mascapai: null,

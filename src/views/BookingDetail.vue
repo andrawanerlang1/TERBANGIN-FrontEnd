@@ -60,6 +60,10 @@
                   <b class="small text-muted">Terminal</b>
                   <p class="small">{{ flight.terminal }}</p>
                 </b-col>
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
                 <b-col>
                   <b class="small text-muted">Gate</b>
                   <p class="small">221</p>

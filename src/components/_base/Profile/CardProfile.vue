@@ -122,7 +122,6 @@ export default {
     ]),
     ...mapMutations(['patchUser']),
     updateProfile() {
-      console.log(this.form)
       const setData = { id: this.user.userId, data: this.profile }
       this.patchUserProfile(setData)
         .then(result => {
