@@ -86,7 +86,10 @@
                 <div class="name" style="font-weight:300">00:00 - 06:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="departure"
+                    value="00:00"
+                    v-model="departure.start"
                     @click="filterDeperature('00:00', '06:00')"
                   />
                 </div>
@@ -95,7 +98,10 @@
                 <div class="name" style="font-weight:300">06:00 - 12:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="departure"
+                    value="06:00"
+                    v-model="departure.start"
                     @click="filterDeperature('06:00', '12:00')"
                   />
                 </div>
@@ -104,7 +110,10 @@
                 <div class="name" style="font-weight:300">12:00 - 18:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="departure"
+                    value="12:00"
+                    v-model="departure.start"
                     @click="filterDeperature('12:00', '18:00')"
                   />
                 </div>
@@ -113,7 +122,10 @@
                 <div class="name" style="font-weight:300">18:00 - 24:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="departure"
+                    value="18:00"
+                    v-model="departure.start"
                     @click="filterDeperature('18:00', '24:00')"
                   />
                 </div>
@@ -137,7 +149,10 @@
                 <div class="name" style="font-weight:300">00:00 - 06:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="arrive"
+                    value="00:00"
+                    v-model="arrive.start"
                     @click="filterArrive('00:00', '06:00')"
                   />
                 </div>
@@ -146,7 +161,10 @@
                 <div class="name" style="font-weight:300">06:00 - 12:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="arrive"
+                    value="06:00"
+                    v-model="arrive.start"
                     @click="filterArrive('06:00', '12:00')"
                   />
                 </div>
@@ -155,7 +173,10 @@
                 <div class="name" style="font-weight:300">12:00 - 18:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="arrive"
+                    value="12:00"
+                    v-model="arrive.start"
                     @click="filterArrive('12:00', '18:00')"
                   />
                 </div>
@@ -164,7 +185,10 @@
                 <div class="name" style="font-weight:300">18:00 - 24:00</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
+                    type="radio"
+                    name="arrive"
+                    value="18:00"
+                    v-model="arrive.start"
                     @click="filterArrive('18:00', '24:00')"
                   />
                 </div>
@@ -188,22 +212,36 @@
                 <div class="name" style="font-weight:300">Garuda Indonesia</div>
                 <div class="checkbox">
                   <input
-                    type="checkbox"
-                    value="Garuda Indonesia"
+                    type="radio"
+                    name="radio"
                     @change="filterMascapai('Garuda Indonesia')"
+                    value="Garuda Indonesia"
+                    v-model="radioValue"
                   />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Air Asia</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterMascapai('air asia')" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    @change="filterMascapai('air asia')"
+                    value="air asia"
+                    v-model="radioValue"
+                  />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Lion Air</div>
                 <div class="checkbox">
-                  <input type="checkbox" @change="filterMascapai('Lion Air')" />
+                  <input
+                    type="radio"
+                    name="radio"
+                    @change="filterMascapai('Lion Air')"
+                    value="Lion Air"
+                    v-model="radioValue"
+                  />
                 </div>
               </div>
             </b-navbar-nav>
@@ -254,6 +292,7 @@ export default {
   name: 'Filter',
   data() {
     return {
+      radioValue: '',
       mascapai: [],
       price: [350000, 1300000],
       slideOption: {
@@ -313,6 +352,9 @@ export default {
       this.setPrice({ min: '', max: '' })
       this.handleChangePage(1)
       this.search()
+      this.radioValue = ''
+      this.departure.start = ''
+      this.arrive.start = ''
     },
     filterTransitDirect(x) {
       if (x === this.transit.direct) {
@@ -434,6 +476,54 @@ export default {
 </script>
 
 <style scoped>
+input[type='radio'] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background: white;
+  height: 13px;
+  width: 13px;
+  border: 1px solid #969696;
+  border-radius: 2px;
+}
+
+input[type='radio']:checked {
+  background: #2167ff;
+}
+
+input[type='checkbox']:hover {
+  filter: brightness(90%);
+}
+
+input[type='checkbox']:disabled {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+input[type='radio']:after {
+  content: '';
+  position: relative;
+  left: 40%;
+  top: 10%;
+  width: 40%;
+  height: 70%;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+input[type='radio']:checked:after {
+  display: block;
+}
+
+input[type='radio']:disabled:after {
+  border-color: #7b7b7b;
+}
+
 .mainWrapper {
   margin-left: 5%;
   margin-top: 30px;
