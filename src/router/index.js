@@ -10,6 +10,7 @@ import BookingDetail from '../views/BookingDetail.vue'
 import Chat from '../views/Chat.vue'
 import Notifications from '../views/Notifications.vue'
 import PostFlight from '../views/PostFlight.vue'
+import Boarding from '../views/Boarding.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -71,6 +72,12 @@ const routes = [
     path: '/post-flight',
     name: 'PostFlight',
     component: PostFlight,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/boarding/:id',
+    name: 'Boarding',
+    component: Boarding,
     meta: { requiresAuth: true }
   }
 ]

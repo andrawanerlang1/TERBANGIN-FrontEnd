@@ -5,7 +5,8 @@ export default {
     flight: {},
     flightDetail: {},
     booking: {},
-    allBooking: []
+    allBooking: [],
+    bookingId: null
   },
   mutations: {
     setFlight(context, payload) {
@@ -19,6 +20,9 @@ export default {
     },
     setAllBooking(context, payload) {
       context.allBooking = payload
+    },
+    setBookingId(context, payload) {
+      context.bookingId = payload
     }
   },
   actions: {
@@ -115,6 +119,9 @@ export default {
     },
     getAllBooking(state) {
       return state.allBooking
+    },
+    getBookingId(state) {
+      return state.bookingId
     }
   }
 }
