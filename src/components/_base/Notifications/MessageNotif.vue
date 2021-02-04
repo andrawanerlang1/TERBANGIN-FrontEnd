@@ -14,7 +14,12 @@
           <div class="row mt-3">
             <div class="col mx-1 message maxMesg">
               <p>
-                {{ item.notifMessage }}
+                {{ item.notifMessage.slice(0, 101) }}
+              </p>
+              <p>
+                {{ item.notifMessage.slice(102, 125) }}
+
+                <a :href="`${item.notifMessage.slice(126)}`">Payment Link</a>
               </p>
             </div>
           </div>
