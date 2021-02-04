@@ -60,6 +60,8 @@
                   <b class="small text-muted">Terminal</b>
                   <p class="small">{{ flight.terminal }}</p>
                 </b-col>
+                {{ typeof bookingId }} {{ bookingId }}
+
                 <b-col>
                   <b class="small text-muted">Gate</b>
                   <p class="small">221</p>
@@ -72,7 +74,11 @@
               </p>
             </div>
             <div class="booking-right col-sm-4 text-center">
-              <vue-qrcode value="qrcodeValue" />
+              <vue-qrcode
+                :value="
+                  `https://terbangin.netlify.app/boarding/` + this.bookingId
+                "
+              />
             </div>
           </div>
         </div>
@@ -97,11 +103,12 @@ export default {
     Footer
   },
   data() {
-    return { qrcodeValue: `www.google.com` }
+    return {}
   },
   computed: {
     ...mapGetters({
-      flight: 'getFlightDetail'
+      flight: 'getFlightDetail',
+      bookingId: 'getBookingId'
     }),
     flightClass() {
       if (this.flight.clas === 2) {

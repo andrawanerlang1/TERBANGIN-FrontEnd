@@ -34,6 +34,7 @@
             <p class="text-secondary name-airplane">
               {{ item.mascapai }}, {{ item.code }}
             </p>
+
             <div v-if="index === detailIndex" class="booking-detail">
               <div class="d-flex justify-content-between">
                 <div class="booking-code">
@@ -45,12 +46,16 @@
                 <div class="payment">
                   <p>Payment : Rp {{ item.totalPayment }}</p>
                 </div>
+
                 <div>
                   <router-link
                     v-if="item.paymentStatus"
                     :to="'/detail-booking/' + item.flightId"
                   >
-                    <button class="btn-detail">
+                    <button
+                      class="btn-detail"
+                      @click="bookingId(item.bookingId)"
+                    >
                       Boarding pass
                     </button>
                   </router-link>
@@ -87,7 +92,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import moment from 'moment'
 import Navbar from '../components/Navbar'
 import CardProfile from '../components/_base/Profile/CardProfile'
@@ -109,6 +114,10 @@ export default {
   },
   methods: {
     ...mapActions(['getBookingByUserId']),
+    ...mapMutations(['setBookingId']),
+    bookingId(input) {
+      this.setBookingId(input)
+    },
     show() {
       console.log(this.booking)
     },
