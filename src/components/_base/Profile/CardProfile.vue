@@ -4,18 +4,26 @@
       <form>
         <div class="text-center">
           <div class="user-profile">
-            <img v-if="url" :src="url" alt="" class="rounded-circle mt-4" />
+            <img
+              v-if="url"
+              :src="url"
+              alt=""
+              class="rounded-circle mt-4"
+              style="width:105px;height:105px"
+            />
             <img
               v-else-if="profile.profileImage"
               :src="`${URLS}/user/` + profile.profileImage"
               alt=""
-              class="rounded-circle mt-4"
+              class="rounded-circle mt-4 "
+              style="width:105px;height:105px"
             />
             <div v-else>
               <img
                 src="../../../assets/img/profile.png"
                 alt="profile"
                 class="rounded-circle mt-4"
+                style="width:105px;height:105px"
               />
             </div>
           </div>

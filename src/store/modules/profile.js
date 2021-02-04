@@ -21,7 +21,7 @@ export default {
     getUserProfile(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .get(`http://localhost:3000/user/${payload}`)
+          .get(`${process.env.VUE_APP_PORT}/user/${payload}`)
           .then(response => {
             context.commit('setUserProfile', response.data.data[0])
             resolve(response.data.data[0])
@@ -36,7 +36,7 @@ export default {
         console.log(payload)
         axios
           .patch(
-            `http://localhost:3000/user/settings/${payload.id}`,
+            `${process.env.VUE_APP_PORT}/user/settings/${payload.id}`,
             payload.data
           )
           .then(response => {
@@ -53,7 +53,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `http://localhost:3000/user/img/${context.state.profile.userId}`,
+            `${process.env.VUE_APP_PORT}/user/img/${context.state.profile.userId}`,
             payload
           )
           .then(response => {
@@ -68,7 +68,9 @@ export default {
     deleteProfilePict(context, payload) {
       return new Promise((resolve, reject) => {
         axios
-          .patch(`http://localhost:3000/user/delete/image/${payload.userId}`)
+          .patch(
+            `${process.env.VUE_APP_PORT}/user/delete/image/${payload.userId}`
+          )
           .then(response => {
             resolve(response.data.data)
           })
@@ -81,7 +83,7 @@ export default {
       console.log(payload)
       return new Promise((resolve, reject) => {
         axios
-          .patch(`http://localhost:3000/user/changePassword`, payload)
+          .patch(`${process.env.VUE_APP_PORT}/user/changePassword`, payload)
           .then(response => {
             resolve(response.data.msg)
           })

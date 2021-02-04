@@ -133,7 +133,7 @@
         <div class="separatorName">
           Flight Code
         </div>
-        <b-form-input v-model="form.flightCode"></b-form-input>
+        <b-form-input v-model="form.code"></b-form-input>
       </div>
       <br />
       <b-button @click="addFlight">Post</b-button>
@@ -160,7 +160,7 @@ export default {
         food: '0',
         capacity: '0',
         luggage: '0',
-        flightCode: null,
+        code: null,
         from: null,
         to: null,
         terminal: null,
@@ -234,7 +234,7 @@ export default {
         food,
         capacity,
         luggage,
-        flightCode,
+        code,
         terminal,
         transit
       } = this.form
@@ -257,7 +257,7 @@ export default {
         tripType: '1',
         terminal,
         transitType: transit,
-        flightCode
+        code
       }
       console.log(data)
       this.postFlight(data)
@@ -279,7 +279,7 @@ export default {
         food: '0',
         capacity: '0',
         luggage: '0',
-        flightCode: null,
+        code: null,
         from: null,
         to: null,
         terminal: null,

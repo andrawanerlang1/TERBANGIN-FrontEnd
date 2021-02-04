@@ -21,6 +21,22 @@
         </div>
       </div>
     </div>
+    <div class="headerNavMobile"> 
+      <div style="margin-right:10px" @click="toLanding">
+        <img src="../assets/img/logoflight.png" style="margin-right:10px" />
+      </div>
+      <div :class=" $route.name == 'Search' ? 'searchActive' : 'findTicket'" id="findTicket" @click="getAllTicket"  >
+        Find Ticket
+      </div>
+      <div v-if="setUser.email">
+        <div class="myBooking">
+          <router-link v-if="setUser.role === 0" to="/mybooking" class="routerlink"  class-active="active"
+            >My Booking</router-link
+          >
+          <router-link v-else to="/post-flight" class="routerlink">Post Flight</router-link>
+        </div>
+      </div>
+    </div>
     <div class="profile">
       <div v-if="setUser.email">
         <router-link to="/chat">
@@ -38,14 +54,13 @@
             <img
             v-if="!setProfile.profileImage"
               src="../assets/img/profile.png"
-              style="border-radius:100%; border: 2px solid #2395FF; width:45px"
+              style="border-radius:100%; border: 2px solid #2395FF; width:45pxwidth:45px; height:45px"
               alt=""
             />
                <img
               v-if="setProfile.profileImage"
               :src="`${URL}/user/` + setProfile.profileImage"
-              style="border-radius:100%; border: 2px solid #2395FF; width:45px"
-
+              style="border-radius:100%; border: 2px solid #2395FF; width:45px; height:45px"
             />
           </template>
           <b-dropdown-item @click="goProfile">My Profile</b-dropdown-item>
@@ -116,7 +131,9 @@ export default {
   color: black;
   text-decoration: none;
 }
-
+.headerNavMobile{
+  display: none;
+}
 .routerlink:hover{
 font-weight: bold;
 }
@@ -200,8 +217,17 @@ font-weight: bold;
   .searchFlight div{
     margin-right: 15px;
     margin-left: 15px;
- 
-
+  }
+}
+  @media screen AND (max-width:600px) {
+  .searchFlight, .logo{
+    display: none;
+  }
+  .headerNavMobile{
+    display: flex ;
+    justify-content: space-around;
+    width: 100%;
+    border-bottom: 2px solid black;
   }
 }
 

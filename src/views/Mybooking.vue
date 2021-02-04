@@ -32,7 +32,7 @@
               </div>
             </div>
             <p class="text-secondary name-airplane">
-              {{ item.mascapai }}, {{ item.flightCode }}
+              {{ item.mascapai }}, {{ item.code }}
             </p>
             <div v-if="index === detailIndex" class="booking-detail">
               <div class="d-flex justify-content-between">

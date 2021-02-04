@@ -120,6 +120,15 @@ export default {
       }
       this.errorPassenger = ''
 
+      if (this.params.totalPassanger > 0) {
+        if (this.formPassenger.length != this.params.totalPassanger) {
+          return (this.errorPassenger = `*Please insert ${this.params
+            .totalPassanger -
+            this.formPassenger.length} passengers more to book ticket`)
+        }
+      }
+      this.errorPassenger = ''
+
       const dataBooking = {
         userId: this.userId,
         flightId: this.flight.flightId,
@@ -132,6 +141,7 @@ export default {
 
       const setData = [dataBooking, ...this.formPassenger]
 
+      console.log(setData)
       const patchFlight = {
         flightId: this.flight.flightId,
         totalPassenger: this.formPassenger.length
@@ -145,7 +155,7 @@ export default {
               this.successAlert(result.data.msg)
               const dataNotif = {
                 notifTitle: 'Booking status',
-                notifMessage: `Hello there! Your booking status is received and waiting for payment. Booking code: ${result.data.data.code} .`,
+                notifMessage: `Hello there! Your booking status is received and waiting for payment. Booking code: ${result.data.data[0].code} . Pay your ticket here :'${result.data.data[1].midtransUrl}`,
                 receiverId: this.setUser.userId
               }
               this.sendNotif(dataNotif)

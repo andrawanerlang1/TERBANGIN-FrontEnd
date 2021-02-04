@@ -87,11 +87,11 @@
             </div>
             <div class="list-img">
               <div style="margin-bottom: 40px;">
-                <img src="../../../assets/img/img1.png" alt="" />
+                <img src="../../../assets/img/img5.png" alt="" />
                 <h6 style="font-weight:bold;text-align:center">PARIS</h6>
               </div>
               <div>
-                <img src="../../../assets/img/img2.png" alt="" />
+                <img src="../../../assets/img/img4.png" alt="" />
                 <h6 style="font-weight:bold;text-align:center">BALI</h6>
               </div>
               <div>
@@ -99,11 +99,11 @@
                 <h6 style="font-weight:bold;text-align:center">SINGAPORE</h6>
               </div>
               <div>
-                <img src="../../../assets/img/img4.png" alt="" />
+                <img src="../../../assets/img/img2.png" alt="" />
                 <h6 style="font-weight:bold;text-align:center">AGRA</h6>
               </div>
               <div>
-                <img src="../../../assets/img/img5.png" alt="" />
+                <img src="../../../assets/img/img1.png" alt="" />
                 <h6 style="font-weight:bold;text-align:center">SYDNEY</h6>
               </div>
             </div>
