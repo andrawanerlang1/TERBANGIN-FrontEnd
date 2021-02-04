@@ -82,7 +82,7 @@ export default {
         .then(result => {
           this.makeToast(
             'Congratulations',
-            `${result.data.data.fullName} Login successfully`,
+            `${result.data.data.fullName} Register successfully`,
             'success'
           )
         })
