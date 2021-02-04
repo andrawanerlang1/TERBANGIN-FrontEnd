@@ -14,7 +14,7 @@
           <div class="row justify-content-center mb-4">
             <div class="booking-left col-sm-6">
               <b-row>
-                <b-col>
+                <b-col md="12">
                   <img
                     :src="
                       flight.mascapai === 'Garuda Indonesia'
@@ -29,9 +29,9 @@
                     class="maskapai-img"
                   />
                 </b-col>
-                <b-col class="pt-4">
+                <b-col class="pt-4" md="12">
                   <b class="departure font-weight-bold">
-                    {{ flight.fromCountry }}
+                    {{ flight.fromCity }}
                   </b>
                   <img
                     src="../assets/img/logoGrey.png"
@@ -39,7 +39,7 @@
                     class="logo-grey"
                   />
                   <b class="departure font-weight-bold ml-2">
-                    {{ flight.toCountry }}
+                    {{ flight.toCity }}
                   </b>
                 </b-col>
               </b-row>
@@ -180,6 +180,11 @@ export default {
   }
 }
 @media (max-width: 576px) {
+  .booking-left img.maskapai-img {
+    max-width: 180px;
+    max-height: 50px;
+    margin-top: 40px;
+  }
   .booking-right img.qr-code {
     margin: 10% auto;
     width: 100%;

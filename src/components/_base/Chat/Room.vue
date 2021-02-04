@@ -78,7 +78,7 @@ export default {
   data() {
     return {
       role: 0,
-      socket: io('http://localhost:3000'),
+      socket: io(`${process.env.VUE_APP_PORT}`),
       room: '',
       oldRoom: '',
       roomId: null,
