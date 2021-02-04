@@ -54,7 +54,6 @@ export default {
   },
   created() {
     this.form.key = this.$route.query.key
-    console.log(this.form)
   },
   methods: {
     ...mapActions(['resetPassword']),
@@ -65,7 +64,6 @@ export default {
           setTimeout(() => {
             this.$router.push('/')
           }, 2500)
-          console.log(result)
         })
         .catch(error => {
           this.makeToast('Failed', `${error.data.msg}`, 'danger')

@@ -106,7 +106,6 @@ export default {
     this.$router.push('/detail-profile')
     },
     show() {
-      console.log(this.setUser)
     },
     toLanding(){
     this.$router.push('/')

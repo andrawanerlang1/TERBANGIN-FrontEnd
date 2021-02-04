@@ -47,7 +47,6 @@ export default {
     forgotPass() {
       this.forgotPassword(this.form)
         .then(result => {
-          console.log(result)
           this.makeToast(
             `${result.data.msg}`,
             `Congratulations, ${this.form.email}`,
