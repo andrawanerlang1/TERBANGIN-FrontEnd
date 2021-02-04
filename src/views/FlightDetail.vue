@@ -120,6 +120,17 @@ export default {
       }
       this.errorPassenger = ''
 
+      if (this.params.totalPassanger > 0) {
+        if (this.formPassenger.length != this.params.totalPassanger) {
+          console.log(this.formPassenger.length)
+          console.log(this.params.totalPassanger)
+          return (this.errorPassenger = `*Please insert ${this.params
+            .totalPassanger -
+            this.formPassenger.length} passengers more to book ticket`)
+        }
+      }
+      this.errorPassenger = ''
+
       const dataBooking = {
         userId: this.userId,
         flightId: this.flight.flightId,
@@ -132,6 +143,7 @@ export default {
 
       const setData = [dataBooking, ...this.formPassenger]
 
+      console.log(setData)
       const patchFlight = {
         flightId: this.flight.flightId,
         totalPassenger: this.formPassenger.length
