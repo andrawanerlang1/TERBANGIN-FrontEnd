@@ -4,7 +4,10 @@
       <div class="top mb-4">
         <div class="d-flex justify-content-between">
           <div>
-            <p class="text-dark-grey">Passenger : {{ formPassenger.length }}</p>
+            <p class="text-dark-grey">
+              Passenger : {{ formPassenger.length }} /
+              {{ params.totalPassanger ? params.totalPassanger : 10 }}
+            </p>
           </div>
           <div>
             <div class="custom-control custom-switch">
@@ -164,7 +167,6 @@ export default {
   padding: 3px 3px 3px 15px;
   font-size: 12px;
   margin-top: -20px;
-  width: 220px;
 }
 
 input {

@@ -3,7 +3,7 @@
     <div class="mainWrapper" v-if="user.role === 0">
       <div
         style="width:80%"
-        class="row mt-3 justify-content-center"
+        class="row mt-3 justify-content-center messageWrapper"
         v-for="(item, index) in notif"
         :key="index"
       >
@@ -160,7 +160,7 @@ export default {
 @media screen and (max-width: 550px) {
   .box {
     width: 269px;
-    height: 150px;
+    height: 200px;
     background: #f7fbff;
     border: 1px solid #2395ff;
     box-sizing: border-box;
