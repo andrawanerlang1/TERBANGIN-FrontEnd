@@ -213,10 +213,10 @@
                 <div class="checkbox">
                   <input
                     type="radio"
-                    name="radio"
-                    @change="filterMascapai('Garuda Indonesia')"
+                    name="airline"
                     value="Garuda Indonesia"
-                    v-model="radioValue"
+                    v-model="transit.airline"
+                    @click="filterMascapai('Garuda Indonesia')"
                   />
                 </div>
               </div>
@@ -225,24 +225,22 @@
                 <div class="checkbox">
                   <input
                     type="radio"
-                    name="radio"
-                    @change="filterMascapai('air asia')"
-                    value="air asia"
-                    v-model="radioValue"
+                    name="airline"
+                    value="Air asia"
+                    v-model="transit.airline"
+                    @click="filterMascapai('Air asia')"
                   />
                 </div>
               </div>
               <div class="choice">
                 <div class="name" style="font-weight:300">Lion Air</div>
-                <div class="checkbox">
-                  <input
-                    type="radio"
-                    name="radio"
-                    @change="filterMascapai('Lion Air')"
-                    value="Lion Air"
-                    v-model="radioValue"
-                  />
-                </div>
+                <input
+                  type="radio"
+                  name="airline"
+                  value="Lion air"
+                  v-model="transit.airline"
+                  @click="filterMascapai('Lion air')"
+                />
               </div>
             </b-navbar-nav>
           </b-collapse>
