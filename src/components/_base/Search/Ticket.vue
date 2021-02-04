@@ -161,7 +161,7 @@ export default {
         hours--
         minutes = 60 + minutes
       }
-      hours = hours.toString().length < 2 ? '0' + hours : hours
+      hours = Math.abs(hours.toString().length < 2 ? '0' + hours : hours)
       const res = `${hours - a} hours ${minutes} minutes`
       return res
     },

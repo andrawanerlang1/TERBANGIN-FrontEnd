@@ -5,8 +5,16 @@
         <div class="d-flex align-items-center mb-3">
           <div>
             <img
-              :src="'http://localhost:3000/mascapai/' + flight.mascapaiImage"
               class="mascapai-img"
+              :src="
+                flight.mascapai === 'Garuda Indonesia'
+                  ? require('../../../assets/stockAirline/logo-garuda.png')
+                  : flight.mascapai === 'Lion Air'
+                  ? require('../../../assets/stockAirline/logo-lion1.png')
+                  : flight.mascapai === 'Air Asia'
+                  ? require('../../../assets/stockAirline/logo-airasia.png')
+                  : '../../../assets/stockAirline/logo-garuda.png'
+              "
             />
           </div>
           <div class="ml-4 text-dark-grey">{{ flight.mascapai }}</div>

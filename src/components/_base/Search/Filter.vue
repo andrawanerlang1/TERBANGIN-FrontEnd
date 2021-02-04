@@ -188,7 +188,6 @@
                 <div class="name" style="font-weight:300">Garuda Indonesia</div>
                 <div class="checkbox">
                   <input
-                    v-model="transit.airline"
                     type="checkbox"
                     value="Garuda Indonesia"
                     @change="filterMascapai('Garuda Indonesia')"
@@ -238,8 +237,8 @@
                 ></vue-slider>
               </div>
               <div class="pricetag">
-                <div>${{ price[0] }}</div>
-                <div>${{ price[1] }}</div>
+                <div>IDR {{ price[0] }}</div>
+                <div>IDR {{ price[1] }}</div>
               </div>
             </b-navbar-nav>
           </b-collapse>
