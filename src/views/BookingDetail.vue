@@ -72,11 +72,7 @@
               </p>
             </div>
             <div class="booking-right col-sm-4 text-center">
-              <img
-                class="qr-code"
-                src="../assets/img/qrcode.png"
-                alt="qr code"
-              />
+              <vue-qrcode value="qrcodeValue" />
             </div>
           </div>
         </div>
@@ -91,12 +87,17 @@ import { mapActions, mapGetters } from 'vuex'
 import moment from 'moment'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import VueQrcode from 'vue-qrcode'
 
 export default {
   name: 'BookingDetail',
   components: {
     Navbar,
+    VueQrcode,
     Footer
+  },
+  data() {
+    return { qrcodeValue: `www.google.com` }
   },
   computed: {
     ...mapGetters({
