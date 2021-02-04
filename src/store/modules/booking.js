@@ -96,7 +96,7 @@ export default {
       return new Promise((resolve, reject) => {
         axios
           .patch(
-            `${process.env.VUE_APP_PORT}/book/?userId=${payload.userId}&id=${payload.id}`,
+            `${process.env.VUE_APP_PORT}/booking/book/?userId=${payload.userId}&id=${payload.id}`,
             payload
           )
           .then(result => {
