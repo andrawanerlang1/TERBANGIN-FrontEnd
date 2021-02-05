@@ -164,7 +164,12 @@ export default {
   },
   data() {
     return {
-      socket: io(`${process.env.VUE_APP_PORT}`),
+      socket: io(`${process.env.VUE_APP_PORT}`, {
+        withCredentials: true,
+        extraHeaders: {
+          'terbangin-header': 'ini terbangin header'
+        }
+      }),
       message: '',
       URL: process.env.VUE_APP_PORT
     }

@@ -78,7 +78,12 @@ export default {
   data() {
     return {
       role: 0,
-      socket: io(`${process.env.VUE_APP_PORT}`),
+      socket: io(`${process.env.VUE_APP_PORT}`, {
+        withCredentials: true,
+        extraHeaders: {
+          'terbangin-header': 'ini terbangin header'
+        }
+      }),
       room: '',
       oldRoom: '',
       roomId: null,
