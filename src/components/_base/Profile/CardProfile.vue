@@ -13,7 +13,7 @@
             />
             <img
               v-else-if="profile.profileImage"
-              :src="`${URLS}/user/` + profile.profileImage"
+              :src="`${URLS}/fileUploadsTerbangin/user/` + profile.profileImage"
               alt=""
               class="rounded-circle mt-4 "
               style="width:105px;height:105px"

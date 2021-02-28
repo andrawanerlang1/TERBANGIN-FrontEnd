@@ -14,7 +14,9 @@
               class="imgUpload"
               style="width:50px;height:50px;border-radius:15px;"
               v-if="chatActive.profileImage"
-              :src="`${URL}/user/` + chatActive.profileImage"
+              :src="
+                `${URL}/fileUploadsTerbangin/user/` + chatActive.profileImage
+              "
             />
           </div>
           <div class="profile-name">
@@ -35,7 +37,7 @@
                   id="imageUploads"
                   class="profile-img-chat "
                   v-if="item.profileImage"
-                  :src="`${URL}/user/` + item.profileImage"
+                  :src="`${URL}/fileUploadsTerbangin/user/` + item.profileImage"
                 />
               </div>
               <div class="msg">
@@ -66,7 +68,7 @@
                   id="imageUploads"
                   class="profile-img-chat "
                   v-if="item.profileImage"
-                  :src="`${URL}/user/` + item.profileImage"
+                  :src="`${URL}/fileUploadsTerbangin/user/` + item.profileImage"
                 />
               </div>
             </div>
@@ -84,7 +86,10 @@
                   id="imageUploads"
                   class="profile-img-chat"
                   v-else
-                  :src="`${URL}/user/` + chatActive.profileImage"
+                  :src="
+                    `${URL}/fileUploadsTerbangin/user/` +
+                      chatActive.profileImage
+                  "
                 />
               </div>
               <div class="msg">
@@ -114,7 +119,9 @@
                   id="imageUploads"
                   class="profile-img-chat"
                   v-else
-                  :src="`${URL}/user/` + profile.profileImage"
+                  :src="
+                    `${URL}/fileUploadsTerbangin/user/` + profile.profileImage
+                  "
                 />
               </div>
             </div>

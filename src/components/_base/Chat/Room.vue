@@ -38,7 +38,7 @@
             />
             <img
               v-if="item.profileImage"
-              :src="`${URL}/user/` + item.profileImage"
+              :src="`${URL}/fileUploadsTerbangin/user/` + item.profileImage"
             />
           </div>
           <div class="chat-msg">
